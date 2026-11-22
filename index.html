@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Travel exposure history – fever in the returning traveller</title>
+<meta name="description" content="Map-based travel and exposure history tool for clinicians assessing fever in returning travellers.">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Travel exposure history</h1>
+    <p>Fever in the returning traveller · step 1: where, when, and what were they exposed to?</p>
+  </div>
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="trip" aria-selected="true">Trip</button>
+    <button role="tab" data-tab="report" aria-selected="false">Report <span id="report-count" class="badge"></span></button>
+    <button role="tab" data-tab="data" aria-selected="false">Data</button>
+    <button role="tab" data-tab="about" aria-selected="false">About</button>
+  </nav>
+</header>
+
+<main class="layout">
+  <section class="mapwrap" aria-label="Map">
+    <div id="map"></div>
+    <div class="maptools">
+      <label><input type="checkbox" id="shade" checked> Shade malaria (country level)</label>
+      <label><input type="checkbox" id="show-areas" checked> Show mapped risk areas</label>
+      <span class="hint">Click the map to drop a pin for each place stayed. Drag pins to adjust.</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <!-- TRIP -->
+    <div class="tab" id="tab-trip">
+      <p class="privacy">Do not enter names, NHS numbers or other identifiers. Nothing is sent or stored: closing the tab clears it.</p>
+      <div class="grid2">
+        <label>Fever onset date <small>(optional, for incubation timing)</small><input type="date" id="onset"></label>
+        <label>Date returned to UK<input type="date" id="returned"></label>
+      </div>
+      <label>General notes <small>(e.g. prophylaxis, vaccines, immune status)</small><textarea id="notes" rows="2"></textarea></label>
+      <div class="stops-head">
+        <h2>Places stayed <span id="stop-count"></span></h2>
+        <div class="btns">
+          <button id="add-stop" class="ghost">+ Add without map</button>
+          <button id="clear" class="ghost danger">Clear all</button>
+        </div>
+      </div>
+      <div id="stops"></div>
+      <div id="empty" class="empty">
+        <p><strong>Click the map where the traveller stayed.</strong> Each pin becomes a stop with its own dates and exposures. Add a separate pin for a notable day trip (a lake, a cave, a game park).</p>
+      </div>
+      <div class="sticky-go"><button id="go-report">View report →</button></div>
+    </div>
+
+    <!-- REPORT -->
+    <div class="tab" id="tab-report" hidden>
+      <div class="btns">
+        <button id="download">Download .txt</button>
+        <button id="copy" class="ghost">Copy text</button>
+        <span id="copied" class="hint" aria-live="polite"></span>
+      </div>
+      <pre id="report"></pre>
+    </div>
+
+    <!-- DATA -->
+    <div class="tab" id="tab-data" hidden>
+      <p>The tool reads five editable CSV files in <code>/data</code>. Database version: <strong id="db-version">–</strong></p>
+      <div id="db-problems"></div>
+      <label>Show rules for a country<select id="data-country"></select></label>
+      <div id="data-table"></div>
+      <p><button id="export-expanded" class="ghost">Download full country → exposure → pathogen table (CSV)</button></p>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="tab" id="tab-about" hidden>
+      <h2>What this does</h2>
+      <p>It records where and when a febrile traveller stayed and what they were exposed to, then lists the infections that are possible for those places and exposures, with incubation periods checked against the fever-onset date. It deliberately ignores symptoms: it is the start of the diagnostic process, not a differential-diagnosis engine.</p>
+      <h2>Limits</h2>
+      <ul>
+        <li>Geography is country-level, except where a <em>mapped risk area</em> has been drawn (dashed purple outlines: e.g. valley fever in the south-west USA, malaria in Kruger or the Thai border provinces). In those countries a pin outside the area does not pick up that risk, and the report lists it under "Not at this pin". The outlines are rough: always check the area visited on NaTHNaC or the CDC maps.</li>
+        <li>Outbreaks change weekly. The alerts list is maintained by hand from NaTHNaC and UKHSA <em>Outbreaks under monitoring</em>; alerts past their review date are flagged as stale.</li>
+        <li>It is not a substitute for the ACDP VHF risk assessment, local guidance or specialist advice. Imported Fever Service: <strong>0844 778 8990</strong> (24/7).</li>
+      </ul>
+      <h2>Sources</h2>
+      <ul class="refs">
+        <li>Thwaites GE, Day NPJ. Approach to fever in the returning traveler. <i>N Engl J Med</i> 2017;376:548–60 (Tables 1–3).</li>
+        <li>Thakker C, Warrell C, Barrett J, et al. UK guidelines for the investigation and management of eosinophilia in returning travellers and migrants. <i>J Infect</i> 2025;90:106328 (Table 2).</li>
+        <li>Fever in Returning Travellers – Infection Quick Reference Guide, v5, July 2025.</li>
+        <li><a href="https://travelhealthpro.org.uk/countries">NaTHNaC TravelHealthPro country information</a> and <a href="https://travelhealthpro.org.uk/outbreaks">outbreak surveillance</a>.</li>
+        <li><a href="https://www.gov.uk/guidance/high-consequence-infectious-disease-country-specific-risk">UKHSA: HCID country-specific risk</a> · <a href="https://www.gov.uk/government/publications/outbreaks-under-monitoring-in-2026">Outbreaks under monitoring</a> · <a href="https://www.gov.uk/guidance/imported-fever-service-ifs">Imported Fever Service</a>.</li>
+        <li><a href="https://www.cdc.gov/yellow-book/hcp/preparing-international-travelers/yellow-fever-vaccine-and-malaria-prevention-information-by-country.html">CDC Yellow Book: yellow fever & malaria by country</a>.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<template id="tpl-stop">
+  <article class="stop">
+    <header>
+      <span class="num"></span>
+      <select data-f="iso3" aria-label="Country"></select>
+      <button class="icon" data-act="locate" title="Show on map" aria-label="Show on map">◎</button>
+      <button class="icon danger" data-act="del" title="Remove stop" aria-label="Remove stop">✕</button>
+    </header>
+    <label>Place / area <small>(town, park, lake…)</small><input data-f="place" autocomplete="off"></label>
+    <div class="grid2">
+      <label>Arrived<input type="date" data-f="arrive"></label>
+      <label>Left<input type="date" data-f="depart"></label>
+    </div>
+    <div class="alerts"></div>
+    <details class="exp" open>
+      <summary>Exposures <small class="exp-hint"></small></summary>
+      <div class="exp-groups"></div>
+    </details>
+    <label>Other exposures or details<textarea data-f="other" rows="2"></textarea></label>
+    <div class="preview"></div>
+    <div class="links"></div>
+  </article>
+</template>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
