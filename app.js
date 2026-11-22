@@ -63,8 +63,21 @@
       return;
     }
     map = L.map('map', { worldCopyJump: true, minZoom: 2 }).setView([12, 20], 2);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; OpenStreetMap contributors &copy; CARTO', subdomains: 'abcd', maxZoom: 18 }).addTo(map);
+    // Free, keyless base maps. The first one is the default; the others are in the layer picker (top right).
+    const osm = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+    const esri = 'Tiles &copy; Esri';
+    const bases = {
+      'Street map (OpenStreetMap)': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: osm }),
+      'Light grey, English labels (Esri)': L.layerGroup([
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', { maxZoom: 16, attribution: esri + ' &mdash; Esri, HERE, Garmin, &copy; OpenStreetMap contributors' }),
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', { maxZoom: 16 })]),
+      'Terrain (OpenTopoMap)': L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', { maxZoom: 17, subdomains: 'abc',
+        attribution: 'Map data: ' + osm + ', SRTM &mdash; style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)' }),
+      'Satellite (Esri)': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 18,
+        attribution: esri + ' &mdash; Esri, Maxar, Earthstar Geographics, GIS User Community' })
+    };
+    bases['Street map (OpenStreetMap)'].addTo(map);
+    L.control.layers(bases, null, { position: 'topright', collapsed: true }).addTo(map);
     map.on('click', e => addStop(e.latlng.wrap()));
     addLegend();
     if (areaFeatures.length) {
