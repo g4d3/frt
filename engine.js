@@ -234,11 +234,9 @@
     push('FEVER IN THE RETURNING TRAVELLER – TRAVEL & EXPOSURE HISTORY');
     push(hr);
     push(`Generated: ${meta.now}    Exposure database version: ${db.version || 'unknown'}`);
-    push('Lists POSSIBLE exposures by geography only. It does not use symptoms and');
-    push('does not rank likelihood. Use with BIA/UKHSA guidance, NaTHNaC and local');
-    push('ID/microbiology. Exclude malaria in all travellers from endemic areas.');
+    push('Lists POSSIBLE exposures by geography only.');
     push('');
-    push('TIMELINE');
+    push('TRAVEL SUMMARY');
     push(`  Fever onset:        ${trip.onset || 'not recorded'}`);
     push(`  Returned to UK:     ${trip.returned || 'not recorded'}`);
     push(`  Countries visited:  ${result.stops.length}`);
@@ -314,11 +312,8 @@
     push(sub);
     push('SUMMARY – ALL POSSIBLE PATHOGENS (deduplicated)');
     push(sub);
-    if (!trip.onset) push('  (Add a fever-onset date to check incubation periods.)');
     result.summary.forEach(e => {
-      const t = (e.best === 'unknown' ? '' : ` – ${TIMING_LABEL[e.best]}`) + (e.dep ? ' – AREA NOT ASSESSED' : '');
-      wrapText(`* ${e.p.name}${e.p.hcid ? ' [HCID]' : ''}${t}`, 70).forEach((ln, i) => push((i ? '    ' : '  ') + ln));
-      wrap('from: ' + Object.entries(e.where).map(([k, v]) => `${k} (${v.join('; ')})`).join(' | '), 6).forEach(push);
+      wrapText(`* ${e.p.name}`, 70).forEach((ln, i) => push((i ? '    ' : '  ') + ln));
     });
     push('');
     push(sub);
