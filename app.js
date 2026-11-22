@@ -6,9 +6,11 @@
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const todayISO = () => new Date().toISOString().slice(0, 10);
 
-  const FILES = { countries: 'data/countries.csv', exposures: 'data/exposures.csv', pathogens: 'data/pathogens.csv',
-    rules: 'data/exposure_map.csv', alerts: 'data/alerts.csv' };
-  const BOUNDARIES = ['data/countries-50m.json', 'https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json'];
+  // DATA_DIR lets index.html point at a different folder ('' = files at the top level of the site).
+  const D = typeof window.DATA_DIR === 'string' ? window.DATA_DIR : 'data/';
+  const FILES = { countries: D + 'countries.csv', exposures: D + 'exposures.csv', pathogens: D + 'pathogens.csv',
+    rules: D + 'exposure_map.csv', alerts: D + 'alerts.csv' };
+  const BOUNDARIES = [D + 'countries-50m.json', 'https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json'];
   // French overseas departments sit inside France's polygon in Natural Earth: split them out.
   const OVERSEAS = [['GUF', 2, 6, -55, -51.5], ['MTQ', 14.3, 15, -61.3, -60.7], ['GLP', 15.8, 16.6, -61.9, -60.9],
     ['REU', -21.5, -20.8, 55.1, 55.9], ['MYT', -13.1, -12.6, 44.9, 45.4]];
@@ -24,13 +26,17 @@
     $('#stops').innerHTML = `<p class="error">Could not load the data files (${esc(err.message)}). If you opened index.html directly from your computer, run a local web server instead (see README).</p>`;
   });
 
+  // Single-file build: data embedded as window.EMBEDDED[path]; normal build: fetched from /data.
+  function getText(path) {
+    if (window.EMBEDDED && path in window.EMBEDDED) return Promise.resolve(window.EMBEDDED[path]);
+    return fetch(path, { cache: 'no-cache' }).then(r => { if (!r.ok) throw new Error(path + ' ' + r.status); return r.text(); });
+  }
   async function init() {
-    const txt = await Promise.all(Object.values(FILES).map(f => fetch(f, { cache: 'no-cache' }).then(r => {
-      if (!r.ok) throw new Error(f + ' ' + r.status); return r.text(); })));
+    const txt = await Promise.all(Object.values(FILES).map(getText));
     const raw = {}; Object.keys(FILES).forEach((k, i) => { raw[k] = FRT.parseCSV(txt[i]); });
-    raw.version = await fetch('data/version.txt', { cache: 'no-cache' }).then(r => r.ok ? r.text() : '').catch(() => '');
+    raw.version = await getText(D + 'version.txt').catch(() => '');
     try {
-      const geo = await fetch('data/areas.geojson', { cache: 'no-cache' }).then(r => r.json());
+      const geo = JSON.parse(await getText(D + 'areas.geojson'));
       areaFeatures = geo.features.filter(f => f.geometry && f.properties && f.properties.id);
       areaFeatures.forEach(f => { f.bbox = bbox(f.geometry); f.tagList = String(f.properties.tags || '').split(';').map(t => t.trim()).filter(Boolean); });
       raw.areas = areaFeatures.map(f => f.properties);
