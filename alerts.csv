@@ -1,0 +1,9 @@
+where,pathogen,title,detail,date_checked,review_by,source_url
+# Current outbreaks. Add a row when NaTHNaC / UKHSA report something; delete it when it is over.
+# pathogen (optional): an id from pathogens.csv. It is added to the "any stay in this country" list for that country
+#   and the alert shows in red. Leave it blank for an information-only note (shown in blue).
+# review_by: after this date the tool marks the alert as STALE so you remember to re-check it.
+COD,ebola,Ebola disease (Bundibugyo virus) outbreak – ongoing,"Ongoing since May 2026; >11,000 confirmed cases. Provinces affected include Ituri, Nord-Kivu, Sud-Kivu, Tshopo, Haut-Uélé, Bas-Uélé, Sud-Ubangi and Nord-Ubangi. Complete the ACDP VHF risk assessment if onset is within 21 days of leaving.",2026-11-22,2026-12-06,https://www.ecdc.europa.eu/en/ebola-outbreak-democratic-republic-congo-and-uganda
+NGA,,Ebola – imported case linked to DRC outbreak,"One case reported 20 Oct 2026 (travelled via Addis Ababa). Contacts completing 21-day monitoring in Nov 2026. Lassa fever is also endemic.",2026-11-22,2026-12-06,https://www.ecdc.europa.eu/en/ebola-outbreak-democratic-republic-congo-and-uganda
+KEN,,Ebola – cluster linked to DRC outbreak (monitoring completed),"Nine cases, last reported 20 Oct 2026; all contacts completed monitoring by 11 Nov 2026.",2026-11-22,2026-12-06,https://www.ecdc.europa.eu/en/ebola-outbreak-democratic-republic-congo-and-uganda
+UGA,,Ebola outbreak declared over (28 Jul 2026),"Borders the active DRC outbreak area – ask about cross-border travel.",2026-11-22,2026-12-06,https://www.ecdc.europa.eu/en/ebola-outbreak-democratic-republic-congo-and-uganda

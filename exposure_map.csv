@@ -1,0 +1,228 @@
+where,except,exposure,pathogen,note,source
+# HOW THIS FILE WORKS
+# One row = "in these places, this exposure can lead to this pathogen".
+# where / except: separate items with ";" . Each item can be:
+#   GLOBAL | an ISO3 country code (KEN) | a region or subregion (sub-saharan-africa, west-africa) | a tag from countries.csv (malaria_high)
+# exposure: an id from exposures.csv ("any" = applies to every stay in that country)
+# pathogen: an id from pathogens.csv
+# note: shown in the report next to the pathogen (keep it short)
+#
+# ===== BASELINE: any stay in the country =====
+malaria_high,,any,pf,"High-risk country for falciparum malaria — exclude malaria in all.",NaTHNaC; NEJM2017 T1
+malaria_risk,,any,pf,"Malaria present in parts of this country — check the area visited on NaTHNaC / CDC map.",NaTHNaC; CDC Yellow Book
+malaria_high;malaria_risk,,any,pv_po,"",NaTHNaC; CDC Yellow Book
+knowlesi,,any,pk,"",NEJM2017 T1
+enteric_high,,any,enteric,"Highest-risk region for enteric fever (Indian subcontinent).",NEJM2017 T1
+lassa,,any,lassa,"Lassa endemic country — VHF risk assessment if onset within 21 d of leaving.",UKHSA HCID country risk; QRG2025
+cchf,,any,cchf,"CCHF reported in this country — VHF risk assessment if onset within 21 d (ask about ticks, livestock, slaughter).",UKHSA HCID country risk; QRG2025
+aedes,,any,dengue,"Aedes-borne arboviruses circulate here; bites often unnoticed (day-biting).",NaTHNaC; QRG2025
+GLOBAL,,any,resp_viruses,"",QRG2025
+#
+# ===== MOSQUITOES / MIDGES =====
+malaria_high;malaria_risk,,mosquito,pf,"",NEJM2017 T2
+malaria_high;malaria_risk,,mosquito,pv_po,"",NEJM2017 T2
+knowlesi,,mosquito,pk,"Forest / forest-fringe",NEJM2017 T1
+aedes,,mosquito,dengue,"",NEJM2017 T2
+aedes,,mosquito,chik,"",NEJM2017 T2
+aedes,,mosquito,zika,"",NEJM2017 T2
+FRA;ITA;ESP;PRT;HRV,,mosquito,dengue,"Sporadic locally acquired cases in southern Europe (summer–autumn).",ECDC
+FRA;ITA,,mosquito,chik,"Locally acquired clusters reported in recent summers.",ECDC
+yellow_fever,,mosquito,yf,"",NEJM2017 T1; CDC Yellow Book
+je,,mosquito,je,"Mainly rural / agricultural areas.",NEJM2017 T1
+west_nile,,mosquito,wnv,"",NEJM2017 T2
+oropouche,,mosquito,oropouche,"",NaTHNaC
+rift_valley,,mosquito,rvf,"",NEJM2017 T1
+#
+# ===== TICKS =====
+atbf,,tick,atbf,"Game parks / bush; often multiple eschars.",NEJM2017; QRG2025
+msf,,tick,msf,"",NEJM2017 T1
+rmsf,,tick,rmsf,"",NEJM2017 T1
+cchf,,tick,cchf,"",NEJM2017 T1/T3
+tbe,,tick,tbe,"",NEJM2017 T2
+lyme,,tick,lyme,"",NEJM2017 T2
+tbrf,,tick,tbrf,"",NEJM2017 T2
+kfd,,tick,kfd,"",Expert
+sfts,,tick,sfts,"",Expert
+GLOBAL,,tick,qfever,"",NEJM2017 T2
+north-america;europe;east-asia;central-asia,,tick,tularemia,"",NEJM2017 T2
+#
+# ===== MITES / CHIGGERS =====
+scrub_typhus,KEN;ARE;CHL,mite,scrub,"",NEJM2017 T1
+KEN;ARE;CHL,,mite,scrub,"Sporadic reports only outside the Asia-Pacific ‘tsutsugamushi triangle’.",Expert
+#
+# ===== SANDFLIES =====
+visceral_leish,,sandfly,vl,"",NEJM2017 T2; QRG2025
+sandfly_fever,,sandfly,sandfly_fever,"",NEJM2017 T2
+bartonella_bacill,,sandfly,oroya,"",NEJM2017 T1
+#
+# ===== TSETSE =====
+hat_rhodesiense,,tsetse,hat_r,"Game parks (e.g. Serengeti, Luangwa).",NEJM2017 T1
+hat_gambiense,,tsetse,hat_g,"",NEJM2017 T2
+#
+# ===== FLEAS / LICE / BUGS =====
+GLOBAL,,flea,murine_typhus,"Especially SE Asia, ports and markets.",NEJM2017 T1
+plague,,flea,plague,"",NEJM2017 T1
+lbrf,,louse,lbrf,"",NEJM2017 T1
+GLOBAL,,louse,epidemic_typhus,"Outbreak / crowded settings.",NEJM2017 T1
+GLOBAL,,louse,trench,"",NEJM2017 T2
+chagas,,triatomine,chagas,"",NEJM2017 T2
+#
+# ===== DOGS / CATS / PRIMATES / BATS =====
+GLOBAL,rabies_free,dog,rabies,"",NEJM2017 T1
+GLOBAL,,dog,pasteurella,"",Expert
+GLOBAL,,dog,toxocara,"",BIA2025 T2
+GLOBAL,rabies_free,cat,rabies,"",NEJM2017 T1
+GLOBAL,,cat,cat_scratch,"",NEJM2017 T2
+GLOBAL,,cat,toxo,"",NEJM2017 T2
+GLOBAL,,cat,pasteurella,"",Expert
+GLOBAL,rabies_free,primate,rabies,"",NEJM2017 T1
+macaque,,primate,b_virus,"Macaques",NEJM2017 T2
+GLOBAL,,bat,rabies,"Bat lyssaviruses occur even in 'rabies-free' countries (incl. UK, Australia).",NEJM2017 T1
+filovirus_hist,,bat,marburg,"Caves/mines with Rousettus bats.",NEJM2017 T3
+histo,,bat,histo,"Caves, guano.",BIA2025 6.1.9
+nipah,,bat,nipah,"",NEJM2017 T2
+tbrf,,bat,tbrf,"Soft ticks in caves.",NEJM2017 T2
+#
+# ===== RODENTS =====
+GLOBAL,,rodent,lepto,"",NEJM2017 T1
+lassa,,rodent,lassa,"Multimammate rats in houses/food stores.",NEJM2017 T3
+hantavirus,,rodent,hantavirus,"",NEJM2017 T2
+GLOBAL,,rodent,rat_bite,"",NEJM2017 T2
+GLOBAL,,rodent,murine_typhus,"",NEJM2017 T1
+plague,,rodent,plague,"",NEJM2017 T1
+north-america;europe;east-asia;central-asia,,rodent,tularemia,"",NEJM2017 T2
+#
+# ===== LIVESTOCK, CAMELS, PIGS, HORSES =====
+GLOBAL,NZL,livestock,qfever,"Especially birthing products.",NEJM2017 T2; QRG2025
+GLOBAL,western-europe;northern-europe;AUS;NZL;CAN;JPN,livestock,brucella,"",NEJM2017 T2; QRG2025
+sub-saharan-africa;middle-east;north-africa;central-south-asia;east-asia;southeast-asia;TUR,,livestock,anthrax,"Hides, carcasses, slaughter.",NEJM2017 T1
+cchf,,livestock,cchf,"Slaughter or contact with animal blood.",NEJM2017 T1/T3
+rift_valley,,livestock,rvf,"Blood/tissue of infected animals.",NEJM2017 T1
+GLOBAL,,livestock,lepto,"",NEJM2017 T1
+mers,,camel,mers,"",NEJM2017 T1/T3; QRG2025
+GLOBAL,,camel,brucella,"",NEJM2017 T2
+GLOBAL,,camel,qfever,"",NEJM2017 T2
+GLOBAL,,pig,lepto,"",NEJM2017 T1
+strep_suis,,pig,strep_suis,"",Expert
+nipah,,pig,nipah,"Pig farms (Malaysia outbreak).",NEJM2017 T2
+je,,pig,je,"Pigs amplify JE virus.",NEJM2017 T1
+GLOBAL,,pig,hev,"",Expert
+AUS,,horse,hendra,"",NEJM2017 T2
+#
+# ===== BIRDS =====
+GLOBAL,,poultry,avian_flu,"H5N1 now widespread in birds globally; human cases mainly Asia, Egypt, Americas.",NEJM2017 T1; QRG2025
+GLOBAL,,pet_bird,psittacosis,"",NEJM2017 T2
+GLOBAL,,pet_bird,avian_flu,"",NEJM2017 T2
+#
+# ===== BUSHMEAT / WILD ANIMALS =====
+filovirus_hist,,bushmeat,ebola,"",NEJM2017 T3
+filovirus_hist,,bushmeat,marburg,"",NEJM2017 T3
+mpox_clade1;central-africa;west-africa,,bushmeat,mpox,"",QRG2025
+sub-saharan-africa;central-south-asia;southeast-asia;east-asia,,bushmeat,anthrax,"",NEJM2017 T1
+GLOBAL,,bushmeat,trichinella,"Wild boar, bear, game.",BIA2025 6.2.9
+north-america;europe;east-asia;central-asia,,bushmeat,tularemia,"Hares, rodents.",NEJM2017 T2
+GLOBAL,,bushmeat,toxo,"",NEJM2017 T2
+#
+# ===== FRESH WATER / FLOODS / SOIL =====
+schisto,,freshwater,katayama,"",BIA2025 T2; NEJM2017 T2
+FRA,,freshwater,katayama,"Rare: Corsica (Cavu river) transmission reported.",BIA2025 T2
+GLOBAL,,freshwater,lepto,"Highest in SE & S Asia, Latin America, Caribbean, Pacific.",NEJM2017 T1/T2
+melioidosis,,freshwater,melioid,"",NEJM2017 T1
+GLOBAL,,flood_mud,lepto,"",NEJM2017 T1/T2
+melioidosis,,flood_mud,melioid,"",NEJM2017 T1/T2
+schisto,,flood_mud,katayama,"Irrigation channels, paddies.",BIA2025 T2
+GLOBAL,northern-europe;western-europe;CAN,barefoot,strongy,"",BIA2025 T2; NEJM2017 T2
+GLOBAL,northern-europe;western-europe;CAN;USA,barefoot,ascaris_hookworm,"",BIA2025 T2
+melioidosis,,barefoot,melioid,"",NEJM2017 T2
+GLOBAL,,barefoot,toxocara,"",BIA2025 T2
+cocci,,dust,cocci,"",BIA2025 T2
+histo,,dust,histo,"Demolition, bird/bat droppings.",BIA2025 6.1.9
+GLOBAL,NZL,dust,qfever,"Wind-borne from livestock areas.",NEJM2017 T2
+hantavirus,,dust,hantavirus,"Sweeping out rodent-infested buildings.",NEJM2017 T2
+#
+# ===== FOOD & DRINK =====
+GLOBAL,low_food_risk,food_water,enteric,"",NEJM2017 T1/T2
+GLOBAL,low_food_risk,food_water,hav,"",NEJM2017 T2
+central-south-asia;sub-saharan-africa;north-africa;middle-east;southeast-asia;east-asia;central-america;caribbean,low_food_risk,food_water,hev,"",NEJM2017 T2
+GLOBAL,,food_water,gastro_bact,"",NEJM2017 T2
+GLOBAL,low_food_risk,food_water,amoebic,"",NEJM2017 T2; QRG2025
+GLOBAL,low_food_risk,food_water,ascaris_hookworm,"",BIA2025 T2
+GLOBAL,,food_water,toxo,"",NEJM2017 T2
+GLOBAL,western-europe;northern-europe;AUS;NZL;CAN;JPN,raw_dairy,brucella,"",NEJM2017 T2; QRG2025
+GLOBAL,,raw_dairy,qfever,"",NEJM2017 T2
+GLOBAL,,raw_dairy,listeria,"",NEJM2017 T2
+tbe,,raw_dairy,tbe,"Goat/sheep milk.",NEJM2017 T2
+GLOBAL,,raw_dairy,gastro_bact,"",NEJM2017 T2
+GLOBAL,,raw_meat,toxo,"",NEJM2017 T2
+GLOBAL,,raw_meat,trichinella,"",BIA2025 T2 & 6.2.9
+GLOBAL,,raw_meat,hev,"Pork, game, liver sausage (incl. Europe).",Expert
+strep_suis,,raw_meat,strep_suis,"Raw pork / blood dishes.",Expert
+GLOBAL,,raw_meat,gastro_bact,"",NEJM2017 T2
+liver_fluke,,raw_fw_fish,liver_fluke,"",BIA2025 T2
+gnathostoma,,raw_fw_fish,gnathostoma,"",BIA2025 T2
+paragonimus,,raw_crustacean,paragonimus,"",BIA2025 T2
+angiostrongylus,,raw_snail,angio,"",BIA2025 T2
+GLOBAL,,raw_marine_fish,anisakis,"",BIA2025 T2
+GLOBAL,,watercress,fasciola,"Especially Andes (Bolivia, Peru), Egypt, Iran, Turkey, Vietnam, Europe.",BIA2025 T2
+nipah,,palm_sap,nipah,"",NEJM2017 T2; UKHSA
+mers,,camel,brucella,"Raw camel milk.",NEJM2017 T2
+#
+# ===== PEOPLE & HEALTHCARE =====
+GLOBAL,,sick_contact,resp_viruses,"",NEJM2017 T3
+GLOBAL,,sick_contact,tb,"",NEJM2017 T2/T3
+GLOBAL,,sick_contact,measles,"",NEJM2017 T3
+GLOBAL,,sick_contact,mening,"",NEJM2017
+lassa,,sick_contact,lassa,"",NEJM2017 T3
+filovirus_hist,,sick_contact,ebola,"",NEJM2017 T3
+filovirus_hist,,sick_contact,marburg,"",NEJM2017 T3
+cchf,,sick_contact,cchf,"",NEJM2017 T3
+mers,,sick_contact,mers,"",NEJM2017 T3
+nipah,,sick_contact,nipah,"",UKHSA
+mpox_clade1;central-africa;west-africa,,sick_contact,mpox,"",QRG2025
+filovirus_hist,,funeral,ebola,"",NEJM2017
+filovirus_hist,,funeral,marburg,"",NEJM2017
+lassa,,funeral,lassa,"",NEJM2017
+GLOBAL,,healthcare,mdro,"Rectal swab + MRSA screen if hospitalised abroad.",QRG2025; NEJM2017
+GLOBAL,,healthcare,tb,"",NEJM2017
+lassa,,healthcare,lassa,"Nosocomial transmission reported.",NEJM2017 T3
+filovirus_hist,,healthcare,ebola,"",NEJM2017 T3
+filovirus_hist,,healthcare,marburg,"",NEJM2017 T3
+cchf,,healthcare,cchf,"",NEJM2017 T3
+mers,,healthcare,mers,"Most MERS clusters are healthcare-associated.",NEJM2017 T3; QRG2025
+GLOBAL,,healthcare,hbv,"",NEJM2017 T2
+GLOBAL,,healthcare,hcv,"",NEJM2017 T2
+GLOBAL,,healthcare,hiv,"",NEJM2017 T2
+GLOBAL,,sex,hiv,"",NEJM2017 T2
+GLOBAL,,sex,hbv,"",NEJM2017 T2
+GLOBAL,,sex,stis,"",NEJM2017 T2
+GLOBAL,,sex,mpox,"Clade II worldwide; clade I in Central/East Africa and spreading.",QRG2025
+aedes,,sex,zika,"",NEJM2017 T2
+GLOBAL,,sex,hav,"",NEJM2017 T2
+GLOBAL,,needle,hbv,"",NEJM2017 T2
+GLOBAL,,needle,hcv,"",NEJM2017 T2
+GLOBAL,,needle,hiv,"",NEJM2017 T2
+malaria_high;malaria_risk,,needle,pf,"Transfusion-transmitted malaria.",NEJM2017 T2
+GLOBAL,,needle,mdro,"",NEJM2017
+SAU,,mass_gathering,mening,"Hajj/Umrah — check ACWY vaccination.",NaTHNaC
+meningitis_belt,,mass_gathering,mening,"African meningitis belt (dry season).",NaTHNaC
+SAU,,mass_gathering,mers,"",UKHSA
+GLOBAL,,mass_gathering,resp_viruses,"",NEJM2017
+GLOBAL,,mass_gathering,measles,"",NEJM2017
+GLOBAL,,mass_gathering,tb,"",NEJM2017
+meningitis_belt,,any,mening,"African meningitis belt.",NaTHNaC
+#
+# ===== TRAVEL STYLE =====
+malaria_high;malaria_risk,,vfr,pf,"VFR travellers have the highest malaria risk (often no prophylaxis).",NEJM2017; UKHSA
+GLOBAL,low_food_risk,vfr,enteric,"",NEJM2017
+GLOBAL,low_food_risk,vfr,tb,"",NEJM2017
+GLOBAL,low_food_risk,vfr,hav,"",NEJM2017
+atbf,,rural_forest,atbf,"",NEJM2017
+scrub_typhus,KEN;ARE;CHL,rural_forest,scrub,"",NEJM2017 T1
+hat_rhodesiense,,rural_forest,hat_r,"",NEJM2017 T1
+je,,rural_forest,je,"",NEJM2017 T1
+yellow_fever,,rural_forest,yf,"Jungle cycle.",NEJM2017 T1
+knowlesi,,rural_forest,pk,"",NEJM2017 T1
+GLOBAL,,rural_forest,lepto,"",NEJM2017
+GLOBAL,,cruise_spa,legionella,"",Expert
+GLOBAL,,cruise_spa,resp_viruses,"",Expert
+GLOBAL,,antibiotics,mdro,"Antibiotic use abroad raises the risk of resistant-organism carriage.",NEJM2017; QRG2025
