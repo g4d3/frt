@@ -106,7 +106,7 @@ Check which countries carry each tag:
 
 Traced by colour from the 34 JPGs (red = chemoprophylaxis, mauve = chemoprophylaxis in rural/forested areas, orange = mosquito avoidance only, beige = none) and georeferenced from each country's outline. 94 of 95 test cities landed in the right zone. Edges may be off by ~10–20 km; city "circles" (e.g. Nairobi, Hanoi, Kathmandu) are approximated as 15 km discs. Zones are extended ~5 km offshore so coastal pins are caught. In these countries malaria is now **area-based**: a pin outside every zone lists malaria under "Not at this pin"; no pin = AREA NOT ASSESSED.
 
-Check one or two pins in each by eye against the CDC map (turn on "Show mapped risk areas"):
+Check one or two pins in each by eye against the CDC map (choose "Malaria" above the map – the default):
 
 - [ ] Afghanistan (rural, April–December) · [ ] Bangladesh · [ ] Bolivia · [ ] Brazil · [ ] Cambodia (rural/forested) · [ ] Costa Rica · [ ] Dominican Republic
 - [ ] Ecuador · [ ] Eritrea · [ ] Ethiopia · [ ] Guatemala · [ ] Guyana · [ ] Honduras · [ ] Indonesia (chemo + rural) · [ ] Kenya · [ ] Laos

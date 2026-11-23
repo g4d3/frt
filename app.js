@@ -80,19 +80,7 @@
     L.control.layers(bases, null, { position: 'topright', collapsed: true }).addTo(map);
     map.on('click', e => addStop(e.latlng.wrap()));
     addLegend();
-    if (areaFeatures.length) {
-      areaLayer = L.geoJSON({ type: 'FeatureCollection', features: areaFeatures }, {
-        style: f => {
-          const t = String(f.properties.tags || '');
-          if (t.includes('malaria_cdc_chemo')) return { color: '#a3201a', weight: 1, fillColor: '#c8352c', fillOpacity: 0.28 };
-          if (t.includes('malaria_cdc_rural')) return { color: '#7b3f86', weight: 1, fillColor: '#a466ae', fillOpacity: 0.28 };
-          if (t.includes('malaria_cdc_avoid')) return { color: '#c56a12', weight: 1, fillColor: '#f0a04b', fillOpacity: 0.28 };
-          return { color: '#5a3d99', weight: 1.5, dashArray: '5 4', fillColor: '#5a3d99', fillOpacity: 0.07 };
-        },
-        onEachFeature: (f, layer) => layer.bindTooltip(esc(f.properties.name), { sticky: true, className: 'ctip' })
-      });
-      if ($('#show-areas').checked) areaLayer.addTo(map);
-    }
+    drawAreas();
     loadBoundaries();
   }
 
@@ -119,29 +107,93 @@
     const n = (f.properties && f.properties.name || '').toLowerCase();
     return db.byName[n] || null;
   }
-  function styleFeature(f) {
-    const shade = $('#shade').checked, c = f.country, t = c ? c.tags : [];
-    const alert = c && FRT.alertsFor(db, c.iso3, todayISO()).length;
-    let fill = 'transparent', op = 0;
-    if (shade && t.includes('malaria_high')) { fill = '#b8322a'; op = 0.32; }
-    else if (shade && (t.includes('malaria_risk') || t.some(x => x.startsWith('malaria_cdc_')))) { fill = '#e08a2c'; op = 0.25; }
-    return { color: alert ? '#8a0f12' : '#7a8a8c', weight: alert ? 2 : 0.5, fillColor: fill, fillOpacity: op, dashArray: alert ? '4 3' : null };
+  // ---------- map overlays: malaria (default) | hcid | outbreak | areas | none ----------
+  const overlay = () => { const r = document.querySelector('input[name="overlay"]:checked'); return r ? r.value : 'malaria'; };
+  const isMalariaArea = p => /malaria/.test(String(p.tags || '') + ' ' + p.id);
+  const hcidAreaIds = () => new Set(db.hcid.filter(h => h.show && h.area).map(h => h.area));
+  function outbreakAreaIds() {
+    const ids = new Set(), today = todayISO();
+    db.hcid.filter(h => h.show && h.area).forEach(h => {
+      if (FRT.alertsFor(db, h.country, today).some(a => a.pathogen === h.hcid)) ids.add(h.area);
+    });
+    return ids;
   }
+  function areaFilter() {
+    const m = overlay();
+    if (m === 'malaria') return p => isMalariaArea(p);
+    if (m === 'hcid') { const ids = hcidAreaIds(); return p => ids.has(p.id); }
+    if (m === 'outbreak') { const ids = outbreakAreaIds(); return p => ids.has(p.id); }
+    if (m === 'areas') { const ids = hcidAreaIds(); return p => !isMalariaArea(p) && !ids.has(p.id); }
+    return () => false;
+  }
+  function areaStyle(f) {
+    const t = String(f.properties.tags || ''), m = overlay();
+    if (t.includes('malaria_cdc_chemo')) return { color: '#a3201a', weight: 1, fillColor: '#c8352c', fillOpacity: 0.3 };
+    if (t.includes('malaria_cdc_rural')) return { color: '#7b3f86', weight: 1, fillColor: '#a466ae', fillOpacity: 0.3 };
+    if (t.includes('malaria_cdc_avoid')) return { color: '#c56a12', weight: 1, fillColor: '#f0a04b', fillOpacity: 0.3 };
+    if (m === 'malaria') return { color: '#c56a12', weight: 1.5, dashArray: '5 4', fillColor: '#f0a04b', fillOpacity: 0.2 };
+    if (m === 'hcid' || m === 'outbreak') return { color: '#7a1f5c', weight: 1.5, dashArray: '5 4', fillColor: '#7a1f5c', fillOpacity: 0.18 };
+    return { color: '#5a3d99', weight: 1.5, dashArray: '5 4', fillColor: '#5a3d99', fillOpacity: 0.1 };
+  }
+  function drawAreas() {
+    if (!map || !window.L) return;
+    if (areaLayer) map.removeLayer(areaLayer);
+    const keep = areaFilter();
+    areaLayer = L.geoJSON({ type: 'FeatureCollection', features: areaFeatures.filter(f => keep(f.properties)) }, {
+      style: areaStyle,
+      onEachFeature: (f, layer) => layer.bindTooltip(esc(f.properties.name), { sticky: true, className: 'ctip' })
+    }).addTo(map);
+  }
+  function styleFeature(f) {
+    const m = overlay(), c = f.country, t = c ? c.tags : [];
+    let fill = 'transparent', op = 0, color = '#7a8a8c', weight = 0.5, dash = null;
+    if (c && m === 'malaria') {
+      if (t.includes('malaria_high')) { fill = '#b8322a'; op = 0.32; }
+      else if (t.includes('malaria_risk')) { fill = '#e08a2c'; op = 0.25; }
+      else if (t.some(x => x.startsWith('malaria_cdc_'))) { fill = '#e08a2c'; op = 0.1; }
+    } else if (c && m === 'hcid') {
+      const rows = (db.hcidBy[c.iso3] || []).filter(h => h.show);
+      if (rows.some(h => !h.area)) { fill = '#7a1f5c'; op = 0.28; }
+      else if (rows.length) { fill = '#7a1f5c'; op = 0.08; }
+    } else if (c && m === 'outbreak') {
+      const al = FRT.alertsFor(db, c.iso3, todayISO());
+      if (al.some(a => a.pathogen)) { fill = '#b8322a'; op = 0.3; color = '#8a0f12'; weight = 2; dash = '4 3'; }
+      else if (al.length) { fill = '#2f6fb0'; op = 0.25; }
+    }
+    return { color, weight, fillColor: fill, fillOpacity: op, dashArray: dash };
+  }
+  const LEGENDS = {
+    malaria: '<b>Malaria</b>' +
+      '<div><i style="background:#b8322a;opacity:.55"></i>High-risk country (whole country)</div>' +
+      '<div><i style="background:#e08a2c;opacity:.5"></i>Present in parts (country level)</div>' +
+      '<div><i style="background:#c8352c;opacity:.6"></i>CDC: chemoprophylaxis</div>' +
+      '<div><i style="background:#a466ae;opacity:.6"></i>CDC: chemoprophylaxis, rural areas</div>' +
+      '<div><i style="background:#f0a04b;opacity:.6"></i>CDC: mosquito avoidance only</div>' +
+      '<small>Pale orange countries have CDC zones: only the coloured zones count. Zones traced from CDC maps – verify on NaTHNaC/CDC.</small>',
+    hcid: '<b>HCIDs (UKHSA)</b>' +
+      '<div><i style="background:#7a1f5c;opacity:.5"></i>Country with an HCID listed</div>' +
+      '<div><i class="area" style="border-color:#7a1f5c;background:#efdbe7"></i>Named HCID area</div>' +
+      '<small>Shows where UKHSA lists an HCID – not a risk level. Pick a country to see which.</small>',
+    outbreak: '<b>Current outbreaks</b>' +
+      '<div><i class="dash" style="background:#e8b4b1"></i>Outbreak alert (pathogen)</div>' +
+      '<div><i style="background:#2f6fb0;opacity:.45"></i>Information note</div>' +
+      '<div><i class="area" style="border-color:#7a1f5c;background:#efdbe7"></i>Outbreak area</div>' +
+      '<small>From alerts.csv – check dates on the Data tab.</small>',
+    areas: '<b>Other mapped risk areas</b>' +
+      '<div><i class="area"></i>e.g. valley fever, Lyme, leishmaniasis</div>' +
+      '<small>Rough outlines – hover for the name.</small>',
+    none: '<small>No overlay.</small>'
+  };
+  let legendDiv = null;
   function addLegend() {
     const lg = L.control({ position: 'bottomleft' });
-    lg.onAdd = () => {
-      const d = L.DomUtil.create('div', 'legend');
-      d.innerHTML = '<div><i style="background:#b8322a;opacity:.55"></i>Malaria – high-risk country</div>' +
-        '<div><i style="background:#e08a2c;opacity:.5"></i>Malaria – present in parts</div>' +
-        '<div><i style="background:#c8352c;opacity:.6"></i>CDC zone: chemoprophylaxis</div>' +
-        '<div><i style="background:#a466ae;opacity:.6"></i>CDC zone: chemo, rural areas</div>' +
-        '<div><i style="background:#f0a04b;opacity:.6"></i>CDC zone: mosquito avoidance only</div>' +
-        '<div><i class="dash"></i>Current outbreak alert</div>' +
-        '<div><i class="area"></i>Mapped risk area</div>' +
-        '<small>Country shading is country level. CDC zones traced from CDC maps (34 countries); purple outlines are rough. Verify on NaTHNaC/CDC.</small>';
-      return d;
-    };
+    lg.onAdd = () => { legendDiv = L.DomUtil.create('div', 'legend'); legendDiv.innerHTML = LEGENDS[overlay()]; return legendDiv; };
     lg.addTo(map);
+  }
+  function setOverlay() {
+    if (boundaryLayer) boundaryLayer.setStyle(styleFeature);
+    drawAreas();
+    if (legendDiv) legendDiv.innerHTML = LEGENDS[overlay()];
   }
   function bbox(g) {
     let a = [180, 90, -180, -90];
@@ -336,8 +388,8 @@
         ['#onset', '#returned', '#notes'].forEach(s => { $(s).value = ''; }); delete b.dataset.confirm; b.textContent = 'Clear all'; renderAll(); }
       else { b.dataset.confirm = '1'; b.textContent = 'Click again to clear'; setTimeout(() => { delete b.dataset.confirm; b.textContent = 'Clear all'; }, 3000); }
     });
-    $('#shade').addEventListener('change', () => { if (boundaryLayer) boundaryLayer.setStyle(styleFeature); });
-    $('#show-areas').addEventListener('change', e => { if (map && areaLayer) { if (e.target.checked) areaLayer.addTo(map); else map.removeLayer(areaLayer); } });
+    document.querySelectorAll('input[name="overlay"]').forEach(r => r.addEventListener('change', setOverlay));
+    if ($('#detailed')) $('#detailed').addEventListener('change', updateReport);
     $$('.tabs [data-tab]').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
     $('#go-report').addEventListener('click', () => showTab('report'));
     $('#download').addEventListener('click', download);
@@ -361,7 +413,7 @@
     const res = FRT.analyse(db, state, todayISO());
     const now = new Date();
     const stamp = now.toISOString().slice(0, 10) + ' ' + now.toTimeString().slice(0, 5);
-    return { res, text: FRT.renderText(db, state, res, { now: stamp }) };
+    return { res, text: FRT.renderText(db, state, res, { now: stamp, detailed: !!($('#detailed') && $('#detailed').checked) }) };
   }
   function updateReport() {
     if (!db) return;

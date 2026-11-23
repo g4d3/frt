@@ -267,7 +267,65 @@
 
   // ---------- Text report ----------
   function fmtDays(lo, hi) { return lo === hi ? `${lo} d` : `${Math.max(lo, 0)}–${hi} d`; }
+  function incShort(p) { return p.max >= 365 ? `${p.min} d – ${Math.round(p.max / 365)} y` : fmtDays(p.min, p.max); }
+  // Short report: dates, activities, pathogen names + incubation. Built to paste into a clerking note.
+  function renderShort(db, trip, result, meta) {
+    const L = [], push = s => L.push(s);
+    const wrap = (s, ind) => wrapText(s, 72 - ind).map(x => ' '.repeat(ind) + x);
+    const expLab = id => { const e = db.expById[id] || {}; return e.short || e.label || id; };
+    const flag = { early: 'onset sooner than usual incubation', late: 'outside usual incubation', before: 'onset before arrival' };
+    push('TRAVEL & EXPOSURE HISTORY');
+    push(`Generated: ${meta.now}   Exposure database version: ${db.version || 'unknown'}`);
+    push('Lists POSSIBLE exposures by geography only.');
+    push('');
+    push(`Fever onset: ${trip.onset || 'not recorded'}   Returned to UK: ${trip.returned || 'not recorded'}`);
+    if (trip.notes) wrap('Notes: ' + trip.notes, 0).forEach(push);
+    result.stops.forEach(r => {
+      const s = r.stop, c = r.country;
+      const ago = (trip.onset && s.depart) ? ` (left ${dayNum(trip.onset) - dayNum(s.depart)} d before onset)` : '';
+      push('');
+      push(`${r.n}. ${c ? c.name : 'Country not set'}${s.place ? ' – ' + s.place : ''}: ${s.arrive || '?'} to ${s.depart || '?'}${ago}`);
+      if (!c) return;
+      const acts = (s.exposures || []).filter(id => id !== 'any').map(expLab);
+      wrap('Activities: ' + (acts.length ? acts.join('; ') : 'none recorded'), 3).forEach(push);
+      r.alerts.forEach(a => wrap('Current outbreak: ' + a.title, 3).forEach(push));
+      if (r.hcid.length) {
+        const nm = h => {
+          const ins = h.areas.filter(a => a.inside === true);
+          const where = (!h.country && h.areas.length) ? (ins.length ? ' [pin in reported area]' : (h.areas[0].inside === null ? ' [area not assessed]' : ' [pin outside reported area]')) : '';
+          return h.p.name.split(' – ')[0] + where;
+        };
+        const grp = { in: [], out: [], other: [] };
+        r.hcid.forEach(h => (grp[h.win.state] || grp.other).push(nm(h)));
+        const parts = [];
+        if (grp.in.length) parts.push('left within incubation window: ' + grp.in.join('; '));
+        if (grp.out.length) parts.push('outside window: ' + grp.out.join('; '));
+        if (grp.other.length) parts.push('window not assessed: ' + grp.other.join('; '));
+        wrap('HCIDs reported (UKHSA) – ' + parts.join('. '), 3).forEach(push);
+      }
+      const seen = {};
+      r.groups.forEach(g => g.items.forEach(x => {
+        const e = seen[x.p.id]; if (!e) seen[x.p.id] = x; else if (!x.dep) e.dep = false;
+      }));
+      const items = Object.values(seen).filter(x => !x.p.hcid).sort((a, b) =>
+        (TIMING_RANK[a.t.status] - TIMING_RANK[b.t.status]) || (a.p.prio - b.p.prio) || a.p.name.localeCompare(b.p.name));
+      if (items.length) {
+        push('   Possible exposures (incubation):');
+        items.forEach(x => {
+          const extra = [flag[x.t.status], x.dep ? 'area not assessed' : ''].filter(Boolean).join(', ');
+          wrap(`- ${x.p.name} (${incShort(x.p)})${extra ? ' – ' + extra : ''}`, 5).forEach((ln, i) => push(i ? '  ' + ln : ln));
+        });
+      }
+      const ex = Array.from(new Set(r.excluded.map(x => (db.pathogens[x.pathogen] || {}).name).filter(Boolean)));
+      if (ex.length) wrap(`Elsewhere in ${c.name}, not at this pin: ` + ex.join('; '), 3).forEach(push);
+    });
+    push('');
+    push('Imported Fever Service 0844 778 8990');
+    return L.join('\n') + '\n';
+  }
+
   function renderText(db, trip, result, meta) {
+    if (!meta.detailed) return renderShort(db, trip, result, meta);
     const L = []; const hr = '='.repeat(72), sub = '-'.repeat(72);
     const push = s => L.push(s);
     const wrap = (s, ind) => wrapText(s, 72 - ind).map(x => ' '.repeat(ind) + x);

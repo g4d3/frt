@@ -12,7 +12,7 @@
 <header class="top">
   <div>
     <h1>Travel exposure history</h1>
-    <p>Fever in the returning traveller · Place pin · Tick exposure · Generate report </p>
+    <p>Fever in the returning traveller · step 1: where, when, and what were they exposed to?</p>
   </div>
   <nav class="tabs" role="tablist">
     <button role="tab" data-tab="trip" aria-selected="true">Trip</button>
@@ -26,8 +26,13 @@
   <section class="mapwrap" aria-label="Map">
     <div id="map"></div>
     <div class="maptools">
-      <label><input type="checkbox" id="shade" checked> Shade malaria (country level)</label>
-      <label><input type="checkbox" id="show-areas" checked> Show mapped risk areas</label>
+      <span class="overlay" role="radiogroup" aria-label="Map overlay">Show:
+        <label><input type="radio" name="overlay" value="malaria" checked> Malaria</label>
+        <label><input type="radio" name="overlay" value="hcid"> HCIDs</label>
+        <label><input type="radio" name="overlay" value="outbreak"> Outbreaks</label>
+        <label><input type="radio" name="overlay" value="areas"> Mapped areas</label>
+        <label><input type="radio" name="overlay" value="none"> None</label>
+      </span>
       <span class="hint">Click the map to drop a pin for each place stayed. Drag pins to adjust.</span>
     </div>
   </section>
@@ -60,6 +65,7 @@
       <div class="btns">
         <button id="download">Download .txt</button>
         <button id="copy" class="ghost">Copy text</button>
+        <label class="hint"><input type="checkbox" id="detailed"> Detailed version</label>
         <span id="copied" class="hint" aria-live="polite"></span>
       </div>
       <pre id="report"></pre>
@@ -80,7 +86,7 @@
       <p>It records where and when a febrile traveller stayed and what they were exposed to, then lists the infections that are possible for those places and exposures, with incubation periods checked against the fever-onset date. It deliberately ignores symptoms: it is the start of the diagnostic process, not a differential-diagnosis engine.</p>
       <h2>Limits</h2>
       <ul>
-        <li>Geography is country-level, except where a <em>mapped risk area</em> has been drawn (dashed purple outlines: e.g. valley fever in the south-west USA, malaria in Kruger or the Thai border provinces). In those countries a pin outside the area does not pick up that risk, and the report lists it under "Not at this pin". The outlines are rough: always check the area visited on NaTHNaC or the CDC maps.</li>
+        <li>Geography is country-level, except where a <em>mapped risk area</em> has been drawn (choose <em>Mapped areas</em> above the map: e.g. valley fever in the south-west USA, malaria in Kruger or the Thai border provinces). In those countries a pin outside the area does not pick up that risk, and the report lists it under "Not at this pin". The outlines are rough: always check the area visited on NaTHNaC or the CDC maps.</li>
         <li>Outbreaks change weekly. The alerts list is maintained by hand from NaTHNaC and UKHSA <em>Outbreaks under monitoring</em>; alerts past their review date are flagged as stale.</li>
         <li>It is not a substitute for the ACDP VHF risk assessment, local guidance or specialist advice. Imported Fever Service: <strong>0844 778 8990</strong> (24/7).</li>
       </ul>
