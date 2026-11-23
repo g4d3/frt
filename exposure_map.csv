@@ -13,8 +13,6 @@ malaria_risk,,any,pf,"Malaria present in parts of this country — check the are
 malaria_high;malaria_risk,,any,pv_po,"",NaTHNaC; CDC Yellow Book
 knowlesi,,any,pk,"",NEJM2017 T1
 enteric_high,,any,enteric,"Highest-risk region for enteric fever (Indian subcontinent).",NEJM2017 T1
-lassa,,any,lassa,"Lassa endemic country — VHF risk assessment if onset within 21 d of leaving.",UKHSA HCID country risk; QRG2025
-cchf,,any,cchf,"CCHF reported in this country — VHF risk assessment if onset within 21 d (ask about ticks, livestock, slaughter).",UKHSA HCID country risk; QRG2025
 aedes,,any,dengue,"Aedes-borne arboviruses circulate here; bites often unnoticed (day-biting).",NaTHNaC; QRG2025
 GLOBAL,,any,resp_viruses,"",QRG2025
 #
@@ -37,12 +35,12 @@ rift_valley,,mosquito,rvf,"",NEJM2017 T1
 atbf,,tick,atbf,"Game parks / bush; often multiple eschars.",NEJM2017; QRG2025
 msf,,tick,msf,"",NEJM2017 T1
 rmsf,,tick,rmsf,"",NEJM2017 T1
-cchf,,tick,cchf,"",NEJM2017 T1/T3
+GLOBAL,,tick,cchf,,NEJM2017 T1/T3
 tbe,,tick,tbe,"",NEJM2017 T2
 lyme,,tick,lyme,"",NEJM2017 T2
 tbrf,,tick,tbrf,"",NEJM2017 T2
 kfd,,tick,kfd,"",Expert
-sfts,,tick,sfts,"",Expert
+GLOBAL,,tick,sfts,,Expert
 GLOBAL,,tick,qfever,"",NEJM2017 T2
 north-america;europe;east-asia;central-asia,,tick,tularemia,"",NEJM2017 T2
 #
@@ -61,7 +59,7 @@ hat_gambiense,,tsetse,hat_g,"",NEJM2017 T2
 #
 # ===== FLEAS / LICE / BUGS =====
 GLOBAL,,flea,murine_typhus,"Especially SE Asia, ports and markets.",NEJM2017 T1
-plague,,flea,plague,"",NEJM2017 T1
+GLOBAL,,flea,plague,,NEJM2017 T1
 lbrf,,louse,lbrf,"",NEJM2017 T1
 GLOBAL,,louse,epidemic_typhus,"Outbreak / crowded settings.",NEJM2017 T1
 GLOBAL,,louse,trench,"",NEJM2017 T2
@@ -78,33 +76,33 @@ GLOBAL,,cat,pasteurella,"",Expert
 GLOBAL,rabies_free,primate,rabies,"",NEJM2017 T1
 macaque,,primate,b_virus,"Macaques",NEJM2017 T2
 GLOBAL,,bat,rabies,"Bat lyssaviruses occur even in 'rabies-free' countries (incl. UK, Australia).",NEJM2017 T1
-filovirus_hist,,bat,marburg,"Caves/mines with Rousettus bats.",NEJM2017 T3
+GLOBAL,,bat,marburg,Caves/mines with Rousettus bats.,NEJM2017 T3
 histo,,bat,histo,"Caves, guano.",BIA2025 6.1.9
-nipah,,bat,nipah,"",NEJM2017 T2
+GLOBAL,,bat,nipah,,NEJM2017 T2
 tbrf,,bat,tbrf,"Soft ticks in caves.",NEJM2017 T2
 #
 # ===== RODENTS =====
 GLOBAL,,rodent,lepto,"",NEJM2017 T1
-lassa,,rodent,lassa,"Multimammate rats in houses/food stores.",NEJM2017 T3
+GLOBAL,,rodent,lassa,Multimammate rats in houses/food stores.,NEJM2017 T3
 hantavirus,,rodent,hantavirus,"",NEJM2017 T2
 GLOBAL,,rodent,rat_bite,"",NEJM2017 T2
 GLOBAL,,rodent,murine_typhus,"",NEJM2017 T1
-plague,,rodent,plague,"",NEJM2017 T1
+GLOBAL,,rodent,plague,,NEJM2017 T1
 north-america;europe;east-asia;central-asia,,rodent,tularemia,"",NEJM2017 T2
 #
 # ===== LIVESTOCK, CAMELS, PIGS, HORSES =====
 GLOBAL,NZL,livestock,qfever,"Especially birthing products.",NEJM2017 T2; QRG2025
 GLOBAL,western-europe;northern-europe;AUS;NZL;CAN;JPN,livestock,brucella,"",NEJM2017 T2; QRG2025
 sub-saharan-africa;middle-east;north-africa;central-south-asia;east-asia;southeast-asia;TUR,,livestock,anthrax,"Hides, carcasses, slaughter.",NEJM2017 T1
-cchf,,livestock,cchf,"Slaughter or contact with animal blood.",NEJM2017 T1/T3
+GLOBAL,,livestock,cchf,Slaughter or contact with animal blood.,NEJM2017 T1/T3
 rift_valley,,livestock,rvf,"Blood/tissue of infected animals.",NEJM2017 T1
 GLOBAL,,livestock,lepto,"",NEJM2017 T1
-mers,,camel,mers,"",NEJM2017 T1/T3; QRG2025
+GLOBAL,,camel,mers,,NEJM2017 T1/T3; QRG2025
 GLOBAL,,camel,brucella,"",NEJM2017 T2
 GLOBAL,,camel,qfever,"",NEJM2017 T2
 GLOBAL,,pig,lepto,"",NEJM2017 T1
 strep_suis,,pig,strep_suis,"",Expert
-nipah,,pig,nipah,"Pig farms (Malaysia outbreak).",NEJM2017 T2
+GLOBAL,,pig,nipah,Pig farms (Malaysia outbreak).,NEJM2017 T2
 je,,pig,je,"Pigs amplify JE virus.",NEJM2017 T1
 GLOBAL,,pig,hev,"",Expert
 AUS,,horse,hendra,"",NEJM2017 T2
@@ -112,11 +110,11 @@ AUS,,horse,hendra,"",NEJM2017 T2
 # ===== BIRDS =====
 GLOBAL,,poultry,avian_flu,"H5N1 now widespread in birds globally; human cases mainly Asia, Egypt, Americas.",NEJM2017 T1; QRG2025
 GLOBAL,,pet_bird,psittacosis,"",NEJM2017 T2
-GLOBAL,,pet_bird,avian_flu,"",NEJM2017 T2
+GLOBAL,,pet_bird,avian_flu,,NEJM2017 T2
 #
 # ===== BUSHMEAT / WILD ANIMALS =====
-filovirus_hist,,bushmeat,ebola,"",NEJM2017 T3
-filovirus_hist,,bushmeat,marburg,"",NEJM2017 T3
+GLOBAL,,bushmeat,ebola,,NEJM2017 T3
+GLOBAL,,bushmeat,marburg,,NEJM2017 T3
 mpox_clade1;central-africa;west-africa,,bushmeat,mpox,"",QRG2025
 sub-saharan-africa;central-south-asia;southeast-asia;east-asia,,bushmeat,anthrax,"",NEJM2017 T1
 GLOBAL,,bushmeat,trichinella,"Wild boar, bear, game.",BIA2025 6.2.9
@@ -164,31 +162,30 @@ paragonimus,,raw_crustacean,paragonimus,"",BIA2025 T2
 angiostrongylus,,raw_snail,angio,"",BIA2025 T2
 GLOBAL,,raw_marine_fish,anisakis,"",BIA2025 T2
 GLOBAL,,watercress,fasciola,"Especially Andes (Bolivia, Peru), Egypt, Iran, Turkey, Vietnam, Europe.",BIA2025 T2
-nipah,,palm_sap,nipah,"",NEJM2017 T2; UKHSA
-mers,,camel,brucella,"Raw camel milk.",NEJM2017 T2
+GLOBAL,,palm_sap,nipah,,NEJM2017 T2; UKHSA
 #
 # ===== PEOPLE & HEALTHCARE =====
 GLOBAL,,sick_contact,resp_viruses,"",NEJM2017 T3
 GLOBAL,,sick_contact,tb,"",NEJM2017 T2/T3
 GLOBAL,,sick_contact,measles,"",NEJM2017 T3
 GLOBAL,,sick_contact,mening,"",NEJM2017
-lassa,,sick_contact,lassa,"",NEJM2017 T3
-filovirus_hist,,sick_contact,ebola,"",NEJM2017 T3
-filovirus_hist,,sick_contact,marburg,"",NEJM2017 T3
-cchf,,sick_contact,cchf,"",NEJM2017 T3
-mers,,sick_contact,mers,"",NEJM2017 T3
-nipah,,sick_contact,nipah,"",UKHSA
+GLOBAL,,sick_contact,lassa,,NEJM2017 T3
+GLOBAL,,sick_contact,ebola,,NEJM2017 T3
+GLOBAL,,sick_contact,marburg,,NEJM2017 T3
+GLOBAL,,sick_contact,cchf,,NEJM2017 T3
+GLOBAL,,sick_contact,mers,,NEJM2017 T3
+GLOBAL,,sick_contact,nipah,,UKHSA
 mpox_clade1;central-africa;west-africa,,sick_contact,mpox,"",QRG2025
-filovirus_hist,,funeral,ebola,"",NEJM2017
-filovirus_hist,,funeral,marburg,"",NEJM2017
-lassa,,funeral,lassa,"",NEJM2017
+GLOBAL,,funeral,ebola,,NEJM2017
+GLOBAL,,funeral,marburg,,NEJM2017
+GLOBAL,,funeral,lassa,,NEJM2017
 GLOBAL,,healthcare,mdro,"Rectal swab + MRSA screen if hospitalised abroad.",QRG2025; NEJM2017
 GLOBAL,,healthcare,tb,"",NEJM2017
-lassa,,healthcare,lassa,"Nosocomial transmission reported.",NEJM2017 T3
-filovirus_hist,,healthcare,ebola,"",NEJM2017 T3
-filovirus_hist,,healthcare,marburg,"",NEJM2017 T3
-cchf,,healthcare,cchf,"",NEJM2017 T3
-mers,,healthcare,mers,"Most MERS clusters are healthcare-associated.",NEJM2017 T3; QRG2025
+GLOBAL,,healthcare,lassa,Nosocomial transmission reported.,NEJM2017 T3
+GLOBAL,,healthcare,ebola,,NEJM2017 T3
+GLOBAL,,healthcare,marburg,,NEJM2017 T3
+GLOBAL,,healthcare,cchf,,NEJM2017 T3
+GLOBAL,,healthcare,mers,Most MERS clusters are healthcare-associated.,NEJM2017 T3; QRG2025
 GLOBAL,,healthcare,hbv,"",NEJM2017 T2
 GLOBAL,,healthcare,hcv,"",NEJM2017 T2
 GLOBAL,,healthcare,hiv,"",NEJM2017 T2
@@ -226,3 +223,41 @@ GLOBAL,,rural_forest,lepto,"",NEJM2017
 GLOBAL,,cruise_spa,legionella,"",Expert
 GLOBAL,,cruise_spa,resp_viruses,"",Expert
 GLOBAL,,antibiotics,mdro,"Antibiotic use abroad raises the risk of resistant-organism carriage.",NEJM2017; QRG2025
+#
+# ===== HCIDs =====
+# For HCID pathogens the countries come from hcid_risk.csv (rows with show = yes); "where" is ignored, so these use GLOBAL.
+GLOBAL,,sex,lassa,"Semen up to 3 months after illness.",UKHSA Lassa page
+GLOBAL,,sex,ebola,"Semen of survivors (over a year).",UKHSA Ebola page
+GLOBAL,,primate,ebola,"Chimpanzees, gorillas (dead or alive).",UKHSA Ebola page
+GLOBAL,,primate,marburg,"",UKHSA Marburg page
+GLOBAL,,cat,plague,"Infected cats (fleas, scratches, bites, respiratory).",UKHSA Plague page
+GLOBAL,,sick_contact,plague,"Pneumonic plague: close, prolonged contact.",UKHSA Plague page
+GLOBAL,,bushmeat,plague,"Handling infected animals or tissues.",UKHSA Plague page
+GLOBAL,,livestock,sfts,"Sheep, goats as intermediate hosts.",UKHSA SFTS page
+GLOBAL,,sick_contact,sfts,"",UKHSA SFTS page
+GLOBAL,,healthcare,sfts,"Nosocomial and needlestick transmission reported.",UKHSA SFTS page
+GLOBAL,,rodent,junin,"Calomys corn mice.",UKHSA AHF page
+GLOBAL,,farm_fields,junin,"Field margins, harvest.",UKHSA AHF page
+GLOBAL,,healthcare,junin,"Very rare nosocomial spread.",UKHSA AHF page
+GLOBAL,,rodent,machupo,"",UKHSA Bolivia HF page
+GLOBAL,,farm_fields,machupo,"",UKHSA Bolivia HF page
+GLOBAL,,healthcare,machupo,"",UKHSA Bolivia HF page
+GLOBAL,,sick_contact,machupo,"",UKHSA Bolivia HF page
+GLOBAL,,rodent,chapare,"",UKHSA Bolivia HF page
+GLOBAL,,farm_fields,chapare,"",UKHSA Bolivia HF page
+GLOBAL,,healthcare,chapare,"",UKHSA Bolivia HF page
+GLOBAL,,sick_contact,chapare,"",UKHSA Bolivia HF page
+GLOBAL,,rodent,lujo,"Probable reservoir.",UKHSA Lujo page
+GLOBAL,,healthcare,lujo,"",UKHSA Lujo page
+GLOBAL,,sick_contact,lujo,"",UKHSA Lujo page
+GLOBAL,,rodent,andes,"",UKHSA Andes page
+GLOBAL,,dust,andes,"Sweeping or cleaning rodent-infested buildings.",UKHSA Andes page
+GLOBAL,,rural_forest,andes,"",UKHSA Andes page
+GLOBAL,,sick_contact,andes,"Household / close contact.",UKHSA Andes page
+GLOBAL,,sex,andes,"Suggested route.",UKHSA Andes page
+GLOBAL,,cruise_spa,andes,"May 2026 cruise-ship outbreak.",UKHSA Andes page
+GLOBAL,,sick_contact,avian_flu,"",UKHSA HCID list
+GLOBAL,,raw_dairy,mers,"Raw camel milk.",UKHSA MERS page
+GLOBAL,,raw_meat,mers,"Raw camel meat.",UKHSA MERS page
+GLOBAL,,bat,ebola,"",UKHSA Ebola page
+GLOBAL,,healthcare,nipah,"",UKHSA Nipah page

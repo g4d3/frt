@@ -1,0 +1,316 @@
+# HCIDs by country (and area) – one row per country x HCID, copied from the UKHSA page
+# "High consequence infectious disease: country specific risk" (https://www.gov.uk/guidance/high-consequence-infectious-disease-country-specific-risk).
+# country: ISO3 code. area: optional id of a shape in areas.geojson (sub-national detail from the UKHSA HCID guidance pages).
+# hcid: pathogen id from pathogens.csv. category: UKHSA letter a–e (category_text is shown in the report).
+# show: yes = listed in the report for travellers to that country. Defaults: a, d, e = yes; b = yes only if the main year is 2025/2026; c (imported case, no spread) = no; SARS = no.
+#   Change any row's "show" if you disagree. Rows with show = no still appear in the Data tab.
+# The report LISTS what UKHSA reports. It does not estimate risk.
+country,area,hcid,category,category_text,last_reported,show,notes,source,checked
+AFG,,cchf,a,(a) Community or zoonotic transmission,2026,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+AFG,,plague,a,(a) Community or zoonotic transmission,2007,yes,type unspecified,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ALB,,cchf,a,(a) Community or zoonotic transmission,2026,yes,zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+DZA,,mers,c,"(c) Imported/lab-acquired case, no onward transmission",2014,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+DZA,,plague,a,(a) Community or zoonotic transmission,2008,yes,pneumonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+AGO,,marburg,a,(a) Community or zoonotic transmission,2004,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+AGO,,plague,a,(a) Community or zoonotic transmission,1981,yes,bubonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ARG,,junin,a,(a) Community or zoonotic transmission,2026,yes,community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ARG,,andes,a,(a) Community or zoonotic transmission,2019 (isolated cases 2026),yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ARM,,cchf,a,(a) Community or zoonotic transmission,1974,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+AUS,,avian_flu,c,"(c) Imported/lab-acquired case, no onward transmission",2024,no,A(H5N1),UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+AUS,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+AUT,,cchf,c,"(c) Imported/lab-acquired case, no onward transmission",2026,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+AUT,,mers,c,"(c) Imported/lab-acquired case, no onward transmission",2016,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+AZE,,avian_flu,a,(a) Community or zoonotic transmission,2006,yes,A(H5N1); community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+BHR,,mers,c,"(c) Imported/lab-acquired case, no onward transmission",2016,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+BHR,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+BGD,,avian_flu,a,(a) Community or zoonotic transmission,2026,yes,A(H5N1); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+BGD,,nipah,a,(a) Community or zoonotic transmission,2026,yes,community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+BEL,,junin,c,"(c) Imported/lab-acquired case, no onward transmission",2020,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+BEN,,ebola,d,(d) Human serology only (exposure may have been elsewhere),1983,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+BEN,,cchf,d,(d) Human serology only (exposure may have been elsewhere),1983,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+BEN,,lassa,a,(a) Community or zoonotic transmission,2023,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+BOL,,plague,a,(a) Community or zoonotic transmission,2018,yes,bubonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+BOL,,machupo,a,(a) Community or zoonotic transmission,2013,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+BOL,,chapare,a,(a) Community or zoonotic transmission,2025,yes,community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+BWA,,plague,a,(a) Community or zoonotic transmission,1990,yes,bubonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+BRA,,plague,a,(a) Community or zoonotic transmission,2005,yes,type unspecified,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+BGR,,cchf,a,(a) Community or zoonotic transmission,2020,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+BFA,,cchf,a,(a) Community or zoonotic transmission,1983,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+BFA,,lassa,a,(a) Community or zoonotic transmission,2017,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+KHM,,avian_flu,a,(a) Community or zoonotic transmission,2026,yes,A(H5N1); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CMR,,cchf,a,(a) Community or zoonotic transmission,2008 (serology 2024),yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CMR,,ebola,d,(d) Human serology only (exposure may have been elsewhere),2023,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CMR,,lassa,d,(d) Human serology only (exposure may have been elsewhere),2021,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CMR,,marburg,d,(d) Human serology only (exposure may have been elsewhere),2023,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CAN,,avian_flu,e,(e) Unknown / limited information,2024,yes,A(H5N1),UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CAN,,avian_flu,c,"(c) Imported/lab-acquired case, no onward transmission",2015,no,A(H7N9),UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CAN,,sars,a,(a) Community or zoonotic transmission,2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CAF,,cchf,d,(d) Human serology only (exposure may have been elsewhere),2012,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CAF,,ebola,d,(d) Human serology only (exposure may have been elsewhere),1995,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CAF,,lassa,d,(d) Human serology only (exposure may have been elsewhere),1993,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+TCD,,ebola,d,(d) Human serology only (exposure may have been elsewhere),1987,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CHL,,andes,a,(a) Community or zoonotic transmission,2026,yes,community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CHL,,avian_flu,a,(a) Community or zoonotic transmission,2023,yes,A(H5N1); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CHN,,avian_flu,a,(a) Community or zoonotic transmission,2025,yes,A(H5N1); community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CHN,,avian_flu,a,(a) Community or zoonotic transmission,2019,yes,A(H7N9); community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CHN,,avian_flu,a,(a) Community or zoonotic transmission,2026,yes,A(H5N6); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CHN,,cchf,a,(a) Community or zoonotic transmission,2023,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CHN,,lassa,c,"(c) Imported/lab-acquired case, no onward transmission",2024,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CHN,,mers,c,"(c) Imported/lab-acquired case, no onward transmission",2015,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CHN,,plague,a,(a) Community or zoonotic transmission,2024,yes,type unspecified,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CHN,,sars,a,(a) Community or zoonotic transmission,2004,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CHN,,sfts,a,(a) Community or zoonotic transmission,2026,yes,zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+COG,,cchf,d,(d) Human serology only (exposure may have been elsewhere),1976,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+COG,,ebola,a,(a) Community or zoonotic transmission,2003,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+COD,,cchf,a,(a) Community or zoonotic transmission,2008,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+COD,,ebola,a,(a) Community or zoonotic transmission,2026,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+COD,,marburg,a,(a) Community or zoonotic transmission,1998,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+COD,,plague,a,(a) Community or zoonotic transmission,2024,yes,type unspecified,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CIV,,cchf,a,(a) Community or zoonotic transmission,2022,yes,community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CIV,,ebola,a,(a) Community or zoonotic transmission,1994,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CIV,,lassa,d,(d) Human serology only (exposure may have been elsewhere),2008,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+DJI,,avian_flu,a,(a) Community or zoonotic transmission,2023,yes,A(H5N1); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ECU,,avian_flu,a,(a) Community or zoonotic transmission,2023,yes,A(H5N1); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ECU,,plague,a,(a) Community or zoonotic transmission,1998,yes,pneumonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+EGY,,avian_flu,a,(a) Community or zoonotic transmission,2017,yes,A(H5N1); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+EGY,,cchf,a,(a) Community or zoonotic transmission,2012,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+EGY,,mers,c,"(c) Imported/lab-acquired case, no onward transmission",2014,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GNQ,,cchf,d,(d) Human serology only (exposure may have been elsewhere),1985,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GNQ,,ebola,d,(d) Human serology only (exposure may have been elsewhere),1987,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GNQ,,marburg,a,(a) Community or zoonotic transmission,2023,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ETH,,ebola,d,(d) Human serology only (exposure may have been elsewhere),1983,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ETH,,marburg,a,(a) Community or zoonotic transmission,2025,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+FRA,,andes,c,"(c) Imported/lab-acquired case, no onward transmission",2026,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+FRA,,ebola,c,"(c) Imported/lab-acquired case, no onward transmission",2026,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+FRA,,lassa,c,"(c) Imported/lab-acquired case, no onward transmission",2024,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+FRA,,mers,b,(b) Limited local transmission linked to an imported/lab case,2013 (imported cases 2025),no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+FRA,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GAB,,ebola,a,(a) Community or zoonotic transmission,2001,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GEO,,cchf,a,(a) Community or zoonotic transmission,2023,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+DEU,,cchf,c,"(c) Imported/lab-acquired case, no onward transmission",2009,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+DEU,,lassa,b,(b) Limited local transmission linked to an imported/lab case,2016,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+DEU,,mers,c,"(c) Imported/lab-acquired case, no onward transmission",2015,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+DEU,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GHA,,cchf,d,(d) Human serology only (exposure may have been elsewhere),2011,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GHA,,lassa,a,(a) Community or zoonotic transmission,2023,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GHA,,marburg,a,(a) Community or zoonotic transmission,2022,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GRC,,cchf,a,(a) Community or zoonotic transmission,2025,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GRC,,mers,c,"(c) Imported/lab-acquired case, no onward transmission",2014,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GIN,,cchf,d,(d) Human serology only (exposure may have been elsewhere),2021,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GIN,,ebola,a,(a) Community or zoonotic transmission,2021,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GIN,,marburg,a,(a) Community or zoonotic transmission,2021,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GIN,,lassa,a,(a) Community or zoonotic transmission,2025 (isolated cases 2026),yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+HKG,,avian_flu,a,(a) Community or zoonotic transmission,1997,yes,A(H5N1); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+HKG,,avian_flu,c,"(c) Imported/lab-acquired case, no onward transmission",2019,no,A(H7N9),UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+HKG,,sars,a,(a) Community or zoonotic transmission,2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+HUN,,cchf,d,(d) Human serology only (exposure may have been elsewhere),2017,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+IND,,avian_flu,a,(a) Community or zoonotic transmission,2026,yes,A(H5N1); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+IND,,cchf,a,(a) Community or zoonotic transmission,2026,yes,community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+IND,,nipah,a,(a) Community or zoonotic transmission,2026,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+IND,,plague,a,(a) Community or zoonotic transmission,2002,yes,pneumonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+IND,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+IDN,,avian_flu,a,(a) Community or zoonotic transmission,2017,yes,A(H5N1); community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+IDN,,plague,a,(a) Community or zoonotic transmission,2007,yes,type unspecified,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+IDN,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+IRN,,cchf,a,(a) Community or zoonotic transmission,2026,yes,community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+IRN,,mers,b,(b) Limited local transmission linked to an imported/lab case,2015,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+IRQ,,avian_flu,a,(a) Community or zoonotic transmission,2006,yes,A(H5N1); community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+IRQ,,cchf,a,(a) Community or zoonotic transmission,2026,yes,community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+IRL,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ISR,,lassa,c,"(c) Imported/lab-acquired case, no onward transmission",1988,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ITA,,avian_flu,a,(a) Community or zoonotic transmission,2013,yes,A(H7N7); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ITA,,ebola,c,"(c) Imported/lab-acquired case, no onward transmission",2015,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ITA,,mers,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ITA,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2013,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+JPN,,sfts,a,(a) Community or zoonotic transmission,2026,yes,zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+JPN,,lassa,c,"(c) Imported/lab-acquired case, no onward transmission",1988,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+JOR,,mers,a,(a) Community or zoonotic transmission,2023,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+JOR,,plague,a,(a) Community or zoonotic transmission,1997,yes,pneumonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+KAZ,,cchf,a,(a) Community or zoonotic transmission,2026,yes,zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+KAZ,,plague,a,(a) Community or zoonotic transmission,2003,yes,bubonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+KEN,,cchf,a,(a) Community or zoonotic transmission,2020,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+KEN,,ebola,b,(b) Limited local transmission linked to an imported/lab case,2026,yes,linked to DRC outbreak,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+KEN,,marburg,a,(a) Community or zoonotic transmission,1987,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+KEN,,mers,a,(a) Community or zoonotic transmission,2019,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+KEN,,plague,a,(a) Community or zoonotic transmission,1990,yes,bubonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+XKX,,cchf,a,(a) Community or zoonotic transmission,2016,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+KWT,,cchf,d,(d) Human serology only (exposure may have been elsewhere),1982,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+KWT,,mers,a,(a) Community or zoonotic transmission,2015,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+KWT,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+KGZ,,cchf,a,(a) Community or zoonotic transmission,2021,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+KGZ,,plague,a,(a) Community or zoonotic transmission,2013,yes,bubonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+LAO,,avian_flu,a,(a) Community or zoonotic transmission,2020,yes,A(H5N1); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+LAO,,avian_flu,a,(a) Community or zoonotic transmission,2021,yes,A(H5N6); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+LAO,,plague,a,(a) Community or zoonotic transmission,1996,yes,type unspecified,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+LBN,,mers,c,"(c) Imported/lab-acquired case, no onward transmission",2017,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+LBR,,cchf,d,(d) Human serology only (exposure may have been elsewhere),2023,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+LBR,,ebola,a,(a) Community or zoonotic transmission,2014,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+LBR,,lassa,a,(a) Community or zoonotic transmission,2026,yes,community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+LBR,,marburg,d,(d) Human serology only (exposure may have been elsewhere),2023,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+LBY,,plague,a,(a) Community or zoonotic transmission,2009,yes,pneumonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MAC,,avian_flu,c,"(c) Imported/lab-acquired case, no onward transmission",2017,no,A(H7N9),UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MAC,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MDG,,cchf,d,(d) Human serology only (exposure may have been elsewhere),2008,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MDG,,ebola,d,(d) Human serology only (exposure may have been elsewhere),1989,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MDG,,plague,a,(a) Community or zoonotic transmission,2026,yes,community or zoonotic; pneumonic and bubonic; regular seasonal outbreaks,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MWI,,plague,a,(a) Community or zoonotic transmission,2002,yes,bubonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MYS,,avian_flu,c,"(c) Imported/lab-acquired case, no onward transmission",2014,no,A(H7N9),UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MYS,,mers,c,"(c) Imported/lab-acquired case, no onward transmission",2018,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MYS,,nipah,a,(a) Community or zoonotic transmission,1999,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MYS,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MLI,,cchf,a,(a) Community or zoonotic transmission,2020,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MLI,,ebola,b,(b) Limited local transmission linked to an imported/lab case,2014,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MLI,,lassa,a,(a) Community or zoonotic transmission,2019,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MRT,,cchf,a,(a) Community or zoonotic transmission,2026,yes,community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MEX,,avian_flu,e,(e) Unknown / limited information,2025,yes,A(H5N1),UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MNG,,cchf,d,(d) Human serology only (exposure may have been elsewhere),2018,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MNG,,plague,a,(a) Community or zoonotic transmission,2025,yes,bubonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MNG,,sars,b,(b) Limited local transmission linked to an imported/lab case,2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MAR,,plague,a,(a) Community or zoonotic transmission,1977,yes,type unspecified,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MAR,,mers,d,(d) Human serology only (exposure may have been elsewhere),2018,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MOZ,,cchf,d,(d) Human serology only (exposure may have been elsewhere),2016,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MOZ,,plague,a,(a) Community or zoonotic transmission,1997,yes,bubonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MMR,,avian_flu,a,(a) Community or zoonotic transmission,2007,yes,A(H5N1); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MMR,,cchf,d,(d) Human serology only (exposure may have been elsewhere),2018,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MMR,,plague,a,(a) Community or zoonotic transmission,2010,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MMR,,sfts,a,(a) Community or zoonotic transmission,2019,yes,community transmission (category letter not shown),UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+NAM,,cchf,a,(a) Community or zoonotic transmission,2025,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+NAM,,plague,a,(a) Community or zoonotic transmission,1999,yes,bubonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+NPL,,avian_flu,a,(a) Community or zoonotic transmission,2019,yes,A(H5N1); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+NLD,,avian_flu,a,(a) Community or zoonotic transmission,2003,yes,A(H7N7); community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+NLD,,lassa,c,"(c) Imported/lab-acquired case, no onward transmission",2019,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+NLD,,marburg,c,"(c) Imported/lab-acquired case, no onward transmission",2008,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+NLD,,mers,c,"(c) Imported/lab-acquired case, no onward transmission",2014,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+NGA,,avian_flu,a,(a) Community or zoonotic transmission,2007,yes,A(H5N1); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+NGA,,cchf,a,(a) Community or zoonotic transmission,2014 (serology 2019),yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+NGA,,ebola,b,(b) Limited local transmission linked to an imported/lab case,2014 (imported case 2026),no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+NGA,,lassa,a,(a) Community or zoonotic transmission,2026,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+NGA,,mers,d,(d) Human serology only (exposure may have been elsewhere),2019,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+MKD,,cchf,a,(a) Community or zoonotic transmission,2024,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+OMN,,cchf,a,(a) Community or zoonotic transmission,2017,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+OMN,,mers,a,(a) Community or zoonotic transmission,2023,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+PAK,,avian_flu,a,(a) Community or zoonotic transmission,2007,yes,A(H5N1); community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+PAK,,cchf,a,(a) Community or zoonotic transmission,2026,yes,community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+PAK,,sfts,d,(d) Human serology only (exposure may have been elsewhere),2020,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+PER,,andes,d,(d) Human serology only (exposure may have been elsewhere),2012,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+PER,,plague,a,(a) Community or zoonotic transmission,2018,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+PHL,,nipah,a,(a) Community or zoonotic transmission,2014,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+PHL,,mers,c,"(c) Imported/lab-acquired case, no onward transmission",2015,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+PHL,,sars,b,(b) Limited local transmission linked to an imported/lab case,2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+PRT,,cchf,a,(a) Community or zoonotic transmission,2024,yes,community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+PRI,,sars,e,(e) Unknown / limited information,2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+QAT,,mers,a,(a) Community or zoonotic transmission,2026,yes,zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ROU,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+RUS,,cchf,a,(a) Community or zoonotic transmission,2026,yes,community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+RUS,,ebola,c,"(c) Imported/lab-acquired case, no onward transmission",2004,no,lab-acquired,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+RUS,,marburg,c,"(c) Imported/lab-acquired case, no onward transmission",1990,no,lab-acquired,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+RUS,,plague,a,(a) Community or zoonotic transmission,2016,yes,bubonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+RWA,,marburg,a,(a) Community or zoonotic transmission,2024,yes,community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+RWA,,plague,a,(a) Community or zoonotic transmission,1994,yes,bubonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+SAU,,cchf,a,(a) Community or zoonotic transmission,1990,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+SAU,,mers,a,(a) Community or zoonotic transmission,2025 (isolated cases 2026),yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+SAU,,plague,a,(a) Community or zoonotic transmission,1994,yes,bubonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+SEN,,cchf,a,(a) Community or zoonotic transmission,2026,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+SEN,,ebola,c,"(c) Imported/lab-acquired case, no onward transmission",2014,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+SEN,,lassa,e,(e) Unknown / limited information,-,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+SRB,,cchf,c,"(c) Imported/lab-acquired case, no onward transmission",1999,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+SYC,,plague,b,(b) Limited local transmission linked to an imported/lab case,2017,no,pneumonic; linked to imported case,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+SLE,,ebola,a,(a) Community or zoonotic transmission,2014,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+SLE,,lassa,a,(a) Community or zoonotic transmission,2026,yes,community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+SGP,,nipah,a,(a) Community or zoonotic transmission,1999,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+SGP,,sars,a,(a) Community or zoonotic transmission,2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ZAF,,andes,c,"(c) Imported/lab-acquired case, no onward transmission",2026,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ZAF,,cchf,a,(a) Community or zoonotic transmission,2019,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ZAF,,ebola,b,(b) Limited local transmission linked to an imported/lab case,1996,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ZAF,,lassa,c,"(c) Imported/lab-acquired case, no onward transmission",2002,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ZAF,,lujo,b,(b) Limited local transmission linked to an imported/lab case,2008,no,linked to case from Zambia,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ZAF,,marburg,b,(b) Limited local transmission linked to an imported/lab case,1975,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ZAF,,plague,a,(a) Community or zoonotic transmission,1982,yes,type not reported,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ZAF,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+KOR,,mers,a,(a) Community or zoonotic transmission,2018,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+KOR,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+KOR,,sfts,a,(a) Community or zoonotic transmission,2026,yes,zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+SSD,,cchf,a,(a) Community or zoonotic transmission,2013,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+SSD,,ebola,a,(a) Community or zoonotic transmission,2004,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ESP,,andes,c,"(c) Imported/lab-acquired case, no onward transmission",2026,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ESP,,avian_flu,a,(a) Community or zoonotic transmission,2022,yes,A(H5N1); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ESP,,cchf,a,(a) Community or zoonotic transmission,2026,yes,zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ESP,,ebola,c,"(c) Imported/lab-acquired case, no onward transmission",2014,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ESP,,mers,c,"(c) Imported/lab-acquired case, no onward transmission",2013,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ESP,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+SDN,,cchf,a,(a) Community or zoonotic transmission,2020,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+SWE,,lassa,c,"(c) Imported/lab-acquired case, no onward transmission",2016,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+SWE,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CHE,,andes,c,"(c) Imported/lab-acquired case, no onward transmission",2026,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+CHE,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+TWN,,avian_flu,c,"(c) Imported/lab-acquired case, no onward transmission",2019,no,A(H7N9),UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+TWN,,avian_flu,a,(a) Community or zoonotic transmission,2026,yes,A(H7N7); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+TWN,,sars,a,(a) Community or zoonotic transmission,2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+TWN,,sfts,a,(a) Community or zoonotic transmission,2026,yes,zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+TJK,,cchf,a,(a) Community or zoonotic transmission,2009,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+TZA,,cchf,a,(a) Community or zoonotic transmission,1986 (serology 2024),yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+TZA,,marburg,a,(a) Community or zoonotic transmission,2025,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+TZA,,plague,a,(a) Community or zoonotic transmission,2007,yes,bubonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+TZA,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+THA,,avian_flu,a,(a) Community or zoonotic transmission,2006,yes,A(H5N1); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+THA,,mers,c,"(c) Imported/lab-acquired case, no onward transmission",2016,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+THA,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+THA,,sfts,a,(a) Community or zoonotic transmission,2026,yes,community or zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+TGO,,lassa,a,(a) Community or zoonotic transmission,2022,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+TUN,,cchf,d,(d) Human serology only (exposure may have been elsewhere),2016,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+TUN,,mers,b,(b) Limited local transmission linked to an imported/lab case,2013,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+TUR,,avian_flu,a,(a) Community or zoonotic transmission,2006,yes,A(H5N1); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+TUR,,cchf,a,(a) Community or zoonotic transmission,2026,yes,zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+TUR,,mers,c,"(c) Imported/lab-acquired case, no onward transmission",2014,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+TKM,,plague,a,(a) Community or zoonotic transmission,2004,yes,type not reported,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+UGA,,cchf,a,(a) Community or zoonotic transmission,2026,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+UGA,,ebola,a,(a) Community or zoonotic transmission,2025 (limited local transmission 2026),yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+UGA,,lassa,d,(d) Human serology only (exposure may have been elsewhere),1984,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+UGA,,marburg,a,(a) Community or zoonotic transmission,2017 (isolated cases 2026),yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+UGA,,plague,b,(b) Limited local transmission linked to an imported/lab case,2019,no,pneumonic; linked to imported case,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+UKR,,cchf,d,(d) Human serology only (exposure may have been elsewhere),2020,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ARE,,cchf,a,(a) Community or zoonotic transmission,2010,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ARE,,mers,a,(a) Community or zoonotic transmission,2023,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GBR,,avian_flu,a,(a) Community or zoonotic transmission,2025,yes,A(H5N1); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GBR,,avian_flu,a,(a) Community or zoonotic transmission,1996,yes,A(H7N7); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GBR,,cchf,c,"(c) Imported/lab-acquired case, no onward transmission",2014,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GBR,,ebola,c,"(c) Imported/lab-acquired case, no onward transmission",2015,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GBR,,lassa,b,(b) Limited local transmission linked to an imported/lab case,2022,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GBR,,mers,c,"(c) Imported/lab-acquired case, no onward transmission",2018,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+GBR,,sars,c,"(c) Imported/lab-acquired case, no onward transmission",2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+USA,,avian_flu,a,(a) Community or zoonotic transmission,2026,yes,A(H5N1); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+USA,,plague,a,(a) Community or zoonotic transmission,2026,yes,zoonotic; type not reported,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+USA,,ebola,b,(b) Limited local transmission linked to an imported/lab case,2014,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+USA,,lassa,c,"(c) Imported/lab-acquired case, no onward transmission",2024,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+USA,,marburg,c,"(c) Imported/lab-acquired case, no onward transmission",2008,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+USA,,mers,b,(b) Limited local transmission linked to an imported/lab case,2014,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+USA,,sars,b,(b) Limited local transmission linked to an imported/lab case,2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+UZB,,cchf,a,(a) Community or zoonotic transmission,2017,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+VNM,,avian_flu,a,(a) Community or zoonotic transmission,2025,yes,A(H5N1); zoonotic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+VNM,,plague,a,(a) Community or zoonotic transmission,2002,yes,type not reported,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+VNM,,sars,a,(a) Community or zoonotic transmission,2003,no,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+VNM,,sfts,a,(a) Community or zoonotic transmission,2017,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+YEM,,mers,a,(a) Community or zoonotic transmission,2014,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+YEM,,plague,a,(a) Community or zoonotic transmission,2020,yes,pneumonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ZMB,,lujo,a,(a) Community or zoonotic transmission,2008,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ZMB,,plague,a,(a) Community or zoonotic transmission,2015,yes,bubonic,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ZWE,,cchf,d,(d) Human serology only (exposure may have been elsewhere),1980,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ZWE,,ebola,d,(d) Human serology only (exposure may have been elsewhere),1980,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ZWE,,marburg,d,(d) Human serology only (exposure may have been elsewhere),1980,yes,,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ZWE,,plague,a,(a) Community or zoonotic transmission,2012,yes,type not reported,UKHSA HCID country-specific risk (updated 19 Nov 2026),2026-11-23
+ARG,ar_pampas_junin,junin,a,(a) Community or zoonotic transmission,2026,yes,"Endemic in the Pampas: Buenos Aires, Córdoba, Santa Fe, La Pampa provinces. Exposure mostly during harvest (April–July).",UKHSA AHF page,2026-11-23
+ARG,ar_andes_north,andes,a,(a) Community or zoonotic transmission,2019 (isolated cases 2026),yes,"Andes virus endemic region North (Salta, Jujuy).",UKHSA Andes page,2026-11-23
+ARG,ar_andes_centro,andes,a,(a) Community or zoonotic transmission,2019 (isolated cases 2026),yes,"Andes virus endemic region Centro (Buenos Aires, Santa Fe, Entre Ríos).",UKHSA Andes page,2026-11-23
+ARG,ar_andes_ne,andes,a,(a) Community or zoonotic transmission,2019 (isolated cases 2026),yes,Andes virus endemic region Northeast (Misiones).,UKHSA Andes page,2026-11-23
+ARG,ar_andes_patagonia,andes,a,(a) Community or zoonotic transmission,2019 (isolated cases 2026),yes,"Andes virus endemic region Patagonia (Neuquén, Río Negro, Chubut); 2018–19 Epuyén outbreak.",UKHSA Andes page,2026-11-23
+CHL,cl_andes_south,andes,a,(a) Community or zoonotic transmission,2026,yes,Mainly southern Chile; endemic in Región de Los Lagos.,UKHSA Andes page,2026-11-23
+BOL,bo_machupo_beni,machupo,a,(a) Community or zoonotic transmission,2013,yes,Machupo endemic in a small region; most recent outbreaks in Beni department (north-east).,UKHSA Bolivia HF page,2026-11-23
+BOL,bo_chapare,chapare,a,(a) Community or zoonotic transmission,2025,yes,Chapare cases mainly rural Cochabamba and La Paz.,UKHSA Bolivia HF page,2026-11-23
+BGD,bd_nipah,nipah,a,(a) Community or zoonotic transmission,2026,yes,"Almost annual outbreaks since 2001 in specific districts (map labels: Dhaka, Rajshahi, Rangpur).",UKHSA Nipah page,2026-11-23
+IND,in_wb_nipah,nipah,a,(a) Community or zoonotic transmission,2026,yes,West Bengal / north-east India outbreaks.,UKHSA Nipah page,2026-11-23
+IND,in_kerala_nipah,nipah,a,(a) Community or zoonotic transmission,2026,yes,Kerala: cases since the first outbreak in 2018.,UKHSA Nipah page,2026-11-23
+PHL,ph_mindanao_nipah,nipah,a,(a) Community or zoonotic transmission,2014,yes,Henipavirus cases on Mindanao (NiV or Nipah-like virus).,UKHSA Nipah page,2026-11-23
+CHN,cn_sfts,sfts,a,(a) Community or zoonotic transmission,2026,yes,Most infections in people exposed to ticks in rural mountainous areas of central and eastern China (season May–July).,UKHSA SFTS page,2026-11-23
+UGA,ug_python_cave,marburg,a,(a) Community or zoonotic transmission,2017 (isolated cases 2026),yes,"2008 traveller cases after visiting the 'python cave', Maramagambo Forest (Egyptian fruit bat colony).",UKHSA Marburg page,2026-11-23
+COD,cd_ebola_2026,ebola,a,(a) Community or zoonotic transmission,2026,yes,"Current Bundibugyo outbreak provinces (Ituri, Nord-Kivu, Sud-Kivu, Tshopo, Haut-Uélé, Bas-Uélé, Sud-Ubangi, Nord-Ubangi) – see alerts.",ECDC; UKHSA,2026-11-23
+USA,us_west_plague,plague,a,(a) Community or zoonotic transmission,2026,yes,"Human cases mainly in the western USA (northern New Mexico, Arizona, Colorado, California, southern Oregon, Nevada).",Expert (CDC plague maps),2026-11-23

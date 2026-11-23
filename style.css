@@ -91,6 +91,10 @@ fieldset legend{grid-column:1/-1}
 .links{font-size:13px;color:var(--muted)}
 .chip.dep{border-style:dashed;background:var(--paper)}
 .area-line{font-size:13px;color:#4a3580;background:#f1edf8;border-radius:6px;padding:5px 8px;margin-bottom:8px}
+.hcidbox{border:1px solid #e6b3b3;background:#fdf6f6;border-radius:8px;padding:8px 10px;margin:0 0 10px}
+.hcidbox ul{margin:0;padding-left:18px}.hcidbox li{margin:0 0 8px;font-size:13px;line-height:1.35}
+.hcidbox li b{color:var(--red)}.hc-win{font-weight:600}.hc-in .hc-win{color:var(--red)}.hc-out .hc-win{color:var(--muted)}
+.hc-area{color:#4a3580}
 .excl{font-size:12.5px;color:var(--muted);margin-top:4px}
 
 .sticky-go{position:sticky;bottom:0;padding:10px 0 14px;background:linear-gradient(transparent,var(--bg) 40%);text-align:right}

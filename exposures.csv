@@ -1,46 +1,47 @@
-id,group,label,ask
+id,group,label,ask,short
 # Lines starting with # are ignored. "any" is special: it applies to every stop in a country, whatever exposures are ticked.
-any,Baseline,Any stay in this country,Applied automatically to every stop
-mosquito,Insects & arthropods,Mosquito / midge bites,"Bitten? Day or night? Bed nets, repellent, air-con?"
-tick,Insects & arthropods,Tick bites,"Long grass, bush walks, safari, livestock? Any eschar noticed?"
-mite,Insects & arthropods,Mites / chiggers (rural scrub & grass),"Sat or lay on grass, farmland, forest edge?"
-sandfly,Insects & arthropods,Sandfly bites,"Rural or peri-urban stay, dusk/night outdoors, mud or stone housing?"
-tsetse,Insects & arthropods,Tsetse fly bites,"Game parks or woodland in East/Central Africa? Painful bite?"
-flea,Insects & arthropods,Flea bites,"Rodents or animals in accommodation, markets, rural housing?"
-louse,Insects & arthropods,Body lice,"Crowded settings, camps, prolonged rough sleeping?"
-triatomine,Insects & arthropods,Triatomine ('kissing') bugs,"Slept in mud/thatch housing in Latin America?"
-dog,Animals,"Dog bite, scratch or lick on broken skin","Which animal, date, wound care, post-exposure rabies vaccine given?"
-cat,Animals,"Cat bite or scratch","Date, wound care, PEP?"
-primate,Animals,Monkey bite or scratch,"Temple or tourist-site monkeys? Date? PEP?"
-bat,Animals,"Bats or caves / mines","Entered caves or mines? Touched or bitten by a bat?"
-rodent,Animals,Rodents (contact or infested housing),"Rats/mice in accommodation, food stores, rural housing?"
-livestock,Animals,"Cattle, sheep or goats (farm, slaughter, birthing)","Farm visit, slaughter, assisting births, handling hides?"
-camel,Animals,Camels (contact or raw milk/meat),"Touched camels, camel rides, raw camel milk?"
-poultry,Animals,"Poultry, live bird markets or sick/dead birds","Visited live bird markets, backyard poultry, slaughtered birds?"
-pet_bird,Animals,Pet or wild birds (parrots etc.),"Kept birds, aviaries, pigeons?"
-pig,Animals,Pigs (farm or slaughter),"Pig farm visit, slaughter?"
-horse,Animals,Horses,"Close contact with sick horses?"
-bushmeat,Animals,"Bushmeat / hunting / handling wild or dead animals","Hunted, butchered or ate bushmeat? Touched dead wild animals?"
-freshwater,Water & soil,"Freshwater swimming, wading, rafting","Lakes, rivers, waterfalls, kayaking? Which water body?"
-flood_mud,Water & soil,"Flood water, mud, rice paddies","Wading in floods or paddies, adventure race, farming?"
-barefoot,Water & soil,"Barefoot on soil or sand / lying on beach","Walked barefoot? Beaches with dogs?"
-dust,Water & soil,"Dust, digging, construction, archaeology, desert","Dust storms, excavation, building work?"
-food_water,Food & drink,"Untreated water, ice, street food, salads","Bottled or tap water? Street food, raw salads, ice?"
-raw_dairy,Food & drink,Unpasteurised milk or cheese,"Fresh cheese, raw milk, yoghurt from farms?"
-raw_meat,Food & drink,"Raw or undercooked meat (pork, game, beef)","Rare meat, wild boar, bear, home-made sausages?"
-raw_fw_fish,Food & drink,"Raw freshwater fish, frogs or snakes","Raw/fermented river fish, koi pla, ceviche of freshwater fish?"
-raw_crustacean,Food & drink,Raw freshwater crab or crayfish,"Raw or pickled crab/crayfish, drunken crab?"
-raw_snail,Food & drink,"Raw snails, slugs, prawns or unwashed greens","Raw snails or freshwater prawns, salads that might carry slugs?"
-raw_marine_fish,Food & drink,"Raw marine fish (sushi, ceviche)","Sushi, sashimi, ceviche, marinated herring?"
-watercress,Food & drink,"Watercress or raw aquatic plants","Wild or farmed watercress, aquatic vegetables?"
-palm_sap,Food & drink,Raw date palm sap,"Fresh raw date palm sap (Bangladesh/India, winter)?"
-sick_contact,People & healthcare,"Unwell contacts (household, travel companions)","Was anyone ill? With what? Any deaths?"
-funeral,People & healthcare,Attended a funeral / handled a body,"Touched or washed the body?"
-healthcare,People & healthcare,"Healthcare work, hospital visit or admission abroad","Worked in, visited or admitted to a healthcare facility? Procedures?"
-sex,People & healthcare,"Condomless sex / new partner","New or multiple partners, commercial sex?"
-needle,People & healthcare,"Tattoo, piercing, injection, transfusion, dental work","Any skin-breaking procedure or blood product?"
-mass_gathering,People & healthcare,"Mass gathering (Hajj/Umrah, festivals) or crowded accommodation","Hajj/Umrah, festivals, dormitories, camps?"
-vfr,Travel style,Visiting friends & relatives (VFR),"Stayed with family, ate local food, no pre-travel advice?"
-rural_forest,Travel style,"Rural stay, forest trek, safari or game park","Camping, trekking, safari, jungle?"
-cruise_spa,Travel style,"Cruise ship, hot tubs, spa or air-conditioned hotels","Cruise, jacuzzi, hotel showers?"
-antibiotics,Travel style,"Antibiotics taken abroad","Self-medicated or prescribed abroad?"
+any,Baseline,Any stay in this country,Applied automatically to every stop,Any stay
+mosquito,Insects & arthropods,Mosquito / midge bites,"Bitten? Day or night? Bed nets, repellent, air-con?",Mosquitoes/midges
+tick,Insects & arthropods,Tick bites,"Long grass, bush walks, safari, livestock? Any eschar noticed?",Ticks
+mite,Insects & arthropods,Mites / chiggers (rural scrub & grass),"Sat or lay on grass, farmland, forest edge?",Mites
+sandfly,Insects & arthropods,Sandfly bites,"Rural or peri-urban stay, dusk/night outdoors, mud or stone housing?",Sandflies
+tsetse,Insects & arthropods,Tsetse fly bites,Game parks or woodland in East/Central Africa? Painful bite?,Tsetse
+flea,Insects & arthropods,Flea bites,"Rodents or animals in accommodation, markets, rural housing?",Fleas
+louse,Insects & arthropods,Body lice,"Crowded settings, camps, prolonged rough sleeping?",Lice
+triatomine,Insects & arthropods,Triatomine ('kissing') bugs,Slept in mud/thatch housing in Latin America?,Triatomine bugs
+dog,Animals,"Dog bite, scratch or lick on broken skin","Which animal, date, wound care, post-exposure rabies vaccine given?",Dogs
+cat,Animals,Cat bite or scratch,"Date, wound care, PEP?",Cats
+primate,Animals,Monkey bite or scratch,Temple or tourist-site monkeys? Date? PEP?,Monkeys/apes
+bat,Animals,Bats or caves / mines,Entered caves or mines? Touched or bitten by a bat?,Bats/caves
+rodent,Animals,Rodents (contact or infested housing),"Rats/mice in accommodation, food stores, rural housing?",Rodents
+livestock,Animals,"Cattle, sheep or goats (farm, slaughter, birthing)","Farm visit, slaughter, assisting births, handling hides?",Livestock/slaughter
+camel,Animals,Camels (contact or raw milk/meat),"Touched camels, camel rides, raw camel milk?",Camels
+poultry,Animals,"Poultry, live bird markets or sick/dead birds","Visited live bird markets, backyard poultry, slaughtered birds?",Poultry/birds
+pet_bird,Animals,Pet or wild birds (parrots etc.),"Kept birds, aviaries, pigeons?",Pet/wild birds
+pig,Animals,Pigs (farm or slaughter),"Pig farm visit, slaughter?",Pigs
+horse,Animals,Horses,Close contact with sick horses?,Horses
+bushmeat,Animals,Bushmeat / hunting / handling wild or dead animals,"Hunted, butchered or ate bushmeat? Touched dead wild animals?",Bushmeat/dead animals
+freshwater,Water & soil,"Freshwater swimming, wading, rafting","Lakes, rivers, waterfalls, kayaking? Which water body?",Fresh water
+flood_mud,Water & soil,"Flood water, mud, rice paddies","Wading in floods or paddies, adventure race, farming?",Floods/mud
+barefoot,Water & soil,Barefoot on soil or sand / lying on beach,Walked barefoot? Beaches with dogs?,Barefoot/soil
+dust,Water & soil,"Dust, digging, construction, archaeology, desert","Dust storms, excavation, building work?",Dust/rodent-infested buildings
+food_water,Food & drink,"Untreated water, ice, street food, salads","Bottled or tap water? Street food, raw salads, ice?",Food/water
+raw_dairy,Food & drink,Unpasteurised milk or cheese,"Fresh cheese, raw milk, yoghurt from farms?",Raw milk
+raw_meat,Food & drink,"Raw or undercooked meat (pork, game, beef)","Rare meat, wild boar, bear, home-made sausages?",Raw meat
+raw_fw_fish,Food & drink,"Raw freshwater fish, frogs or snakes","Raw/fermented river fish, koi pla, ceviche of freshwater fish?",Raw freshwater fish
+raw_crustacean,Food & drink,Raw freshwater crab or crayfish,"Raw or pickled crab/crayfish, drunken crab?",Raw crab/crayfish
+raw_snail,Food & drink,"Raw snails, slugs, prawns or unwashed greens","Raw snails or freshwater prawns, salads that might carry slugs?",Raw snails/greens
+raw_marine_fish,Food & drink,"Raw marine fish (sushi, ceviche)","Sushi, sashimi, ceviche, marinated herring?",Raw marine fish
+watercress,Food & drink,Watercress or raw aquatic plants,"Wild or farmed watercress, aquatic vegetables?",Watercress
+palm_sap,Food & drink,Raw date palm sap,"Fresh raw date palm sap (Bangladesh/India, winter)?",Date palm sap
+sick_contact,People & healthcare,"Unwell contacts (household, travel companions)",Was anyone ill? With what? Any deaths?,Unwell contacts
+funeral,People & healthcare,Attended a funeral / handled a body,Touched or washed the body?,Funeral/body
+healthcare,People & healthcare,"Healthcare work, hospital visit or admission abroad","Worked in, visited or admitted to a healthcare facility? Procedures?",Healthcare
+sex,People & healthcare,Condomless sex / new partner,"New or multiple partners, commercial sex?",Sex
+needle,People & healthcare,"Tattoo, piercing, injection, transfusion, dental work",Any skin-breaking procedure or blood product?,Needles/procedures
+mass_gathering,People & healthcare,"Mass gathering (Hajj/Umrah, festivals) or crowded accommodation","Hajj/Umrah, festivals, dormitories, camps?",Mass gathering
+vfr,Travel style,Visiting friends & relatives (VFR),"Stayed with family, ate local food, no pre-travel advice?",VFR
+farm_fields,Travel style,"Farm work, harvest or crop fields","Worked or walked in crop fields, harvest, grain stores?",Farm/crop fields
+rural_forest,Travel style,"Rural stay, forest trek, safari or game park","Camping, trekking, safari, jungle?",Rural/forest/safari
+cruise_spa,Travel style,"Cruise ship, hot tubs, spa or air-conditioned hotels","Cruise, jacuzzi, hotel showers?",Cruise/spa
+antibiotics,Travel style,Antibiotics taken abroad,Self-medicated or prescribed abroad?,Antibiotics abroad

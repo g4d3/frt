@@ -9,7 +9,7 @@
   // DATA_DIR lets index.html point at a different folder ('' = files at the top level of the site).
   const D = typeof window.DATA_DIR === 'string' ? window.DATA_DIR : 'data/';
   const FILES = { countries: D + 'countries.csv', exposures: D + 'exposures.csv', pathogens: D + 'pathogens.csv',
-    rules: D + 'exposure_map.csv', alerts: D + 'alerts.csv' };
+    rules: D + 'exposure_map.csv', alerts: D + 'alerts.csv', hcid: D + 'hcid_risk.csv' };
   const BOUNDARIES = [D + 'countries-50m.json', 'https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json'];
   // French overseas departments sit inside France's polygon in Natural Earth: split them out.
   const OVERSEAS = [['GUF', 2, 6, -55, -51.5], ['MTQ', 14.3, 15, -61.3, -60.7], ['GLP', 15.8, 16.6, -61.9, -60.9],
@@ -246,7 +246,17 @@
       else if (c.areaTags.length) where = `<div class="area-line">No pin: dashed items occur only in parts of ${esc(c.name)}.</div>`;
       const exNames = Array.from(new Set(res.excluded.map(x => db.pathogens[x.pathogen].name)));
       const ex = exNames.length ? `<div class="excl"><b>Not at this pin</b> (other parts of ${esc(c.name)}): ${exNames.map(esc).join(', ')}</div>` : '';
-      $('.preview', el).innerHTML = `${where}<div class="pv-head">Possible infections for this stop <small>(${seen.size})</small></div>${chips}${ex}`;
+      const shortLab = id => { const e = db.expById[id] || {}; return e.short || e.label || id; };
+      const hc = res.hcid.length ? `<div class="hcidbox"><div class="pv-head">HCIDs reported by UKHSA in ${esc(c.name)} <small>(listed, not a risk estimate)</small></div><ul>${res.hcid.map(h => {
+        const cat = h.country ? `${esc(h.country.category_text)}, ${esc(h.country.last_reported)}` : '';
+        const inArea = h.areas.filter(a => a.inside === true).map(a => `<div class="hc-area">Pin is inside: ${esc(a.name)}</div>`).join('');
+        const outArea = h.areas.length && !h.areas.some(a => a.inside === true) ? `<div class="hc-area muted">${h.areas[0].inside === null ? 'No pin – areas' : 'Pin outside areas'}: ${h.areas.map(a => esc(a.name)).join('; ')}</div>` : '';
+        return `<li class="hc-${h.win.state}"><b>${esc(h.p.name)}</b>${h.p.hcid_group ? ` <small>[${esc(h.p.hcid_group)}]</small>` : ''}<div>${cat}</div>${inArea}${outArea}
+          <div class="hc-win">${esc(h.win.text)}</div>
+          <div class="muted">${h.ticked.length ? '<b>Recorded:</b> ' + h.ticked.map(x => esc(shortLab(x))).join(', ') + ' · ' : ''}Ask about: ${h.ask.map(x => esc(shortLab(x))).join(', ')}</div>
+          ${h.p.reservoir_vector ? `<div class="muted">Spread: ${esc(h.p.reservoir_vector)}</div>` : ''}</li>`;
+      }).join('')}</ul></div>` : '';
+      $('.preview', el).innerHTML = `${where}${hc}<div class="pv-head">Possible infections for this stop <small>(${seen.size})</small></div>${chips}${ex}`;
       $('.links', el).innerHTML = FRT.links(c).map(([t, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join(' · ');
     } else {
       $('.preview', el).innerHTML = '<div class="pv-head muted">Choose the country to see possible infections.</div>';
@@ -372,6 +382,8 @@
     if (!c) { $('#data-table').innerHTML = ''; return; }
     const rows = [];
     db.exposures.forEach(e => FRT.rulesFor(db, iso, e.id).forEach(r => rows.push([e.label, db.pathogens[r.pathogen].name + (r.dep ? ' (parts of country only)' : ''), db.pathogens[r.pathogen].incubation_text, r.note, r.where, r.source])));
+    (db.hcidBy[iso] || []).forEach(h => rows.unshift(['HCID (UKHSA)' + (h.show ? '' : ' – hidden'), db.pathogens[h.hcid].name, db.pathogens[h.hcid].incubation_text,
+      `${h.category_text}, ${h.last_reported}${h.notes ? ' – ' + h.notes : ''}`, h.area ? 'area: ' + h.area : 'country', h.source]));
     FRT.alertsFor(db, iso, todayISO()).forEach(a => rows.unshift(['ALERT', a.pathogen ? db.pathogens[a.pathogen].name : '', '', a.title, a.where, a.source_url]));
     $('#data-table').innerHTML = `<p class="muted">${esc(c.name)} · region <code>${esc(c.region)}</code> · subregion <code>${esc(c.subregion)}</code> · tags <code>${esc(c.tags.join('; ') || 'none')}</code>${c.areaTags.length ? ` · limited to mapped areas: <code>${esc(c.areaTags.join('; '))}</code>` : ''}</p>
       ${c.areaTags.length ? `<p class="muted">Mapped areas: ${db.areas.filter(a => (!a.countries.length || a.countries.includes(c.iso3)) && a.tags.some(t => c.areaTags.includes(t))).map(a => esc(a.name)).join(' · ')}</p>` : ''}

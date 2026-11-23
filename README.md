@@ -23,6 +23,7 @@ data/pathogens.csv    pathogen names, incubation ranges, HCID flags, notes
 data/exposure_map.csv the rules: where + exposure → pathogen
 data/alerts.csv       current outbreaks (hand-maintained)
 data/areas.geojson    mapped sub-national risk areas (shapes you can redraw)
+data/hcid_risk.csv    HCIDs by country/area (UKHSA)
 data/version.txt      date of the last data update (shown in every report)
 ```
 
@@ -128,6 +129,24 @@ Areas drawn so far (rough outlines, 22 Nov 2026 – please check them against th
 
 A shape may cross borders (the valley-fever zone covers Arizona and Sonora). Only countries that list the tag in `area_tags` are restricted by it; elsewhere the tag simply adds risk where the pin falls.
 
+### High consequence infectious diseases (`hcid_risk.csv`)
+
+One row per country × HCID, copied from UKHSA's *HCID: country specific risk* page, plus rows for sub-national areas from the UKHSA HCID guidance pages (Junin – Pampas; Andes – four Argentine regions and southern Chile; Machupo – Beni; Chapare – Cochabamba/La Paz; Nipah – Bangladesh districts, West Bengal, Kerala, Mindanao; SFTS – central & eastern China; Marburg – Python Cave; Ebola – 2026 DRC outbreak provinces).
+
+| column | meaning |
+|---|---|
+| country | ISO3 code |
+| area | optional id of a shape in `areas.geojson` |
+| hcid | pathogen id (`lassa`, `cchf`, `ebola`, `marburg`, `mers`, `avian_flu`, `nipah`, `plague`, `sfts`, `junin`, `machupo`, `chapare`, `lujo`, `andes`, `sars`) |
+| category, category_text | UKHSA letter (a) community/zoonotic, (b) limited local spread after import, (c) imported only, (d) serology only, (e) unknown |
+| last_reported | as UKHSA gives it |
+| show | `yes` = listed for travellers to that country. Defaults: a, d, e yes; b only if the main year is 2025/26; c and SARS no |
+| notes, source, checked | |
+
+For HCIDs the countries come **only** from this file: the `where` column of their rules in `exposure_map.csv` is ignored. The report lists, for each stop, every HCID shown for that country with its UKHSA category and year, whether the pin is inside a named area, whether the stay ended within the 14/21/42-day window, the reservoir/vector (from `pathogens.csv` → `reservoir_vector`, `season`), the linked exposures that were ticked and the ones still to ask about. It does not estimate risk.
+
+To update: when UKHSA changes the page, edit or add rows here (and bump `version.txt`).
+
 ### Current outbreaks (`alerts.csv`)
 
 | column | meaning |
@@ -149,7 +168,7 @@ A shape may cross borders (the valley-fever zone covers Arizona and Sonora). Onl
 
 ## 5. Map data
 
-* Base map tiles: CARTO light (© OpenStreetMap contributors, © CARTO), free for low-volume non-commercial use.
+* Base maps (no API key needed; switch with the layer button, top right of the map): OpenStreetMap standard tiles (default; follow the OSM tile usage policy – fine for light clinical use), Esri light grey with English labels, OpenTopoMap terrain (useful for altitude, e.g. malaria-free highlands), Esri satellite. Edit the `bases` list in `js/app.js` to change them.
 * Country boundaries: Natural Earth 1:50m via the `world-atlas` package, loaded from jsDelivr. To remove that dependency, download <https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json> and save it as `data/countries-50m.json`; the site uses the local copy first. (Until then the browser console shows one harmless 404 for that file.)
 * French Guiana, Martinique, Guadeloupe, Réunion and Mayotte are part of France's polygon in Natural Earth; `js/app.js` (`OVERSEAS`) splits them out by bounding box.
 * If the map cannot load (offline, blocked network), use **+ Add without map**: everything else still works.

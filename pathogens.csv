@@ -1,88 +1,95 @@
-id,name,group,inc_min_days,inc_max_days,incubation_text,hcid,risk_window_days,notes,source,priority
-# inc_min_days / inc_max_days drive the timing check against the fever-onset date. Use typical ranges; long tails are mentioned in incubation_text.
-# hcid = yes adds a high-consequence infectious disease prompt when the stop ended within risk_window_days of onset.
-# priority: 1 = list first (HCIDs and falciparum malaria), 5 = default. Within each timing group the report sorts by priority, then name.
-pf,Malaria – Plasmodium falciparum,Protozoa,7,30,"7–30 d (occasionally longer)",no,,"Exclude in all febrile travellers from endemic areas, whatever the prophylaxis. Malaria RDT + film; repeat if negative.",NEJM2017 T1; QRG2025,1
-pv_po,"Malaria – P. vivax / P. ovale (relapsing)",Protozoa,12,1095,"12 d to months/years (relapse)",no,,"Can present many months after travel. Vivax predominates outside Africa; ovale in sub-Saharan Africa.",NEJM2017; CDC Yellow Book,2
-pk,Malaria – Plasmodium knowlesi,Protozoa,9,14,"9–14 d",no,,"Forest-fringe exposure (macaque reservoir), especially Borneo.",NEJM2017 T1,2
-dengue,Dengue,Arbovirus,3,14,"3–14 d (usually 4–7)",no,,"Blood PCR/NS1 early; serology later. Ask about outbreaks on NaTHNaC.",NEJM2017 T1; QRG2025,3
-chik,Chikungunya,Arbovirus,2,12,"2–12 d",no,,"Same Aedes vectors as dengue; co-circulates.",NEJM2017 T2; QRG2025,5
-zika,Zika virus,Arbovirus,3,14,"3–14 d",no,,"Also sexually transmitted. Relevant in pregnancy.",NEJM2017 T2; QRG2025,5
-yf,Yellow fever,Arbovirus,3,8,"3–8 d",no,,"Check vaccination status. Notifiable.",NEJM2017 T1; QRG2025,5
-je,Japanese encephalitis,Arbovirus,5,15,"5–15 d",no,,"Rural Asia, rice paddies/pig farming; check vaccination.",NEJM2017 T1,5
-wnv,West Nile virus,Arbovirus,2,14,"2–14 d",no,,"Summer/autumn transmission incl. southern & eastern Europe.",NEJM2017 T2,5
-oropouche,Oropouche virus,Arbovirus,3,12,"3–12 d",no,,"Midge-borne; large outbreaks in the Americas since 2024 (check NaTHNaC).",NaTHNaC,5
-rvf,Rift Valley fever,Arbovirus,2,6,"2–6 d",no,,"Mosquitoes or blood/tissue of infected livestock.",NEJM2017 T1,5
-cchf,Crimean–Congo haemorrhagic fever,VHF,1,13,"1–9 d after tick bite; 3–13 d after contact",yes,21,"VHF: complete ACDP VHF risk assessment; isolate; discuss with local ID & Imported Fever Service.",NEJM2017 T1/T3; QRG2025; UKHSA,1
-lassa,Lassa fever,VHF,3,21,"3–21 d",yes,21,"VHF: complete ACDP VHF risk assessment. Exclude malaria first. Most common imported VHF in UK.",NEJM2017 T3; QRG2025; UKHSA,1
-ebola,Ebola disease (incl. Bundibugyo),VHF,2,21,"2–21 d",yes,21,"VHF: complete ACDP VHF risk assessment; isolate; call Imported Fever Service before sending samples.",NEJM2017 T3; QRG2025,1
-marburg,Marburg virus disease,VHF,2,21,"2–21 d",yes,21,"Cave/mine exposure (Rousettus bats) or contact with cases. ACDP VHF algorithm.",NEJM2017 T3; QRG2025,1
-mers,MERS-CoV,Respiratory HCID,2,14,"2–14 d",yes,14,"Airborne HCID: UKHSA MERS algorithm (camel or healthcare/case contact within 14 d).",NEJM2017 T3; QRG2025,1
-avian_flu,Avian influenza (H5/H7),Respiratory HCID,2,14,"2–8 d (UKHSA uses 14-d window)",yes,14,"Airborne HCID: UKHSA avian influenza algorithm (bird/animal contact within 14 d).",NEJM2017 T1; QRG2025,1
-nipah,Nipah virus,Viral zoonosis,4,21,"4–14 d (up to 45)",yes,21,"Bats/date palm sap (Bangladesh, India), pigs (Malaysia), person-to-person.",NEJM2017 T2; UKHSA,1
-hendra,Hendra virus,Viral zoonosis,5,21,"5–21 d",no,,"Close contact with sick horses in Australia.",NEJM2017 T2,5
-mpox,Mpox (clade I in Central/East Africa),Viral,5,21,"5–21 d",no,21,"Check clade I status/HCID guidance on UKHSA. Sexual, household and animal contact.",QRG2025; UKHSA,5
-hantavirus,Hantavirus,Viral zoonosis,7,42,"1–6 weeks",no,,"Rodent excreta/dust in enclosed spaces.",NEJM2017 T2,5
-rabies,Rabies / lyssavirus,Viral zoonosis,7,365,"20–90 d typical; days to years",no,,"Ask about wound care and post-exposure prophylaxis given abroad.",NEJM2017 T1,5
-b_virus,Herpes B virus (macaques),Viral zoonosis,3,30,"3–30 d",no,,"Macaque bite/scratch. Urgent specialist advice.",NEJM2017 T2,5
-tbe,Tick-borne encephalitis,Viral (tick),4,28,"7–14 d (4–28)",no,,"Also from unpasteurised goat/sheep milk.",NEJM2017 T2,5
-kfd,Kyasanur Forest disease,Viral (tick),3,8,"3–8 d",no,,"Forested areas of Karnataka/Kerala/Goa, India.",Expert,5
-sfts,Severe fever with thrombocytopenia syndrome (SFTS),Viral (tick),5,14,"5–14 d",no,,"East Asia; ticks and person-to-person via blood.",Expert,5
-hav,Hepatitis A,Viral (enteric),15,50,"15–50 d",no,,"",NEJM2017 T2; QRG2025,5
-hev,Hepatitis E,Viral (enteric),15,64,"2–9 weeks",no,,"Water-borne (S Asia/Africa) or undercooked pork/game (incl. Europe).",NEJM2017 T2; QRG2025,5
-hbv,Hepatitis B,Blood-borne virus,45,180,"6 weeks–6 months",no,,"",NEJM2017 T2,5
-hcv,Hepatitis C,Blood-borne virus,14,180,"2 weeks–6 months",no,,"",NEJM2017 T2,5
-hiv,Acute HIV seroconversion,Blood-borne virus,7,42,"1–6 weeks",no,,"4th-gen HIV Ag/Ab test (p24) — QRG first-line in all.",NEJM2017 T2; QRG2025,3
-resp_viruses,"Influenza, SARS-CoV-2 & other respiratory viruses",Respiratory,1,7,"1–7 d",no,,"Respiratory virus PCR (QRG first-line).",QRG2025,5
-measles,Measles,Respiratory,7,21,"7–21 d",no,,"Check vaccination; isolate if suspected.",NEJM2017 T3,5
-tb,Tuberculosis,Respiratory,21,730,"weeks to years",no,,"Consider in prolonged fever; respiratory isolation if suspected.",NEJM2017 T3; QRG2025,5
-mening,Meningococcal disease,Bacterial,2,10,"2–10 d",no,,"Hajj/Umrah (ACWY requirement) and the African meningitis belt.",NEJM2017; NaTHNaC,5
-legionella,Legionnaires' disease,Bacterial,2,14,"2–10 d (up to 14)",no,,"Hotels, cruise ships, spas.",Expert,5
-enteric,Enteric fever (typhoid/paratyphoid),Bacterial,6,30,"6–30 d",no,,"Blood cultures. High drug resistance from South Asia (XDR typhoid in Pakistan).",NEJM2017 T1; QRG2025,2
-gastro_bact,"Bacterial enteritis (Campylobacter, Shigella, non-typhoidal Salmonella)",Bacterial,1,7,"1–7 d",no,,"",NEJM2017 T2,5
-amoebic,Amoebic liver abscess (Entamoeba histolytica),Protozoa,14,365,"weeks to months (or years)",no,,"Amoebic serology; ultrasound liver.",NEJM2017 T2; QRG2025,5
-lepto,Leptospirosis,Bacterial,2,30,"2–30 d",no,,"Blood PCR early, urine PCR after day 7, serology. QRG: consider empiric doxycycline in sepsis.",NEJM2017 T1; QRG2025,3
-melioid,Melioidosis (Burkholderia pseudomallei),Bacterial,1,21,"1–21 d (latent for months–years)",no,,"Higher risk with diabetes. Tell the lab (Hazard Group 3).",NEJM2017 T1,3
-brucella,Brucellosis,Bacterial,5,60,"1–8 weeks (up to months)",no,,"Tell the lab (Hazard Group 3); serology/culture.",NEJM2017 T2; QRG2025,5
-qfever,Q fever (Coxiella burnetii),Bacterial,7,40,"2–3 weeks (7–40 d)",no,,"Livestock birthing products, dust; also some ticks.",NEJM2017 T2; QRG2025,5
-anthrax,Anthrax,Bacterial,1,12,"1–12 d",no,,"Hides, wool, bushmeat, carcasses.",NEJM2017 T1,5
-plague,Plague (Yersinia pestis),Bacterial,1,7,"2–6 d bubonic; 1–3 d pneumonic",no,,"Flea bites, handling rodents/wild animals.",NEJM2017 T1/T3,5
-tularemia,Tularaemia,Bacterial,1,14,"1–14 d",no,,"Ticks, hares/rodents, contaminated water.",NEJM2017 T2,5
-psittacosis,Psittacosis (Chlamydia psittaci),Bacterial,5,21,"5–21 d",no,,"",NEJM2017 T2,5
-cat_scratch,Cat-scratch disease (Bartonella henselae),Bacterial,3,30,"3–30 d",no,,"RIPL offers Bartonella testing.",NEJM2017 T2,5
-rat_bite,Rat-bite fever,Bacterial,2,21,"2–21 d",no,,"",NEJM2017 T2,5
-pasteurella,"Wound infection (Pasteurella, Capnocytophaga)",Bacterial,1,7,"1–7 d",no,,"Capnocytophaga severe in asplenia/alcohol excess.",Expert,5
-strep_suis,Streptococcus suis,Bacterial,1,7,"hours–7 d",no,,"Pig contact or raw pork (SE Asia, China).",Expert,5
-listeria,Listeriosis,Bacterial,1,70,"1–70 d",no,,"Relevant in pregnancy and immunosuppression.",NEJM2017 T2,5
-mdro,Resistant organisms (CPE/ESBL/MRSA) – colonisation or infection,Bacterial,0,90,"carriage for ~3 months",no,,"Screen if hospitalised abroad (rectal swab, MRSA screen). QRG2025.",NEJM2017; QRG2025,5
-stis,"Other STIs (syphilis, gonorrhoea, HSV)",Bacterial/viral,3,90,"days–weeks",no,,"HIV & syphilis serology.",NEJM2017 T2; QRG2025,5
-atbf,African tick-bite fever (Rickettsia africae),Rickettsia,4,10,"4–10 d",no,,"Look for eschar(s). QRG: doxycycline if eschar.",NEJM2017; QRG2025,3
-msf,Mediterranean spotted fever (R. conorii),Rickettsia,2,14,"2–14 d",no,,"Dog ticks; look for eschar.",NEJM2017 T1,5
-rmsf,Rocky Mountain / Brazilian spotted fever (R. rickettsii),Rickettsia,2,14,"2–14 d",no,,"Can be rapidly fatal; doxycycline.",NEJM2017 T1,5
-scrub,Scrub typhus (Orientia tsutsugamushi),Rickettsia,6,21,"6–21 d",no,,"Eschar often hidden (groin, axilla, under breasts).",NEJM2017 T1,3
-murine_typhus,Murine (endemic) typhus (R. typhi),Rickettsia,7,14,"7–14 d",no,,"Rodent fleas; ports, markets, urban SE Asia.",NEJM2017 T1,5
-epidemic_typhus,Epidemic typhus (R. prowazekii),Rickettsia,7,14,"7–14 d",no,,"Body lice; outbreaks in crowded/conflict settings.",NEJM2017 T1,5
-lbrf,Louse-borne relapsing fever (B. recurrentis),Spirochaete,4,14,"4–14 d",no,,"Horn of Africa; also migrants travelling from there.",NEJM2017 T1,5
-tbrf,Tick-borne relapsing fever (Borrelia spp.),Spirochaete,4,18,"4–18 d",no,,"Soft ticks in huts, caves, cabins.",NEJM2017 T2,5
-lyme,Lyme disease,Spirochaete,3,30,"3–30 d",no,,"",NEJM2017 T2,5
-trench,Trench fever (Bartonella quintana),Bacterial,5,20,"5–20 d",no,,"Body lice; homelessness.",NEJM2017 T2,5
-oroya,Carrión's disease / Oroya fever (B. bacilliformis),Bacterial,10,210,"10–210 d",no,,"Andean valleys (Peru, Ecuador, Colombia).",NEJM2017 T1,5
-vl,Visceral leishmaniasis,Protozoa,14,365,"2–6 months (10 d to years)",no,,"Prolonged fever; serology/bone marrow.",NEJM2017 T2; QRG2025,5
-sandfly_fever,Sandfly fever / Toscana virus,Arbovirus,2,6,"2–6 d",no,,"",NEJM2017 T2,5
-hat_r,East African trypanosomiasis (T. b. rhodesiense),Protozoa,7,21,"7–21 d",no,,"Look for chancre at bite site. Blood film.",NEJM2017 T1,5
-hat_g,West/Central African trypanosomiasis (T. b. gambiense),Protozoa,30,730,"weeks to years",no,,"Long residence more typical than short trips.",NEJM2017 T2,5
-chagas,Acute Chagas disease (T. cruzi),Protozoa,5,14,"5–14 d (oral outbreaks shorter)",no,,"Acute infection rare in travellers.",NEJM2017 T2,5
-toxo,Toxoplasmosis,Protozoa,5,23,"5–23 d",no,,"",NEJM2017 T2; QRG2025,5
-katayama,Acute schistosomiasis (Katayama syndrome),Helminth,14,56,"2–8 weeks",no,,"Freshwater exposure 2–8 weeks before. Serology may be negative early; repeat later. Eosinophilia common.",BIA2025 T2 & 6.1.1; QRG2025,5
-fasciola,Fascioliasis (acute),Helminth,21,84,"3–12 weeks",no,,"Watercress/aquatic plants. Eosinophilia.",BIA2025 T2 & 6.3.2; QRG2025,5
-liver_fluke,Clonorchiasis / opisthorchiasis (acute),Helminth,14,30,"2–4 weeks",no,,"Raw/fermented freshwater fish. Eosinophilia.",BIA2025 T2 & 6.3.3,5
-gnathostoma,Gnathostomiasis,Helminth,3,84,"days–3 months",no,,"Eosinophilia; migratory swellings.",BIA2025 T2 & 6.5.2,5
-paragonimus,Paragonimiasis,Helminth,3,21,"days–3 weeks (acute)",no,,"Raw freshwater crab/crayfish. Eosinophilia.",BIA2025 T2 & 6.1.7,5
-angio,Angiostrongylus cantonensis (rat lung worm),Helminth,7,21,"1–3 weeks",no,,"Eosinophilic meningitis.",BIA2025 T2 & 6.5.1,5
-trichinella,Trichinellosis,Helminth,7,42,"7–30 d (enteral), 2–6 weeks (parenteral)",no,,"Pork, wild boar, bear, game. Eosinophilia.",BIA2025 T2 & 6.2.9,5
-toxocara,Toxocariasis (visceral larva migrans),Helminth,7,90,"weeks–months",no,,"Soil/dog or cat faeces; raw liver. Eosinophilia.",BIA2025 T2 & 6.1.4,5
-strongy,Strongyloidiasis (acute / larva currens),Helminth,7,28,"days–weeks (persists for decades)",no,,"Screen before steroids/immunosuppression. Eosinophilia.",BIA2025 T2 & 6.1.3,5
-ascaris_hookworm,Ascaris / hookworm (Löffler's syndrome),Helminth,7,21,"1–3 weeks (lung phase)",no,,"Eosinophilia; stool microscopy negative early.",BIA2025 T2 & 6.1.2,5
-anisakis,Anisakiasis,Helminth,0,5,"hours–5 d",no,,"Raw marine fish worldwide.",BIA2025 T2 & 6.2.10,5
-histo,Histoplasmosis (acute),Fungal,7,21,"7–21 d",no,,"Caves, bat/bird guano, demolition.",BIA2025 6.1.9,5
-cocci,Coccidioidomycosis ('valley fever'),Fungal,7,21,"7–21 d",no,,"Desert dust (SW USA, Latin America). Eosinophilia.",BIA2025 T2 & 6.1.8,5
+# hcid_group / reservoir_vector / season: shown in the HCID section of the report (from the UKHSA HCID guidance pages).
+id,name,group,inc_min_days,inc_max_days,incubation_text,hcid,risk_window_days,notes,source,priority,hcid_group,reservoir_vector,season
+# inc_min_days / inc_max_days drive the timing check against the fever-onset date. Use typical ranges; long tails are mentioned in incubation_text.,,,
+# hcid = yes adds a high-consequence infectious disease prompt when the stop ended within risk_window_days of onset.,,,
+# priority: 1 = list first (HCIDs and falciparum malaria), 5 = default. Within each timing group the report sorts by priority, then name.,,,
+pf,Malaria – Plasmodium falciparum,Protozoa,7,30,7–30 d (occasionally longer),no,,"Exclude in all febrile travellers from endemic areas, whatever the prophylaxis. Malaria RDT + film; repeat if negative.",NEJM2017 T1; QRG2025,1,,,
+pv_po,Malaria – P. vivax / P. ovale (relapsing),Protozoa,12,1095,12 d to months/years (relapse),no,,Can present many months after travel. Vivax predominates outside Africa; ovale in sub-Saharan Africa.,NEJM2017; CDC Yellow Book,2,,,
+pk,Malaria – Plasmodium knowlesi,Protozoa,9,14,9–14 d,no,,"Forest-fringe exposure (macaque reservoir), especially Borneo.",NEJM2017 T1,2,,,
+dengue,Dengue,Arbovirus,3,14,3–14 d (usually 4–7),no,,Blood PCR/NS1 early; serology later. Ask about outbreaks on NaTHNaC.,NEJM2017 T1; QRG2025,3,,,
+chik,Chikungunya,Arbovirus,2,12,2–12 d,no,,Same Aedes vectors as dengue; co-circulates.,NEJM2017 T2; QRG2025,5,,,
+zika,Zika virus,Arbovirus,3,14,3–14 d,no,,Also sexually transmitted. Relevant in pregnancy.,NEJM2017 T2; QRG2025,5,,,
+yf,Yellow fever,Arbovirus,3,8,3–8 d,no,,Check vaccination status. Notifiable.,NEJM2017 T1; QRG2025,5,,,
+je,Japanese encephalitis,Arbovirus,5,15,5–15 d,no,,"Rural Asia, rice paddies/pig farming; check vaccination.",NEJM2017 T1,5,,,
+wnv,West Nile virus,Arbovirus,2,14,2–14 d,no,,Summer/autumn transmission incl. southern & eastern Europe.,NEJM2017 T2,5,,,
+oropouche,Oropouche virus,Arbovirus,3,12,3–12 d,no,,Midge-borne; large outbreaks in the Americas since 2024 (check NaTHNaC).,NaTHNaC,5,,,
+rvf,Rift Valley fever,Arbovirus,2,6,2–6 d,no,,Mosquitoes or blood/tissue of infected livestock.,NEJM2017 T1,5,,,
+cchf,Crimean–Congo haemorrhagic fever,VHF,1,14,"3–7 d typical, up to 14 d",yes,21,VHF: complete ACDP VHF risk assessment; isolate; discuss with local ID & Imported Fever Service.,UKHSA CCHF page; NEJM2017 T1/T3; QRG2025; UKHSA,1,contact,"Hyalomma ticks (H. marginatum, H. lusitanicum); blood/tissue of livestock at slaughter; infected patients (healthcare).",
+lassa,Lassa fever,VHF,3,21,"7–10 d typical, max 21 d",yes,21,VHF: complete ACDP VHF risk assessment. Exclude malaria first. Most common imported VHF in UK.,UKHSA Lassa page; NEJM2017 T3; QRG2025; UKHSA,1,contact,"Multimammate rat (Mastomys natalensis): urine/droppings in homes, food; rodents caught for food. Person-to-person via body fluids (incl. semen up to 3 months).",
+ebola,Ebola disease (incl. Bundibugyo),VHF,2,21,2–21 d,yes,21,VHF: complete ACDP VHF risk assessment; isolate; call Imported Fever Service before sending samples.,UKHSA Ebola page; NEJM2017 T3; QRG2025,1,contact,"Fruit bats (Pteropodidae); chimpanzees, gorillas, forest antelopes (dead or alive); body fluids of cases, burials; semen of survivors.",
+marburg,Marburg virus disease,VHF,3,21,"3–10 d typical, up to 21 d (rarely 28)",yes,21,Cave/mine exposure (Rousettus bats) or contact with cases. ACDP VHF algorithm.,UKHSA Marburg page; NEJM2017 T3; QRG2025,1,contact,Egyptian fruit bat (Rousettus aegyptiacus) – caves and mines; non-human primates; body fluids of cases.,
+mers,MERS-CoV,Respiratory HCID,2,14,2–14 d,yes,14,Airborne HCID: UKHSA MERS algorithm (camel or healthcare/case contact within 14 d).,UKHSA MERS page; NEJM2017 T3; QRG2025,1,airborne,"Dromedary camels (contact, raw milk/meat/urine); household and healthcare contact with cases.",
+avian_flu,Avian influenza (H5/H7),Respiratory HCID,2,14,2–8 d (UKHSA uses 14-d window),yes,14,Airborne HCID: UKHSA avian influenza algorithm (bird/animal contact within 14 d).,UKHSA HCID list; NEJM2017 T1; QRG2025,1,airborne,Infected poultry and wild birds; live bird markets. Subtypes listed per country.,
+nipah,Nipah virus,Viral zoonosis,4,21,4–21 d (rarely longer),yes,21,"Bats/date palm sap (Bangladesh, India), pigs (Malaysia), person-to-person.",UKHSA Nipah page; NEJM2017 T2; UKHSA,1,airborne,Pteropus fruit bats; raw or partly fermented date palm sap; pigs (Malaysia 1998–99); close contact with cases.,Bangladesh outbreaks mostly winter (date palm sap season)
+hendra,Hendra virus,Viral zoonosis,5,21,5–21 d,no,,Close contact with sick horses in Australia.,NEJM2017 T2,5,,,
+mpox,Mpox (clade I in Central/East Africa),Viral,5,21,5–21 d,no,21,"Check clade I status/HCID guidance on UKHSA. Sexual, household and animal contact.",QRG2025; UKHSA,5,,,
+hantavirus,Hantavirus,Viral zoonosis,7,42,1–6 weeks,no,,Rodent excreta/dust in enclosed spaces.,NEJM2017 T2,5,,,
+rabies,Rabies / lyssavirus,Viral zoonosis,7,365,20–90 d typical; days to years,no,,Ask about wound care and post-exposure prophylaxis given abroad.,NEJM2017 T1,5,,,
+b_virus,Herpes B virus (macaques),Viral zoonosis,3,30,3–30 d,no,,Macaque bite/scratch. Urgent specialist advice.,NEJM2017 T2,5,,,
+tbe,Tick-borne encephalitis,Viral (tick),4,28,7–14 d (4–28),no,,Also from unpasteurised goat/sheep milk.,NEJM2017 T2,5,,,
+kfd,Kyasanur Forest disease,Viral (tick),3,8,3–8 d,no,,"Forested areas of Karnataka/Kerala/Goa, India.",Expert,5,,,
+sfts,Severe fever with thrombocytopenia syndrome (SFTS),Viral (tick),7,14,7–14 d (typically ~9 d),yes,14,Tick-borne; rare person-to-person spread.,UKHSA SFTS page; Expert,1,contact,"Asian long-horned tick (Haemaphysalis longicornis); sheep and goats as intermediate hosts; blood/body fluids of cases (nosocomial, needlestick).",China May–Jul; South Korea May–Oct; Japan Apr–Aug
+hav,Hepatitis A,Viral (enteric),15,50,15–50 d,no,,,NEJM2017 T2; QRG2025,5,,,
+hev,Hepatitis E,Viral (enteric),15,64,2–9 weeks,no,,Water-borne (S Asia/Africa) or undercooked pork/game (incl. Europe).,NEJM2017 T2; QRG2025,5,,,
+hbv,Hepatitis B,Blood-borne virus,45,180,6 weeks–6 months,no,,,NEJM2017 T2,5,,,
+hcv,Hepatitis C,Blood-borne virus,14,180,2 weeks–6 months,no,,,NEJM2017 T2,5,,,
+hiv,Acute HIV seroconversion,Blood-borne virus,7,42,1–6 weeks,no,,4th-gen HIV Ag/Ab test (p24) — QRG first-line in all.,NEJM2017 T2; QRG2025,3,,,
+resp_viruses,"Influenza, SARS-CoV-2 & other respiratory viruses",Respiratory,1,7,1–7 d,no,,Respiratory virus PCR (QRG first-line).,QRG2025,5,,,
+measles,Measles,Respiratory,7,21,7–21 d,no,,Check vaccination; isolate if suspected.,NEJM2017 T3,5,,,
+tb,Tuberculosis,Respiratory,21,730,weeks to years,no,,Consider in prolonged fever; respiratory isolation if suspected.,NEJM2017 T3; QRG2025,5,,,
+mening,Meningococcal disease,Bacterial,2,10,2–10 d,no,,Hajj/Umrah (ACWY requirement) and the African meningitis belt.,NEJM2017; NaTHNaC,5,,,
+legionella,Legionnaires' disease,Bacterial,2,14,2–10 d (up to 14),no,,"Hotels, cruise ships, spas.",Expert,5,,,
+enteric,Enteric fever (typhoid/paratyphoid),Bacterial,6,30,6–30 d,no,,Blood cultures. High drug resistance from South Asia (XDR typhoid in Pakistan).,NEJM2017 T1; QRG2025,2,,,
+gastro_bact,"Bacterial enteritis (Campylobacter, Shigella, non-typhoidal Salmonella)",Bacterial,1,7,1–7 d,no,,,NEJM2017 T2,5,,,
+amoebic,Amoebic liver abscess (Entamoeba histolytica),Protozoa,14,365,weeks to months (or years),no,,Amoebic serology; ultrasound liver.,NEJM2017 T2; QRG2025,5,,,
+lepto,Leptospirosis,Bacterial,2,30,2–30 d,no,,"Blood PCR early, urine PCR after day 7, serology. QRG: consider empiric doxycycline in sepsis.",NEJM2017 T1; QRG2025,3,,,
+melioid,Melioidosis (Burkholderia pseudomallei),Bacterial,1,21,1–21 d (latent for months–years),no,,Higher risk with diabetes. Tell the lab (Hazard Group 3).,NEJM2017 T1,3,,,
+brucella,Brucellosis,Bacterial,5,60,1–8 weeks (up to months),no,,Tell the lab (Hazard Group 3); serology/culture.,NEJM2017 T2; QRG2025,5,,,
+qfever,Q fever (Coxiella burnetii),Bacterial,7,40,2–3 weeks (7–40 d),no,,"Livestock birthing products, dust; also some ticks.",NEJM2017 T2; QRG2025,5,,,
+anthrax,Anthrax,Bacterial,1,12,1–12 d,no,,"Hides, wool, bushmeat, carcasses.",NEJM2017 T1,5,,,
+plague,Plague (Yersinia pestis) – pneumonic plague is an airborne HCID,Bacterial,1,7,2–6 d bubonic; 1–3 d pneumonic,yes,7,"Flea bites, handling rodents/wild animals.",UKHSA Plague page; NEJM2017 T1/T3,1,airborne (pneumonic),Rodents and their fleas; handling infected animals; infected cats; respiratory particles from pneumonic cases.,
+tularemia,Tularaemia,Bacterial,1,14,1–14 d,no,,"Ticks, hares/rodents, contaminated water.",NEJM2017 T2,5,,,
+psittacosis,Psittacosis (Chlamydia psittaci),Bacterial,5,21,5–21 d,no,,,NEJM2017 T2,5,,,
+cat_scratch,Cat-scratch disease (Bartonella henselae),Bacterial,3,30,3–30 d,no,,RIPL offers Bartonella testing.,NEJM2017 T2,5,,,
+rat_bite,Rat-bite fever,Bacterial,2,21,2–21 d,no,,,NEJM2017 T2,5,,,
+pasteurella,"Wound infection (Pasteurella, Capnocytophaga)",Bacterial,1,7,1–7 d,no,,Capnocytophaga severe in asplenia/alcohol excess.,Expert,5,,,
+strep_suis,Streptococcus suis,Bacterial,1,7,hours–7 d,no,,"Pig contact or raw pork (SE Asia, China).",Expert,5,,,
+listeria,Listeriosis,Bacterial,1,70,1–70 d,no,,Relevant in pregnancy and immunosuppression.,NEJM2017 T2,5,,,
+mdro,Resistant organisms (CPE/ESBL/MRSA) – colonisation or infection,Bacterial,0,90,carriage for ~3 months,no,,"Screen if hospitalised abroad (rectal swab, MRSA screen). QRG2025.",NEJM2017; QRG2025,5,,,
+stis,"Other STIs (syphilis, gonorrhoea, HSV)",Bacterial/viral,3,90,days–weeks,no,,HIV & syphilis serology.,NEJM2017 T2; QRG2025,5,,,
+atbf,African tick-bite fever (Rickettsia africae),Rickettsia,4,10,4–10 d,no,,Look for eschar(s). QRG: doxycycline if eschar.,NEJM2017; QRG2025,3,,,
+msf,Mediterranean spotted fever (R. conorii),Rickettsia,2,14,2–14 d,no,,Dog ticks; look for eschar.,NEJM2017 T1,5,,,
+rmsf,Rocky Mountain / Brazilian spotted fever (R. rickettsii),Rickettsia,2,14,2–14 d,no,,Can be rapidly fatal; doxycycline.,NEJM2017 T1,5,,,
+scrub,Scrub typhus (Orientia tsutsugamushi),Rickettsia,6,21,6–21 d,no,,"Eschar often hidden (groin, axilla, under breasts).",NEJM2017 T1,3,,,
+murine_typhus,Murine (endemic) typhus (R. typhi),Rickettsia,7,14,7–14 d,no,,"Rodent fleas; ports, markets, urban SE Asia.",NEJM2017 T1,5,,,
+epidemic_typhus,Epidemic typhus (R. prowazekii),Rickettsia,7,14,7–14 d,no,,Body lice; outbreaks in crowded/conflict settings.,NEJM2017 T1,5,,,
+lbrf,Louse-borne relapsing fever (B. recurrentis),Spirochaete,4,14,4–14 d,no,,Horn of Africa; also migrants travelling from there.,NEJM2017 T1,5,,,
+tbrf,Tick-borne relapsing fever (Borrelia spp.),Spirochaete,4,18,4–18 d,no,,"Soft ticks in huts, caves, cabins.",NEJM2017 T2,5,,,
+lyme,Lyme disease,Spirochaete,3,30,3–30 d,no,,,NEJM2017 T2,5,,,
+trench,Trench fever (Bartonella quintana),Bacterial,5,20,5–20 d,no,,Body lice; homelessness.,NEJM2017 T2,5,,,
+oroya,Carrión's disease / Oroya fever (B. bacilliformis),Bacterial,10,210,10–210 d,no,,"Andean valleys (Peru, Ecuador, Colombia).",NEJM2017 T1,5,,,
+vl,Visceral leishmaniasis,Protozoa,14,365,2–6 months (10 d to years),no,,Prolonged fever; serology/bone marrow.,NEJM2017 T2; QRG2025,5,,,
+sandfly_fever,Sandfly fever / Toscana virus,Arbovirus,2,6,2–6 d,no,,,NEJM2017 T2,5,,,
+hat_r,East African trypanosomiasis (T. b. rhodesiense),Protozoa,7,21,7–21 d,no,,Look for chancre at bite site. Blood film.,NEJM2017 T1,5,,,
+hat_g,West/Central African trypanosomiasis (T. b. gambiense),Protozoa,30,730,weeks to years,no,,Long residence more typical than short trips.,NEJM2017 T2,5,,,
+chagas,Acute Chagas disease (T. cruzi),Protozoa,5,14,5–14 d (oral outbreaks shorter),no,,Acute infection rare in travellers.,NEJM2017 T2,5,,,
+toxo,Toxoplasmosis,Protozoa,5,23,5–23 d,no,,,NEJM2017 T2; QRG2025,5,,,
+katayama,Acute schistosomiasis (Katayama syndrome),Helminth,14,56,2–8 weeks,no,,Freshwater exposure 2–8 weeks before. Serology may be negative early; repeat later. Eosinophilia common.,BIA2025 T2 & 6.1.1; QRG2025,5,,,
+fasciola,Fascioliasis (acute),Helminth,21,84,3–12 weeks,no,,Watercress/aquatic plants. Eosinophilia.,BIA2025 T2 & 6.3.2; QRG2025,5,,,
+liver_fluke,Clonorchiasis / opisthorchiasis (acute),Helminth,14,30,2–4 weeks,no,,Raw/fermented freshwater fish. Eosinophilia.,BIA2025 T2 & 6.3.3,5,,,
+gnathostoma,Gnathostomiasis,Helminth,3,84,days–3 months,no,,Eosinophilia; migratory swellings.,BIA2025 T2 & 6.5.2,5,,,
+paragonimus,Paragonimiasis,Helminth,3,21,days–3 weeks (acute),no,,Raw freshwater crab/crayfish. Eosinophilia.,BIA2025 T2 & 6.1.7,5,,,
+angio,Angiostrongylus cantonensis (rat lung worm),Helminth,7,21,1–3 weeks,no,,Eosinophilic meningitis.,BIA2025 T2 & 6.5.1,5,,,
+trichinella,Trichinellosis,Helminth,7,42,"7–30 d (enteral), 2–6 weeks (parenteral)",no,,"Pork, wild boar, bear, game. Eosinophilia.",BIA2025 T2 & 6.2.9,5,,,
+toxocara,Toxocariasis (visceral larva migrans),Helminth,7,90,weeks–months,no,,Soil/dog or cat faeces; raw liver. Eosinophilia.,BIA2025 T2 & 6.1.4,5,,,
+strongy,Strongyloidiasis (acute / larva currens),Helminth,7,28,days–weeks (persists for decades),no,,Screen before steroids/immunosuppression. Eosinophilia.,BIA2025 T2 & 6.1.3,5,,,
+ascaris_hookworm,Ascaris / hookworm (Löffler's syndrome),Helminth,7,21,1–3 weeks (lung phase),no,,Eosinophilia; stool microscopy negative early.,BIA2025 T2 & 6.1.2,5,,,
+anisakis,Anisakiasis,Helminth,0,5,hours–5 d,no,,Raw marine fish worldwide.,BIA2025 T2 & 6.2.10,5,,,
+histo,Histoplasmosis (acute),Fungal,7,21,7–21 d,no,,"Caves, bat/bird guano, demolition.",BIA2025 6.1.9,5,,,
+cocci,Coccidioidomycosis ('valley fever'),Fungal,7,21,7–21 d,no,,"Desert dust (SW USA, Latin America). Eosinophilia.",BIA2025 T2 & 6.1.8,5,,,
+junin,Argentine haemorrhagic fever (Junin virus),HCID,5,21,"5–14 d, up to 21 d",yes,21,Vaccine given to at-risk populations in Argentina since 1990.,UKHSA AHF page,1,contact,Corn mouse (Calomys spp.) along margins of cultivated fields; mostly occupational (agricultural) exposure. Person-to-person and nosocomial spread very rare.,Harvest season April–July
+machupo,Bolivian haemorrhagic fever (Machupo virus),HCID,3,21,"3–19 d, up to 21 d",yes,21,,UKHSA Bolivia HF page,1,contact,Wild native rodents (Bolivia); agricultural work. Rare person-to-person and nosocomial spread.,Peaks in the rainy season (rodent migration)
+chapare,Chapare haemorrhagic fever (Chapare virus),HCID,3,21,"3–19 d, up to 21 d",yes,21,,UKHSA Bolivia HF page,1,contact,Wild native rodents (Bolivia); agricultural work. Nosocomial spread documented.,Peaks in the rainy season (rodent migration)
+lujo,Lujo virus haemorrhagic fever,HCID,7,21,7–13 d in known exposures (not well defined),yes,21,"Single documented outbreak (2008, Zambia → South Africa).",UKHSA Lujo page,1,contact,Reservoir not identified – probably rodents. Nosocomial spread in the single (2008) outbreak.,
+andes,Andes hantavirus (hantavirus cardiopulmonary syndrome),HCID,9,40,3–4 weeks typical (9–40 d),yes,42,May 2026 cruise-ship outbreak (see UKHSA).,UKHSA Andes page,1,airborne,"Long-tailed pygmy rice rat (Oligoryzomys longicaudatus): excreta/dust in rural buildings; rarely bites. Only hantavirus with person-to-person spread (household, close contact).",Spring and summer
+sars,SARS coronavirus,HCID,2,10,2–10 d,yes,10,Listed by UKHSA for completeness; show = no by default.,UKHSA HCID list,1,airborne,No transmission reported since 2004.,

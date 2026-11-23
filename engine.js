@@ -35,7 +35,7 @@
   // ---------- Database ----------
   function buildDB(raw) {
     const db = { countries: [], byIso: {}, byNum: {}, byName: {}, exposures: [], expById: {},
-      pathogens: {}, rules: [], alerts: [], areas: [], version: (raw.version || '').trim(), problems: [] };
+      pathogens: {}, rules: [], alerts: [], areas: [], hcid: [], hcidBy: {}, version: (raw.version || '').trim(), problems: [] };
     raw.countries.forEach(c => {
       const areaTags = list(c.area_tags).map(lc);
       const tags = Array.from(new Set(list(c.tags).concat(list(c.area_tags))));
@@ -64,6 +64,13 @@
     (raw.alerts || []).forEach(a => db.alerts.push(Object.assign({}, a, { w: list(a.where).map(lc) })));
     // areas: metadata only ({id, name, tags, note}); geometry stays in the app
     (raw.areas || []).forEach(a => db.areas.push({ id: a.id, name: a.name, note: a.note || '', tags: list(a.tags).map(lc), countries: list(a.countries) }));
+    (raw.hcid || []).forEach((h, i) => {
+      if (!db.pathogens[h.hcid]) { db.problems.push(`hcid_risk row ${i + 1}: unknown pathogen "${h.hcid}"`); return; }
+      if (!db.byIso[h.country]) db.problems.push(`hcid_risk row ${i + 1}: unknown country "${h.country}"`);
+      if (h.area && !db.areas.some(a => a.id === h.area)) db.problems.push(`hcid_risk row ${i + 1}: area "${h.area}" not in areas.geojson`);
+      const row = Object.assign({}, h, { show: lc(h.show || 'yes') !== 'no' });
+      db.hcid.push(row); (db.hcidBy[h.country] = db.hcidBy[h.country] || []).push(row);
+    });
     return db;
   }
   function num(v) { const n = parseFloat(v); return isNaN(n) ? null : n; }
@@ -80,12 +87,15 @@
     const c = db.byIso[stop.iso3]; if (!c) return null;
     const pin = stop.lat != null && stop.lng != null && stop.lat !== '';
     const areaTags = [].concat(...(stop.areas || []).map(a => a.tags || [])).map(lc);
-    return { c, pin, base: c.baseTokens,
+    const hcidSet = new Set((db.hcidBy[c.iso3] || []).filter(h => h.show).map(h => h.hcid));
+    return { c, pin, hcidSet, base: c.baseTokens,
       tokens: pin ? new Set([...c.baseTokens, ...areaTags]) : c.tokens,
       full: new Set([...c.tokens, ...areaTags]) };
   }
   /** -> null if the rule does not apply; else {dep} where dep = area-limited and not assessed (no pin) */
-  function matchRule(ctx, r) {
+  function matchRule(ctx, r, p) {
+    // HCIDs: the countries come from hcid_risk.csv (show = yes), not from the rule's "where".
+    if (p && p.hcid) return ctx.hcidSet.has(p.id) ? { dep: false, viaArea: false } : null;
     if (!ok(ctx.tokens, r.w, r.x)) return null;
     return { dep: !ctx.pin && !ok(ctx.base, r.w, r.x), viaArea: ctx.pin && !ok(ctx.base, r.w, r.x) };
   }
@@ -94,7 +104,7 @@
     const out = [];
     db.rules.forEach(r => {
       if (r.exposure !== exposureId || !db.pathogens[r.pathogen]) return;
-      const m = matchRule(ctx, r); if (m) out.push(Object.assign({}, r, m));
+      const m = matchRule(ctx, r, db.pathogens[r.pathogen]); if (m) out.push(Object.assign({}, r, m));
     });
     return out;
   }
@@ -102,7 +112,7 @@
   function excludedFor(db, stop) {
     const ctx = ctxFor(db, stop); if (!ctx || !ctx.pin) return [];
     const exps = ['any'].concat(stop.exposures || []);
-    return db.rules.filter(r => exps.includes(r.exposure) && db.pathogens[r.pathogen] &&
+    return db.rules.filter(r => exps.includes(r.exposure) && db.pathogens[r.pathogen] && !db.pathogens[r.pathogen].hcid &&
       !ok(ctx.tokens, r.w, r.x) && ok(ctx.full, r.w, r.x)).map(r => Object.assign({}, r, {
         areaNames: db.areas.filter(a => (!a.countries.length || a.countries.includes(ctx.c.iso3)) &&
           a.tags.some(t => r.w.includes(t) && ctx.c.areaTags.includes(t))).map(a => a.name) }));
@@ -112,11 +122,40 @@
     const ctx = ctxFor(db, stopOrIso), out = {};
     if (!ctx) return out;
     db.rules.forEach(r => {
-      if (matchRule(ctx, r)) (out[r.exposure] = out[r.exposure] || new Set()).add(r.pathogen);
+      if (matchRule(ctx, r, db.pathogens[r.pathogen])) (out[r.exposure] = out[r.exposure] || new Set()).add(r.pathogen);
     });
     Object.keys(out).forEach(k => { out[k] = out[k].size; });
     return out;
   }
+  /** HCIDs listed by UKHSA for a stop's country, with area, timing window and exposure links. Lists only – no risk estimate. */
+  function hcidFor(db, s, onset, today) {
+    const c = db.byIso[s.iso3]; if (!c) return [];
+    const pin = s.lat != null && s.lng != null;
+    const inside = new Set((s.areas || []).map(a => a.id));
+    const by = {};
+    (db.hcidBy[c.iso3] || []).filter(h => h.show).forEach(h => {
+      const p = db.pathogens[h.hcid]; if (!p) return;
+      const e = by[p.id] || (by[p.id] = { p, country: null, areas: [] });
+      if (h.area) {
+        const a = db.areas.find(x => x.id === h.area);
+        e.areas.push({ row: h, name: a ? a.name : h.area, inside: pin ? inside.has(h.area) : null });
+      } else e.country = h;
+    });
+    const expFor = pid => Array.from(new Set(db.rules.filter(r => r.pathogen === pid && r.exposure !== 'any').map(r => r.exposure)));
+    const D = dayNum(s.depart) ?? dayNum(s.arrive), O = dayNum(onset), T = dayNum(today);
+    return Object.values(by).map(e => {
+      const w = e.p.window || 21; let win;
+      if (D == null) win = { state: 'nodates', text: 'add dates to apply the ' + w + '-day window' };
+      else if (O != null) win = (O - D) <= w ? { state: 'in', text: `left ${O - D} d before onset – within the ${w}-day window` }
+        : { state: 'out', text: `left ${O - D} d before onset – outside the ${w}-day window` };
+      else win = (T - D) <= w ? { state: 'in', text: `left ${T - D} d ago – within the ${w}-day window` }
+        : { state: 'noonset', text: `left ${T - D} d ago – add onset date to apply the ${w}-day window` };
+      const exps = expFor(e.p.id);
+      const ticked = exps.filter(x => (s.exposures || []).includes(x));
+      return Object.assign(e, { win, ticked, ask: exps.filter(x => !ticked.includes(x)) });
+    }).sort((a, b) => a.p.name.localeCompare(b.p.name));
+  }
+
   function alertsFor(db, iso3, today) {
     const c = db.byIso[iso3];
     return db.alerts.filter(a => applies(c, a.w, [])).map(a => Object.assign({}, a, {
@@ -148,11 +187,13 @@
     const summary = {}; const hcid = [];
     const out = stops.map((s, i) => {
       const c = db.byIso[s.iso3];
-      const res = { n: i + 1, stop: s, country: c, alerts: c ? alertsFor(db, s.iso3, today) : [], groups: [], excluded: [] };
+      const res = { n: i + 1, stop: s, country: c, alerts: c ? alertsFor(db, s.iso3, today) : [], groups: [], excluded: [], hcid: [] };
       if (!c) return res;
       res.pin = s.lat != null && s.lng != null;
       res.areas = (s.areas || []).map(a => a.name);
       res.excluded = excludedFor(db, s);
+      res.hcid = hcidFor(db, s, trip.onset, today);
+      res.hcid.forEach(h => { if (h.win.state === 'in') hcid.push({ p: h.p, n: i + 1, country: c.name }); });
       const add = (label, exp, items) => {
         const seen = {};
         items.forEach(it => {
@@ -175,7 +216,6 @@
           if (TIMING_RANK[x.t.status] < TIMING_RANK[e.best]) e.best = x.t.status;
           const key = `${i + 1}. ${c.name}`, why = exp === 'any' ? 'any stay' : label;
           (e.where[key] = e.where[key] || []).includes(why) || e.where[key].push(why);
-          if (x.p.hcid) hcidCheck(x.p, s, c, i + 1, x.dep);
         });
       };
       const base = rulesFor(db, s, 'any').concat(res.alerts.filter(a => a.pathogen)
@@ -188,15 +228,6 @@
       return res;
     });
 
-    function hcidCheck(p, s, c, n, dep) {
-      const D = dayNum(s.depart) ?? dayNum(s.arrive), O = dayNum(trip.onset), T = dayNum(today);
-      const w = p.window || 21; let state;
-      if (D == null) state = 'dates needed';
-      else if (O != null) state = (O - D) <= w ? `onset ${O - D} d after leaving (≤${w} d)` : null;
-      else state = (T - D) <= w ? `left ${T - D} d ago (≤${w} d)` : 'add onset date to apply the ' + w + '-day window';
-      if (state && dep) state += ' – area-limited, no pin: check where they stayed';
-      if (state && !hcid.some(h => h.p.id === p.id && h.n === n)) hcid.push({ p, n, country: c.name, state });
-    }
 
     const sumList = Object.values(summary).sort((a, b) =>
       (TIMING_RANK[a.best] - TIMING_RANK[b.best]) || (a.p.prio - b.p.prio) || a.p.name.localeCompare(b.p.name));
@@ -248,14 +279,30 @@
     if (trip.notes) { push(''); push('GENERAL NOTES'); wrap(trip.notes, 2).forEach(push); }
     push('');
 
-    if (result.hcid.length) {
-      push(sub);
-      push('!! HIGH CONSEQUENCE INFECTIOUS DISEASE (HCID) CHECK');
-      push(sub);
-      wrap('Complete the relevant risk assessment (ACDP VHF algorithm / UKHSA MERS & avian influenza algorithms), isolate appropriately and discuss with local infection service ± Imported Fever Service (0844 778 8990). Exclude malaria.', 2).forEach(push);
-      result.hcid.forEach(h => wrapText(`${h.p.name} – stop ${h.n} ${h.country}: ${h.state}`, 66).forEach((ln, i) => push((i ? '    ' : '  * ') + ln)));
+    push(sub);
+    push('HCIDs REPORTED BY UKHSA FOR THE COUNTRIES VISITED');
+    push(sub);
+    wrap('From the UKHSA HCID country-specific risk table and HCID guidance pages. Lists what has been reported – not a risk estimate. Risk assessment: ACDP VHF algorithm / UKHSA airborne-HCID guidance; Imported Fever Service 0844 778 8990.', 2).forEach(push);
+    const expLab = id => { const e = db.expById[id] || {}; return e.short || e.label || id; };
+    result.stops.forEach(r => {
+      if (!r.country) return;
       push('');
-    }
+      push(`  Stop ${r.n}: ${r.country.name}${r.stop.place ? ' – ' + r.stop.place : ''}`);
+      if (!r.hcid.length) { push('    No HCIDs listed by UKHSA for this country.'); return; }
+      r.hcid.forEach(h => {
+        const head = `${h.p.name}${h.p.hcid_group ? ' [' + h.p.hcid_group + ']' : ''}`;
+        wrapText(head, 66).forEach((ln, i) => push((i ? '      ' : '    * ') + ln));
+        if (h.country) wrap(`UKHSA ${r.country.iso3}: ${h.country.category_text}, ${h.country.last_reported}${hcNote(h.country.notes) ? ' – ' + hcNote(h.country.notes) : ''}`, 6).forEach(push);
+        const ins = h.areas.filter(a => a.inside === true), outs = h.areas.filter(a => a.inside !== true);
+        ins.forEach(a => wrap(`PIN IS INSIDE: ${a.name} – ${a.row.category_text}, ${a.row.last_reported}${a.row.notes ? '. ' + a.row.notes : ''}`, 6).forEach(push));
+        if (outs.length) wrap((h.areas[0].inside === null ? 'No pin – areas not assessed: ' : 'Also reported in (pin outside): ') + outs.map(a => a.name).join('; '), 6).forEach(push);
+        wrap('Timing: ' + h.win.text, 6).forEach(push);
+        if (h.p.reservoir_vector) wrap('Spread: ' + h.p.reservoir_vector, 6).forEach(push);
+        if (h.p.season) wrap('Season: ' + h.p.season, 6).forEach(push);
+        wrap(`Recorded: ${h.ticked.length ? h.ticked.map(expLab).join('; ') : 'none'}${h.ask.length ? '  |  Ask about: ' + h.ask.map(expLab).join('; ') : ''}`, 6).forEach(push);
+      });
+    });
+    push('');
 
     result.stops.forEach(r => {
       const s = r.stop;
@@ -331,6 +378,11 @@
     push('');
     return L.join('\n');
   }
+  /** Drop note fragments that only repeat the UKHSA category wording. */
+  function hcNote(n) {
+    return String(n || '').split(';').map(x => x.trim())
+      .filter(x => x && !/^(community or zoonotic|zoonotic|community transmission.*)$/i.test(x)).join('; ');
+  }
   function stayLen(s) {
     const a = dayNum(s.arrive), d = dayNum(s.depart);
     return (a != null && d != null && d >= a) ? ` (${d - a + 1} days)` : '';
@@ -345,6 +397,6 @@
     return out.length ? out : [''];
   }
 
-  return { parseCSV, buildDB, rulesFor, excludedFor, ctxFor, relevantExposures, alertsFor, analyse, renderText, timing,
+  return { parseCSV, buildDB, hcidFor, hcNote, rulesFor, excludedFor, ctxFor, relevantExposures, alertsFor, analyse, renderText, timing,
     dayNum, sortStops, links, slug, TIMING_LABEL };
 })());
