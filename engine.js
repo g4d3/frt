@@ -112,10 +112,20 @@
   function excludedFor(db, stop) {
     const ctx = ctxFor(db, stop); if (!ctx || !ctx.pin) return [];
     const exps = ['any'].concat(stop.exposures || []);
-    return db.rules.filter(r => exps.includes(r.exposure) && db.pathogens[r.pathogen] && !db.pathogens[r.pathogen].hcid &&
-      !ok(ctx.tokens, r.w, r.x) && ok(ctx.full, r.w, r.x)).map(r => Object.assign({}, r, {
-        areaNames: db.areas.filter(a => (!a.countries.length || a.countries.includes(ctx.c.iso3)) &&
-          a.tags.some(t => r.w.includes(t) && ctx.c.areaTags.includes(t))).map(a => a.name) }));
+    // pathogens already listed at this pin (by any ticked exposure) are not repeated as "not at this pin"
+    const listed = new Set(db.rules.filter(r => exps.includes(r.exposure) && db.pathogens[r.pathogen] &&
+      matchRule(ctx, r, db.pathogens[r.pathogen])).map(r => r.pathogen));
+    const out = [], byKey = {};
+    db.rules.forEach(r => {
+      if (!exps.includes(r.exposure) || !db.pathogens[r.pathogen] || db.pathogens[r.pathogen].hcid || listed.has(r.pathogen)) return;
+      if (ok(ctx.tokens, r.w, r.x) || !ok(ctx.full, r.w, r.x)) return;
+      const names = db.areas.filter(a => (!a.countries.length || a.countries.includes(ctx.c.iso3)) &&
+        a.tags.some(t => r.w.includes(t) && ctx.c.areaTags.includes(t))).map(a => a.name);
+      const k = r.exposure + '|' + r.pathogen;
+      if (byKey[k]) { names.forEach(n => { if (!byKey[k].areaNames.includes(n)) byKey[k].areaNames.push(n); }); return; }
+      byKey[k] = Object.assign({}, r, { areaNames: names }); out.push(byKey[k]);
+    });
+    return out;
   }
   /** exposure id -> number of distinct pathogens it maps to for this stop (or whole country) */
   function relevantExposures(db, stopOrIso) {

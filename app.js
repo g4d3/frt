@@ -82,7 +82,13 @@
     addLegend();
     if (areaFeatures.length) {
       areaLayer = L.geoJSON({ type: 'FeatureCollection', features: areaFeatures }, {
-        style: { color: '#5a3d99', weight: 1.5, dashArray: '5 4', fillColor: '#5a3d99', fillOpacity: 0.07 },
+        style: f => {
+          const t = String(f.properties.tags || '');
+          if (t.includes('malaria_cdc_chemo')) return { color: '#a3201a', weight: 1, fillColor: '#c8352c', fillOpacity: 0.28 };
+          if (t.includes('malaria_cdc_rural')) return { color: '#7b3f86', weight: 1, fillColor: '#a466ae', fillOpacity: 0.28 };
+          if (t.includes('malaria_cdc_avoid')) return { color: '#c56a12', weight: 1, fillColor: '#f0a04b', fillOpacity: 0.28 };
+          return { color: '#5a3d99', weight: 1.5, dashArray: '5 4', fillColor: '#5a3d99', fillOpacity: 0.07 };
+        },
         onEachFeature: (f, layer) => layer.bindTooltip(esc(f.properties.name), { sticky: true, className: 'ctip' })
       });
       if ($('#show-areas').checked) areaLayer.addTo(map);
@@ -118,7 +124,7 @@
     const alert = c && FRT.alertsFor(db, c.iso3, todayISO()).length;
     let fill = 'transparent', op = 0;
     if (shade && t.includes('malaria_high')) { fill = '#b8322a'; op = 0.32; }
-    else if (shade && t.includes('malaria_risk')) { fill = '#e08a2c'; op = 0.25; }
+    else if (shade && (t.includes('malaria_risk') || t.some(x => x.startsWith('malaria_cdc_')))) { fill = '#e08a2c'; op = 0.25; }
     return { color: alert ? '#8a0f12' : '#7a8a8c', weight: alert ? 2 : 0.5, fillColor: fill, fillOpacity: op, dashArray: alert ? '4 3' : null };
   }
   function addLegend() {
@@ -127,9 +133,12 @@
       const d = L.DomUtil.create('div', 'legend');
       d.innerHTML = '<div><i style="background:#b8322a;opacity:.55"></i>Malaria – high-risk country</div>' +
         '<div><i style="background:#e08a2c;opacity:.5"></i>Malaria – present in parts</div>' +
+        '<div><i style="background:#c8352c;opacity:.6"></i>CDC zone: chemoprophylaxis</div>' +
+        '<div><i style="background:#a466ae;opacity:.6"></i>CDC zone: chemo, rural areas</div>' +
+        '<div><i style="background:#f0a04b;opacity:.6"></i>CDC zone: mosquito avoidance only</div>' +
         '<div><i class="dash"></i>Current outbreak alert</div>' +
         '<div><i class="area"></i>Mapped risk area</div>' +
-        '<small>Shading is country level; purple outlines are rough. Check NaTHNaC/CDC for exact areas.</small>';
+        '<small>Country shading is country level. CDC zones traced from CDC maps (34 countries); purple outlines are rough. Verify on NaTHNaC/CDC.</small>';
       return d;
     };
     lg.addTo(map);

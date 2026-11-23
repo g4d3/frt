@@ -129,6 +129,10 @@ Areas drawn so far (rough outlines, 22 Nov 2026 – please check them against th
 
 A shape may cross borders (the valley-fever zone covers Arizona and Sonora). Only countries that list the tag in `area_tags` are restricted by it; elsewhere the tag simply adds risk where the pin falls.
 
+### CDC malaria zones
+
+For 34 countries (those you supplied CDC maps for) malaria comes from zones traced off the CDC Yellow Book country maps, tagged `malaria_cdc_chemo`, `malaria_cdc_rural` or `malaria_cdc_avoid` in `areas.geojson` (ids `cdc_malaria_<iso>_<class>`). The map shows them in red, mauve and orange. These countries carry those tags in `area_tags`, so malaria is listed only when the pin is inside a zone. To redo a country from a new CDC map, re-run the tracing scripts (kept outside the site) or redraw the zone in geojson.io and keep the same `id` and `tags`.
+
 ### High consequence infectious diseases (`hcid_risk.csv`)
 
 One row per country × HCID, copied from UKHSA's *HCID: country specific risk* page, plus rows for sub-national areas from the UKHSA HCID guidance pages (Junin – Pampas; Andes – four Argentine regions and southern Chile; Machupo – Beni; Chapare – Cochabamba/La Paz; Nipah – Bangladesh districts, West Bengal, Kerala, Mindanao; SFTS – central & eastern China; Marburg – Python Cave; Ebola – 2026 DRC outbreak provinces).
@@ -180,6 +184,7 @@ The seed data was drafted from:
 * Thwaites GE, Day NPJ. *Approach to fever in the returning traveler.* NEJM 2017;376:548-60 – Tables 1 (life-threatening infections), 2 (history/exposures) and 3 (transmissible infections). Source tag `NEJM2017`.
 * Thakker C et al. *UK guidelines for the investigation and management of eosinophilia in returning travellers and migrants.* J Infect 2025;90:106328 – Table 2 (geography of helminths) and section incubation periods. Source tag `BIA2025`.
 * *Fever in Returning Travellers – Infection Quick Reference Guide*, v5 July 2025 – risk exposures, HCID windows (VHF 21 d, MERS/avian influenza 14 d), first-line tests, Imported Fever Service number. Source tag `QRG2025`.
+* CDC Yellow Book country malaria maps (34 countries, traced) and the CDC marine-toxin (seafood poisoning) map. Source tag `CDC Yellow Book`.
 * NaTHNaC, UKHSA, ECDC and CDC pages for country lists and current outbreaks (checked 22 Nov 2026).
 
 Rows marked `Expert` in the `source` column come from general infectious-disease knowledge, not from the three documents. They, and all country tag lists, should be reviewed by you before the tool is relied on clinically. Country tags are coarse: most risks are sub-national and seasonal.

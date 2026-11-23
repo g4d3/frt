@@ -11,14 +11,18 @@ where,except,exposure,pathogen,note,source
 malaria_high,,any,pf,"High-risk country for falciparum malaria — exclude malaria in all.",NaTHNaC; NEJM2017 T1
 malaria_risk,,any,pf,"Malaria present in parts of this country — check the area visited on NaTHNaC / CDC map.",NaTHNaC; CDC Yellow Book
 malaria_high;malaria_risk,,any,pv_po,"",NaTHNaC; CDC Yellow Book
+malaria_cdc_chemo,,any,pf,"CDC map: chemoprophylaxis-recommended area.",CDC Yellow Book malaria map
+malaria_cdc_rural,,any,pf,"CDC map: chemoprophylaxis recommended for rural/forested areas (see area note for season).",CDC Yellow Book malaria map
+malaria_cdc_avoid,,any,pf,"CDC map: mosquito-avoidance-only area (transmission present).",CDC Yellow Book malaria map
+malaria_cdc_chemo;malaria_cdc_rural;malaria_cdc_avoid,,any,pv_po,"",CDC Yellow Book malaria map
 knowlesi,,any,pk,"",NEJM2017 T1
 enteric_high,,any,enteric,"Highest-risk region for enteric fever (Indian subcontinent).",NEJM2017 T1
 aedes,,any,dengue,"Aedes-borne arboviruses circulate here; bites often unnoticed (day-biting).",NaTHNaC; QRG2025
 GLOBAL,,any,resp_viruses,"",QRG2025
 #
 # ===== MOSQUITOES / MIDGES =====
-malaria_high;malaria_risk,,mosquito,pf,"",NEJM2017 T2
-malaria_high;malaria_risk,,mosquito,pv_po,"",NEJM2017 T2
+malaria_high;malaria_risk;malaria_cdc_chemo;malaria_cdc_rural;malaria_cdc_avoid,,mosquito,pf,"",NEJM2017 T2
+malaria_high;malaria_risk;malaria_cdc_chemo;malaria_cdc_rural;malaria_cdc_avoid,,mosquito,pv_po,"",NEJM2017 T2
 knowlesi,,mosquito,pk,"Forest / forest-fringe",NEJM2017 T1
 aedes,,mosquito,dengue,"",NEJM2017 T2
 aedes,,mosquito,chik,"",NEJM2017 T2
@@ -198,7 +202,7 @@ GLOBAL,,sex,hav,"",NEJM2017 T2
 GLOBAL,,needle,hbv,"",NEJM2017 T2
 GLOBAL,,needle,hcv,"",NEJM2017 T2
 GLOBAL,,needle,hiv,"",NEJM2017 T2
-malaria_high;malaria_risk,,needle,pf,"Transfusion-transmitted malaria.",NEJM2017 T2
+malaria_high;malaria_risk;malaria_cdc_chemo;malaria_cdc_rural;malaria_cdc_avoid,,needle,pf,"Transfusion-transmitted malaria.",NEJM2017 T2
 GLOBAL,,needle,mdro,"",NEJM2017
 SAU,,mass_gathering,mening,"Hajj/Umrah — check ACWY vaccination.",NaTHNaC
 meningitis_belt,,mass_gathering,mening,"African meningitis belt (dry season).",NaTHNaC
@@ -209,7 +213,7 @@ GLOBAL,,mass_gathering,tb,"",NEJM2017
 meningitis_belt,,any,mening,"African meningitis belt.",NaTHNaC
 #
 # ===== TRAVEL STYLE =====
-malaria_high;malaria_risk,,vfr,pf,"VFR travellers have the highest malaria risk (often no prophylaxis).",NEJM2017; UKHSA
+malaria_high;malaria_risk;malaria_cdc_chemo;malaria_cdc_rural;malaria_cdc_avoid,,vfr,pf,"VFR travellers have the highest malaria risk (often no prophylaxis).",NEJM2017; UKHSA
 GLOBAL,low_food_risk,vfr,enteric,"",NEJM2017
 GLOBAL,low_food_risk,vfr,tb,"",NEJM2017
 GLOBAL,low_food_risk,vfr,hav,"",NEJM2017
@@ -261,3 +265,8 @@ GLOBAL,,raw_dairy,mers,"Raw camel milk.",UKHSA MERS page
 GLOBAL,,raw_meat,mers,"Raw camel meat.",UKHSA MERS page
 GLOBAL,,bat,ebola,"",UKHSA Ebola page
 GLOBAL,,healthcare,nipah,"",UKHSA Nipah page
+# ===== Marine toxins (CDC Yellow Book seafood-poisoning map). Country level; non-infectious, short onset. =====
+caribbean;pacific-islands;USA;MEX;ESP;MDG;MUS;REU;SYC;PHL;PNG;AUS;IDN;TLS,,reef_fish,ciguatera,Reported in tropical/subtropical reef waters (CDC map ~35°N–35°S).,CDC Yellow Book map: marine toxin poisoning (traced 2026-11-23)
+USA;CAN;MEX;GTM;SLV;NIC;VEN;GUY;BRA;URY;ARG;CHL;GRL;ISL;NOR;SWE;DNK;FIN;GBR;IRL;FRA;ESP;PRT;ITA;HRV;GRC;TUN;MAR;MRT;SEN;AGO;NAM;ZAF;KWT;IRN;OMN;ARE;IND;LKA;BGD;MMR;THA;MYS;VNM;CHN;HKG;TWN;KOR;JPN;RUS;PHL;BRN;IDN;PNG;AUS;NZL;FJI,,shellfish,psp,,CDC Yellow Book map: marine toxin poisoning (traced 2026-11-23)
+USA;CAN;MEX;GBR;IRL;FRA;ESP;PRT;DNK;ITA;HRV;GRC;CHL;AUS;NZL,,shellfish,asp,,CDC Yellow Book map: marine toxin poisoning (traced 2026-11-23)
+USA;MEX;NZL,,shellfish,nsp,Gulf of Mexico / Florida; New Zealand.,CDC Yellow Book map: marine toxin poisoning (traced 2026-11-23)

@@ -32,6 +32,8 @@ raw_fw_fish,Food & drink,"Raw freshwater fish, frogs or snakes","Raw/fermented r
 raw_crustacean,Food & drink,Raw freshwater crab or crayfish,"Raw or pickled crab/crayfish, drunken crab?",Raw crab/crayfish
 raw_snail,Food & drink,"Raw snails, slugs, prawns or unwashed greens","Raw snails or freshwater prawns, salads that might carry slugs?",Raw snails/greens
 raw_marine_fish,Food & drink,"Raw marine fish (sushi, ceviche)","Sushi, sashimi, ceviche, marinated herring?",Raw marine fish
+shellfish,Food & drink,"Shellfish (mussels, clams, oysters, scallops)","Eaten mussels, clams, oysters or scallops – including bought from a beach or harvested themselves?",Shellfish
+reef_fish,Food & drink,"Large reef fish (barracuda, grouper, snapper, amberjack, moray eel)","Eaten large reef fish such as barracuda, grouper, snapper or moray eel?",Reef fish
 watercress,Food & drink,Watercress or raw aquatic plants,"Wild or farmed watercress, aquatic vegetables?",Watercress
 palm_sap,Food & drink,Raw date palm sap,"Fresh raw date palm sap (Bangladesh/India, winter)?",Date palm sap
 sick_contact,People & healthcare,"Unwell contacts (household, travel companions)",Was anyone ill? With what? Any deaths?,Unwell contacts

@@ -78,13 +78,8 @@ Check which countries carry each tag:
 - [ ] South-central & south-east USA, eastern Arizona – Rocky Mountain spotted fever (USA) – source: CDC RMSF maps
 - [ ] Western USA – plague & tick-borne relapsing fever foci (USA) – source: CDC plague & TBRF maps
 - [ ] USA – local dengue transmission areas (Florida, south Texas, Hawaii) (USA) – source: CDC dengue
-- [ ] Mexico – malaria areas (Chiapas; Sierra Madre Occidental) (MEX) – source: CDC Yellow Book; NaTHNaC
-- [ ] South Africa – malaria areas (Kruger, Limpopo & Mpumalanga lowveld, NE KwaZulu-Natal) (ZAF) – source: NaTHNaC; CDC Yellow Book
-- [ ] Northern Namibia & northern Botswana – malaria areas (NAM; BWA) – source: NaTHNaC; CDC Yellow Book
-- [ ] Thailand – border forest malaria areas (Myanmar, Cambodia & Malaysia borders) (THA) – source: NaTHNaC; CDC Yellow Book
+- [ ] Northern Botswana – malaria (BWA) – source: NaTHNaC; CDC Yellow Book (Namibia now uses the CDC map)
 - [ ] Eastern & southern China – scrub typhus (CHN) – source: Expert
-- [ ] Brazilian Amazon (Legal Amazon) – malaria (BRA) – source: NaTHNaC; CDC Yellow Book
-- [ ] Peruvian Amazon – malaria (Loreto, Ucayali, Madre de Dios, San Martín, Amazonas) (PER) – source: NaTHNaC; CDC Yellow Book
 - [ ] Northern & central Argentina – dengue (ARG) – source: NaTHNaC; PAHO
 - [ ] North-east Argentina (Misiones, Corrientes) – yellow fever (ARG) – source: CDC Yellow Book
 - [ ] Southern France & Corsica – leishmaniasis, Toscana virus, Mediterranean spotted fever (FRA) – source: Expert; ECDC
@@ -106,6 +101,28 @@ Check which countries carry each tag:
 - [ ] Rural hills of central & eastern China – SFTS (CHN) – source: UKHSA HCID guidance page
 - [ ] Python Cave, Maramagambo Forest (Queen Elizabeth NP), Uganda – Marburg (UGA) – source: UKHSA HCID guidance page
 - [ ] DRC 2026 Ebola (Bundibugyo) outbreak provinces (COD) – source: ECDC
+
+## 4b. CDC malaria zones – auto-traced from the CDC country maps you supplied
+
+Traced by colour from the 34 JPGs (red = chemoprophylaxis, mauve = chemoprophylaxis in rural/forested areas, orange = mosquito avoidance only, beige = none) and georeferenced from each country's outline. 94 of 95 test cities landed in the right zone. Edges may be off by ~10–20 km; city "circles" (e.g. Nairobi, Hanoi, Kathmandu) are approximated as 15 km discs. Zones are extended ~5 km offshore so coastal pins are caught. In these countries malaria is now **area-based**: a pin outside every zone lists malaria under "Not at this pin"; no pin = AREA NOT ASSESSED.
+
+Check one or two pins in each by eye against the CDC map (turn on "Show mapped risk areas"):
+
+- [ ] Afghanistan (rural, April–December) · [ ] Bangladesh · [ ] Bolivia · [ ] Brazil · [ ] Cambodia (rural/forested) · [ ] Costa Rica · [ ] Dominican Republic
+- [ ] Ecuador · [ ] Eritrea · [ ] Ethiopia · [ ] Guatemala · [ ] Guyana · [ ] Honduras · [ ] Indonesia (chemo + rural) · [ ] Kenya · [ ] Laos
+- [ ] Madagascar · [ ] Malaysia (rural) · [ ] Mauritania · [ ] Mexico · [ ] Namibia · [ ] Nepal · [ ] Nicaragua · [ ] Pakistan · [ ] Panama
+- [ ] Papua New Guinea · [ ] Peru · [ ] South Africa · [ ] South Korea (rural, March–December) · [ ] Tanzania · [ ] Thailand (chemo zones also carry P. knowlesi)
+- [ ] Venezuela · [ ] Vietnam (rural/forested) · [ ] Yemen
+
+Known limits: Thailand's Koh Samui test pin fell outside the zones (small island); Mount Hagen (PNG highlands) treated as no-transmission circle.
+
+## 4c. Seafood poisoning (CDC Yellow Book marine-toxin map) – country level
+
+- [ ] Ciguatera (large reef fish): Caribbean, Pacific islands, USA, MEX, ESP (Canary Is.), MDG, MUS, REU, SYC, PHL, PNG, AUS, IDN, TLS
+- [ ] Paralytic shellfish poisoning: 57 coastal countries read from the dots
+- [ ] Amnesic shellfish poisoning: USA CAN MEX GBR IRL FRA ESP PRT DNK ITA HRV GRC CHL AUS NZL
+- [ ] Neurotoxic shellfish poisoning: USA MEX NZL
+These are toxins, not infections, with onset in hours – the report shows them as "beyond usual incubation" unless the meal was just before onset.
 
 ## 5. Rows not from UKHSA in hcid_risk.csv
 
