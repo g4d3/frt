@@ -136,3 +136,4 @@ th{background:var(--teal-2);position:sticky;top:0}
 .overlay{display:inline-flex;flex-wrap:wrap;gap:4px 10px;align-items:center;font-weight:600}
 .overlay label{font-weight:400;white-space:nowrap}
 .legend b{display:block;margin-bottom:2px}
+#hcid-pick{font-size:12px;padding:1px 4px;max-width:220px}

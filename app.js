@@ -92,9 +92,13 @@
         const topo = await r.json();
         features = topojson.feature(topo, topo.objects.countries).features;
         features.forEach(f => { f.country = featureCountry(f); f.bbox = bbox(f.geometry); });
-        boundaryLayer = L.geoJSON({ type: 'FeatureCollection', features }, {
+        // draw copies whose rings are "unwrapped" across the 180° line (Russia, Fiji, Alaska) – otherwise
+        // Leaflet draws them as bands across the whole map. Detection still uses the original geometry.
+        const draw = features.filter(f => String(parseInt(f.id, 10)) !== '10')     // skip Antarctica
+          .map(f => ({ type: 'Feature', id: f.id, properties: f.properties, country: f.country, geometry: unwrapGeom(f.geometry) }));
+        boundaryLayer = L.geoJSON({ type: 'FeatureCollection', features: draw }, {
           style: styleFeature,
-          onEachFeature: (f, layer) => layer.bindTooltip(f.country ? f.country.name : (f.properties.name || ''), { sticky: true, className: 'ctip' })
+          onEachFeature: (f, layer) => layer.bindTooltip(() => countryTip(f), { sticky: true, className: 'ctip' })
         }).addTo(map);
         state.stops.forEach(s => { if (!s.manualCountry && !s.iso3 && s.lat != null) s.iso3 = detect(s.lat, s.lng); });
         renderAll();
@@ -102,15 +106,47 @@
       } catch (e) { /* try next source */ }
     }
   }
+  function unwrapRing(r) {
+    const out = [r[0].slice()];
+    for (let i = 1; i < r.length; i++) {
+      let x = r[i][0]; const px = out[i - 1][0];
+      while (x - px > 180) x -= 360;
+      while (x - px < -180) x += 360;
+      out.push([x, r[i][1]]);
+    }
+    return out;
+  }
+  function unwrapGeom(g) {
+    if (g.type === 'Polygon') return { type: 'Polygon', coordinates: g.coordinates.map(unwrapRing) };
+    if (g.type === 'MultiPolygon') return { type: 'MultiPolygon', coordinates: g.coordinates.map(p => p.map(unwrapRing)) };
+    return g;
+  }
+  function countryTip(f) {
+    const c = f.country; if (!c) return esc(f.properties.name || '');
+    const m = overlay();
+    if (m === 'hcid') {
+      const names = Array.from(new Set((db.hcidBy[c.iso3] || []).filter(h => h.show)
+        .map(h => (db.pathogens[h.hcid] ? db.pathogens[h.hcid].name.split(' – ')[0].split(' (')[0] : h.hcid) + (h.area ? ' (area)' : ''))));
+      return `<b>${esc(c.name)}</b>` + (names.length ? '<br>' + names.map(esc).join('<br>') : '<br>No HCIDs listed');
+    }
+    if (m === 'outbreak') {
+      const al = FRT.alertsFor(db, c.iso3, todayISO());
+      return `<b>${esc(c.name)}</b>` + (al.length ? '<br>' + al.map(a => esc(a.title)).join('<br>') : '');
+    }
+    return esc(c.name);
+  }
   function featureCountry(f) {
     if (f.id != null && db.byNum[String(parseInt(f.id, 10))]) return db.byNum[String(parseInt(f.id, 10))];
     const n = (f.properties && f.properties.name || '').toLowerCase();
     return db.byName[n] || null;
   }
   // ---------- map overlays: malaria (default) | hcid | outbreak | areas | none ----------
+  const HCID_NOT_SHADED = ['avian_flu'];   // listed by UKHSA in most countries, so shading it hides everything else
   const overlay = () => { const r = document.querySelector('input[name="overlay"]:checked'); return r ? r.value : 'malaria'; };
   const isMalariaArea = p => /malaria/.test(String(p.tags || '') + ' ' + p.id);
-  const hcidAreaIds = () => new Set(db.hcid.filter(h => h.show && h.area).map(h => h.area));
+  const hcidPick = () => { const el = $('#hcid-pick'); return el ? el.value : 'all'; };
+  const hcidRowOn = h => h.show && (hcidPick() === 'all' ? !HCID_NOT_SHADED.includes(h.hcid) : h.hcid === hcidPick());
+  const hcidAreaIds = (all) => new Set(db.hcid.filter(h => h.area && (all ? h.show : hcidRowOn(h))).map(h => h.area));
   function outbreakAreaIds() {
     const ids = new Set(), today = todayISO();
     db.hcid.filter(h => h.show && h.area).forEach(h => {
@@ -121,9 +157,9 @@
   function areaFilter() {
     const m = overlay();
     if (m === 'malaria') return p => isMalariaArea(p);
-    if (m === 'hcid') { const ids = hcidAreaIds(); return p => ids.has(p.id); }
+    if (m === 'hcid') { const ids = hcidAreaIds(false); return p => ids.has(p.id); }
     if (m === 'outbreak') { const ids = outbreakAreaIds(); return p => ids.has(p.id); }
-    if (m === 'areas') { const ids = hcidAreaIds(); return p => !isMalariaArea(p) && !ids.has(p.id); }
+    if (m === 'areas') { const ids = hcidAreaIds(true); return p => !isMalariaArea(p) && !ids.has(p.id); }
     return () => false;
   }
   function areaStyle(f) {
@@ -152,7 +188,7 @@
       else if (t.includes('malaria_risk')) { fill = '#e08a2c'; op = 0.25; }
       else if (t.some(x => x.startsWith('malaria_cdc_'))) { fill = '#e08a2c'; op = 0.1; }
     } else if (c && m === 'hcid') {
-      const rows = (db.hcidBy[c.iso3] || []).filter(h => h.show);
+      const rows = (db.hcidBy[c.iso3] || []).filter(hcidRowOn);
       if (rows.some(h => !h.area)) { fill = '#7a1f5c'; op = 0.28; }
       else if (rows.length) { fill = '#7a1f5c'; op = 0.08; }
     } else if (c && m === 'outbreak') {
@@ -173,7 +209,7 @@
     hcid: '<b>HCIDs (UKHSA)</b>' +
       '<div><i style="background:#7a1f5c;opacity:.5"></i>Country with an HCID listed</div>' +
       '<div><i class="area" style="border-color:#7a1f5c;background:#efdbe7"></i>Named HCID area</div>' +
-      '<small>Shows where UKHSA lists an HCID – not a risk level. Pick a country to see which.</small>',
+      '<small>Where UKHSA lists an HCID – not a risk level. Pick one HCID in the list above the map; hover a country to see all its HCIDs. "All" leaves out avian influenza (listed in most countries; still in the report).</small>',
     outbreak: '<b>Current outbreaks</b>' +
       '<div><i class="dash" style="background:#e8b4b1"></i>Outbreak alert (pathogen)</div>' +
       '<div><i style="background:#2f6fb0;opacity:.45"></i>Information note</div>' +
@@ -190,7 +226,16 @@
     lg.onAdd = () => { legendDiv = L.DomUtil.create('div', 'legend'); legendDiv.innerHTML = LEGENDS[overlay()]; return legendDiv; };
     lg.addTo(map);
   }
+  function fillHcidPick() {
+    const el = $('#hcid-pick'); if (!el || el.options.length > 1) return;
+    const ids = Array.from(new Set(db.hcid.filter(h => h.show).map(h => h.hcid))).filter(id => db.pathogens[id]);
+    ids.sort((a, b) => db.pathogens[a].name.localeCompare(db.pathogens[b].name)).forEach(id => {
+      const o = document.createElement('option'); o.value = id; o.textContent = db.pathogens[id].name.split(' – ')[0]; el.appendChild(o);
+    });
+  }
   function setOverlay() {
+    fillHcidPick();
+    if ($('#hcid-pick')) $('#hcid-pick').hidden = overlay() !== 'hcid';
     if (boundaryLayer) boundaryLayer.setStyle(styleFeature);
     drawAreas();
     if (legendDiv) legendDiv.innerHTML = LEGENDS[overlay()];
@@ -389,6 +434,7 @@
       else { b.dataset.confirm = '1'; b.textContent = 'Click again to clear'; setTimeout(() => { delete b.dataset.confirm; b.textContent = 'Clear all'; }, 3000); }
     });
     document.querySelectorAll('input[name="overlay"]').forEach(r => r.addEventListener('change', setOverlay));
+    if ($('#hcid-pick')) $('#hcid-pick').addEventListener('change', setOverlay);
     if ($('#detailed')) $('#detailed').addEventListener('change', updateReport);
     $$('.tabs [data-tab]').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
     $('#go-report').addEventListener('click', () => showTab('report'));
