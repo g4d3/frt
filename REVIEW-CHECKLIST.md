@@ -124,6 +124,17 @@ Known limits: Thailand's Koh Samui test pin fell outside the zones (small island
 - [ ] Neurotoxic shellfish poisoning: USA MEX NZL
 These are toxins, not infections, with onset in hours – the report shows them as "beyond usual incubation" unless the meal was just before onset.
 
+## 4d. Added from the RIPL test list (manual v31, Table 7) – geography is Expert
+
+- [ ] Anaplasmosis – tick, wherever the `lyme` tag is
+- [ ] Glanders – horse contact: Middle East, Central & South Asia, North Africa, Mongolia, China, Brazil
+- [ ] EEE/WEE/VEE – mosquito: USA, Canada, Caribbean, Central & South America
+- [ ] Murray Valley encephalitis – mosquito: AUS, PNG
+- [ ] Ross River / Barmah Forest – mosquito: AUS, PNG, Pacific islands
+- [ ] Sindbis – mosquito: FIN, SWE, RUS, ZAF
+- [ ] Orf / parapoxviruses – livestock, everywhere
+- [ ] Cowpox & other orthopoxviruses – cats/rodents in Europe; livestock in IND, PAK, BGD, NPL, BRA
+
 ## 5. Rows not from UKHSA in hcid_risk.csv
 
 - [ ] USA us_west_plague plague – Expert (CDC plague maps)
