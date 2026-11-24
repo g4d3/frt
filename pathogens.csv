@@ -133,3 +133,4 @@ dracunculus,Guinea worm (Dracunculus),Helminth,300,420,10–14 months,no,,"Drink
 taeniasis,Taeniasis (beef/pork tapeworm),Helminth,56,84,8–12 weeks,no,,Undercooked beef (T. saginata) or pork (T. solium); worldwide.,User parasite table (Nov 2026); incubation Expert,5,,,
 cysticercosis,Cysticercosis (T. solium),Helminth,90,3650,months–years,no,,"Eggs from food/water contaminated by a pork-tapeworm carrier; Latin America, Africa, Asia.",User parasite table (Nov 2026); incubation Expert,5,,,
 babesia,Babesiosis,Protozoa,7,63,1–9 weeks,no,,"Ixodes ticks; mainly north-east/upper Midwest USA; Europe (B. divergens, usually asplenic).",User parasite table (Nov 2026); incubation Expert,5,,,
+candida_auris,Candida auris (colonisation or infection),Fungal,0,365,"colonisation; no fixed incubation",no,,"Hospital admission abroad, especially ICU or invasive devices.",UKHSA Candida auris guidance,4,,,
