@@ -322,3 +322,4 @@ lyme,,tick,babesia,,User parasite table (Nov 2026)
 melioid_other,,freshwater,melioid,Melioidosis map: sporadic cases or environmental isolates only.,"Melioidosis endemicity map (user, Nov 2026)"
 melioid_other,,flood_mud,melioid,Melioidosis map: sporadic cases or environmental isolates only.,"Melioidosis endemicity map (user, Nov 2026)"
 melioid_other,,barefoot,melioid,Melioidosis map: sporadic cases or environmental isolates only.,"Melioidosis endemicity map (user, Nov 2026)"
+GLOBAL,,healthcare,candida_auris,"Admitted to hospital abroad.",UKHSA Candida auris guidance
