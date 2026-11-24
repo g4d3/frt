@@ -56,7 +56,10 @@
         min: num(p.inc_min_days), max: num(p.inc_max_days),
         hcid: lc(p.hcid || '') === 'yes', window: num(p.risk_window_days), prio: num(p.priority) ?? 5 });
     });
+    const known = new Set(['global']);
+    db.countries.forEach(c => [c.iso3, c.region, c.subregion].concat(c.tags || [], c.areaTags || []).forEach(t => t && known.add(lc(t))));
     raw.rules.forEach((r, i) => {
+      list(r.where).concat(list(r.except)).forEach(t => { if (!known.has(lc(t))) db.problems.push(`exposure_map row ${i + 1}: unknown place or tag "${t}"`); });
       if (!db.expById[r.exposure]) db.problems.push(`exposure_map row ${i + 1}: unknown exposure "${r.exposure}"`);
       if (!db.pathogens[r.pathogen]) db.problems.push(`exposure_map row ${i + 1}: unknown pathogen "${r.pathogen}"`);
       db.rules.push(Object.assign({}, r, { w: list(r.where).map(lc), x: list(r.except).map(lc) }));
@@ -309,13 +312,15 @@
       }));
       const items = Object.values(seen).filter(x => !x.p.hcid).sort((a, b) =>
         (TIMING_RANK[a.t.status] - TIMING_RANK[b.t.status]) || (a.p.prio - b.p.prio) || a.p.name.localeCompare(b.p.name));
-      if (items.length) {
+      const fits = items.filter(x => !flag[x.t.status]), misfit = items.filter(x => flag[x.t.status]);
+      if (fits.length) {
         push('   Possible exposures (incubation):');
-        items.forEach(x => {
-          const extra = [flag[x.t.status], x.dep ? 'area not assessed' : ''].filter(Boolean).join(', ');
+        fits.forEach(x => {
+          const extra = x.dep ? 'area not assessed' : '';
           wrap(`- ${x.p.name} (${incShort(x.p)})${extra ? ' – ' + extra : ''}`, 5).forEach((ln, i) => push(i ? '  ' + ln : ln));
         });
       }
+      if (misfit.length) wrap('Timing outside usual incubation: ' + misfit.map(x => `${x.p.name} (${incShort(x.p)})${x.dep ? ' [area not assessed]' : ''}`).join('; '), 3).forEach(push);
       const ex = Array.from(new Set(r.excluded.map(x => (db.pathogens[x.pathogen] || {}).name).filter(Boolean)));
       if (ex.length) wrap(`Elsewhere in ${c.name}, not at this pin: ` + ex.join('; '), 3).forEach(push);
     });

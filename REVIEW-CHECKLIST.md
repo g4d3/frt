@@ -135,6 +135,17 @@ These are toxins, not infections, with onset in hours – the report shows them 
 - [ ] Orf / parapoxviruses – livestock, everywhere
 - [ ] Cowpox & other orthopoxviruses – cats/rodents in Europe; livestock in IND, PAK, BGD, NPL, BRA
 
+## 4e. Added from your arbovirus, VHF and parasite tables and the melioidosis map (24 Nov 2026)
+
+Where your tables gave no incubation period I used standard values (marked "incubation Expert" in `pathogens.csv` → source).
+
+- [ ] Arboviruses: Bunyamwera (sub-Saharan Africa), California serogroup/La Crosse (USA, CAN), Heartland (USA), St Louis encephalitis (Americas), Spondweni (Africa), O'nyong-nyong (Africa), Banna (China, SE Asia), Colorado tick fever (USA, CAN)
+- [ ] VHFs: Alkhurma (SAU, EGY – ticks, camels, sheep, raw milk), Omsk (RUS – ticks, rodents), Guanarito (VEN – rodents), Sabiá (BRA – rodents). Guanarito and Sabiá are listed as ordinary items, not HCIDs, because the HCID section only uses the UKHSA table.
+- [ ] Sudan virus (SDN, UGA): already covered by "Ebola disease" in the HCID section where UKHSA lists it – UKHSA does not currently list Sudan (the country).
+- [ ] Incubation changes: hantavirus now 5–40 d (was 7–42); Nipah up to 2 months (was 21 d).
+- [ ] Parasites: cutaneous and mucocutaneous leishmaniasis, giardiasis, cryptosporidiosis, cyclosporiasis, cystoisosporiasis, whipworm, pinworm, lymphatic filariasis, Mansonella, onchocerciasis, loiasis, Guinea worm (TCD, SSD, MLI, ETH), taeniasis, cysticercosis, babesiosis. New exposure "Blackflies / deer flies" for onchocerciasis and loiasis.
+- [ ] Melioidosis: NPL and SGP added as endemic. New tag `melioid_other` (sporadic cases or environmental isolates only): IRN PAK KEN UGA MDG HND CRI PAN COL VEN ECU BRA SLE PRI GLP MTQ TTO ABW CUW GUF SUR CIV HTI ITA. "Unconfirmed reports" countries were not added.
+
 ## 5. Rows not from UKHSA in hcid_risk.csv
 
 - [ ] USA us_west_plague plague – Expert (CDC plague maps)

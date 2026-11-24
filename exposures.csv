@@ -6,6 +6,7 @@ tick,Insects & arthropods,Tick bites,"Long grass, bush walks, safari, livestock?
 mite,Insects & arthropods,Mites / chiggers (rural scrub & grass),"Sat or lay on grass, farmland, forest edge?",Mites
 sandfly,Insects & arthropods,Sandfly bites,"Rural or peri-urban stay, dusk/night outdoors, mud or stone housing?",Sandflies
 tsetse,Insects & arthropods,Tsetse fly bites,Game parks or woodland in East/Central Africa? Painful bite?,Tsetse
+biting_fly,Insects & arthropods,"Blackflies, deer/mango flies (Chrysops) or horse flies","Bitten by blackflies near fast rivers, or by large day-biting flies in rainforest?",Blackfly/deer fly
 flea,Insects & arthropods,Flea bites,"Rodents or animals in accommodation, markets, rural housing?",Fleas
 louse,Insects & arthropods,Body lice,"Crowded settings, camps, prolonged rough sleeping?",Lice
 triatomine,Insects & arthropods,Triatomine ('kissing') bugs,Slept in mud/thatch housing in Latin America?,Triatomine bugs
