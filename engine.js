@@ -324,8 +324,6 @@
       const ex = Array.from(new Set(r.excluded.map(x => (db.pathogens[x.pathogen] || {}).name).filter(Boolean)));
       if (ex.length) wrap(`Elsewhere in ${c.name}, not at this pin: ` + ex.join('; '), 3).forEach(push);
     });
-    push('');
-    push('Imported Fever Service 0844 778 8990');
     return L.join('\n') + '\n';
   }
 
@@ -440,7 +438,7 @@
     push('KEY CONTACTS & REFERENCES');
     push(sub);
     [
-      'Imported Fever Service (UKHSA RIPL), 24/7: 0844 778 8990',
+      'Imported Fever Service (UKHSA RIPL)',
       'UKHSA Outbreaks under monitoring: https://www.gov.uk/government/publications/outbreaks-under-monitoring-in-2026',
       'NaTHNaC / TravelHealthPro: https://travelhealthpro.org.uk/countries',
       'BIA guidelines (fever, malaria, eosinophilia): https://www.britishinfection.org/guidance/published-guidelines',
