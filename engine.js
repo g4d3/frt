@@ -283,14 +283,27 @@
     push('');
     push(`Fever onset: ${trip.onset || 'not recorded'}   Returned to UK: ${trip.returned || 'not recorded'}`);
     if (trip.notes) wrap('Notes: ' + trip.notes, 0).forEach(push);
+    // 1. itinerary: places, dates, coordinates, activities
+    push('');
+    push('ITINERARY');
+    result.stops.forEach(r => {
+      const s = r.stop, c = r.country;
+      const where = `${c ? c.name : 'Country not set'}${s.place ? ' – ' + s.place : ''}`;
+      const xy = s.lat != null ? ` (${(+s.lat).toFixed(3)}, ${(+s.lng).toFixed(3)})` : ' (no map pin)';
+      wrap(`${r.n}. ${s.arrive || '?'} to ${s.depart || '?'}  ${where}${xy}`, 0).forEach((ln, i) => push(i ? '   ' + ln : ln));
+      const acts = (s.exposures || []).filter(id => id !== 'any').map(expLab);
+      wrap('Activities: ' + (acts.length ? acts.join('; ') : 'none recorded'), 3).forEach(push);
+      if (s.other) wrap('Other: ' + s.other, 3).forEach(push);
+    });
+    // 2. detailed itinerary: possible pathogens and incubation periods
+    push('');
+    push('DETAILED ITINERARY – POSSIBLE PATHOGENS (INCUBATION)');
     result.stops.forEach(r => {
       const s = r.stop, c = r.country;
       const ago = (trip.onset && s.depart) ? ` (left ${dayNum(trip.onset) - dayNum(s.depart)} d before onset)` : '';
       push('');
       push(`${r.n}. ${c ? c.name : 'Country not set'}${s.place ? ' – ' + s.place : ''}: ${s.arrive || '?'} to ${s.depart || '?'}${ago}`);
       if (!c) return;
-      const acts = (s.exposures || []).filter(id => id !== 'any').map(expLab);
-      wrap('Activities: ' + (acts.length ? acts.join('; ') : 'none recorded'), 3).forEach(push);
       r.alerts.forEach(a => wrap('Current outbreak: ' + a.title, 3).forEach(push));
       if (r.hcid.length) {
         const nm = h => {
@@ -314,7 +327,7 @@
         (TIMING_RANK[a.t.status] - TIMING_RANK[b.t.status]) || (a.p.prio - b.p.prio) || a.p.name.localeCompare(b.p.name));
       const fits = items.filter(x => !flag[x.t.status]), misfit = items.filter(x => flag[x.t.status]);
       if (fits.length) {
-        push('   Possible exposures (incubation):');
+        push('   Possible pathogens (incubation):');
         fits.forEach(x => {
           const extra = x.dep ? 'area not assessed' : '';
           wrap(`- ${x.p.name} (${incShort(x.p)})${extra ? ' – ' + extra : ''}`, 5).forEach((ln, i) => push(i ? '  ' + ln : ln));
@@ -438,7 +451,7 @@
     push('KEY CONTACTS & REFERENCES');
     push(sub);
     [
-      'Imported Fever Service (UKHSA RIPL)',
+      'Imported Fever Service (UKHSA RIPL), 24/7: 0844 778 8990',
       'UKHSA Outbreaks under monitoring: https://www.gov.uk/government/publications/outbreaks-under-monitoring-in-2026',
       'NaTHNaC / TravelHealthPro: https://travelhealthpro.org.uk/countries',
       'BIA guidelines (fever, malaria, eosinophilia): https://www.britishinfection.org/guidance/published-guidelines',

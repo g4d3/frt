@@ -137,3 +137,25 @@ th{background:var(--teal-2);position:sticky;top:0}
 .overlay label{font-weight:400;white-space:nowrap}
 .legend b{display:block;margin-bottom:2px}
 #hcid-pick{font-size:12px;padding:1px 4px;max-width:220px}
+
+/* two steps: 1 places & dates, 2 exposures */
+.steps{display:flex;gap:6px;margin:14px 0 4px}
+.steps button{flex:1;background:var(--paper);color:inherit;border:1px solid var(--line);border-radius:8px;padding:8px;font-weight:600;cursor:pointer}
+.steps button.on{background:#0f5e63;color:#fff;border-color:#0f5e63}
+.step1 .stop .alerts,.step1 .stop .exp,.step1 .stop .preview,.step1 .stop .links,.step1 .stop .other-l{display:none}
+.step1 .stop{padding:10px 12px;margin-bottom:8px}
+.step1 .stop header{margin-bottom:6px}
+/* pop-up at the pin */
+.pinpop .leaflet-popup-content{margin:10px 12px}
+.pinform{display:grid;gap:6px;font-size:13px}
+.pinform .pf-head{display:flex;gap:6px;align-items:center}
+.pinform .pf-num{background:#0f5e63;color:#fff;border-radius:50%;min-width:22px;height:22px;display:inline-grid;place-items:center;font-weight:700}
+.pinform select,.pinform input{width:100%;margin:0;font:inherit;padding:4px 6px}
+.pinform .pf-dates{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.pinform .pf-dates label{display:grid;gap:2px;font-size:12px;color:#555}
+.pinform .pf-btns{display:flex;gap:6px;justify-content:space-between}
+.pinform .pf-btns button{font-size:12px;padding:5px 8px}
+/* date labels beside pins */
+.leaflet-tooltip.pinlabel{padding:2px 6px;font-size:11px;line-height:1.25;border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.pinform select,.pinform input{min-height:34px}
+.pinform .pf-btns button{min-height:32px}

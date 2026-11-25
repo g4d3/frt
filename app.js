@@ -45,6 +45,7 @@
     buildCountryOptions();
     bindGlobal();
     initMap();
+    setStep(1);
     renderAll();
     renderData();
   }
@@ -54,7 +55,9 @@
       db.countries.map(c => `<option value="${c.iso3}">${esc(c.name)}</option>`).join('');
     $('#tpl-stop').content.querySelector('[data-f="iso3"]').innerHTML = opts;
     $('#data-country').innerHTML = opts;
+    countryOpts = opts;
   }
+  let countryOpts = '';
 
   // ---------- map ----------
   function initMap() {
@@ -286,6 +289,38 @@
     const card = $(`.stop[data-id="${s.id}"]`);
     if (card) { card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); card.classList.add('flash'); }
     showTab('trip');
+    if (latlng) openPinForm(s);
+    else if (card) { setStep(1); const f = $('[data-f="iso3"]', card); if (f) f.focus(); }
+  }
+
+  // ---------- pop-up form at the pin: country, place, dates ----------
+  const shortDate = d => d ? new Date(d + 'T00:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : '?';
+  function stopNum(s) { return FRT.sortStops(state.stops).indexOf(s) + 1; }
+  function openPinForm(s) {
+    const m = markers[s.id]; if (!m || !m.bindPopup) return;
+    const f = document.createElement('form');
+    f.className = 'pinform';
+    f.innerHTML = `<div class="pf-head"><span class="pf-num">${stopNum(s)}</span><select data-pf="iso3" aria-label="Country">${countryOpts}</select></div>
+      <input data-pf="place" placeholder="Place (town, park, lake…) – optional" autocomplete="off">
+      <div class="pf-dates"><label>Arrived<input type="date" data-pf="arrive"></label><label>Left<input type="date" data-pf="depart"></label></div>
+      <div class="pf-btns"><button type="submit">Done – click next place</button><button type="button" class="ghost danger" data-pf-del>Remove</button></div>`;
+    ['iso3', 'place', 'arrive', 'depart'].forEach(k => { $(`[data-pf="${k}"]`, f).value = s[k] || ''; });
+    const upd = e => {
+      const k = e.target.dataset.pf; if (!k) return;
+      s[k] = e.target.value;
+      if (k === 'iso3') s.manualCountry = true;
+      if (k === 'arrive' && s.depart && s.depart < s.arrive) { s.depart = ''; $('[data-pf="depart"]', f).value = ''; }
+      if (k === 'arrive' && !s.depart) $('[data-pf="depart"]', f).min = s.arrive;
+      renderAll();
+      $('.pf-num', f).textContent = stopNum(s);
+    };
+    f.addEventListener('change', upd);
+    f.addEventListener('input', e => { if (e.target.dataset.pf === 'place') { s.place = e.target.value; updateReport(); syncMarkers(FRT.sortStops(state.stops)); } });
+    f.addEventListener('submit', e => { e.preventDefault(); m.closePopup(); });
+    $('[data-pf-del]', f).addEventListener('click', () => { m.closePopup(); state.stops = state.stops.filter(x => x !== s); renderAll(); });
+    if (m.unbindPopup) m.unbindPopup();
+    m.bindPopup(f, { className: 'pinpop', minWidth: 240, maxWidth: 280, autoClose: true, closeOnClick: false, autoPanPadding: [20, 20] }).openPopup();
+    setTimeout(() => { const t = $(s.iso3 ? (s.arrive ? '[data-pf="depart"]' : '[data-pf="arrive"]') : '[data-pf="iso3"]', f); if (t) t.focus(); }, 50);
   }
   function stopById(id) { return state.stops.find(s => s.id === +id); }
 
@@ -384,11 +419,13 @@
           if (!s.manualCountry) s.iso3 = detect(s.lat, s.lng);
           renderAll();
         });
-        m.on('click', () => { const c = $(`.stop[data-id="${s.id}"]`); if (c) { showTab('trip'); c.scrollIntoView({ behavior: 'smooth' }); c.classList.add('flash'); setTimeout(() => c.classList.remove('flash'), 1200); } });
+        m.on('click', () => { openPinForm(s); const c = $(`.stop[data-id="${s.id}"]`); if (c) { showTab('trip'); c.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); c.classList.add('flash'); setTimeout(() => c.classList.remove('flash'), 1200); } });
         markers[s.id] = m;
       } else { markers[s.id].setIcon(icon); markers[s.id].setLatLng([s.lat, s.lng]); }
       const c = db.byIso[s.iso3];
-      markers[s.id].bindTooltip(`${i + 1}. ${c ? c.name : 'Country?'}${s.place ? ' – ' + s.place : ''}`);
+      const lab = `<b>${esc(s.place || (c ? c.name : 'Country?'))}</b><br>${s.arrive || s.depart ? shortDate(s.arrive) + ' – ' + shortDate(s.depart) : 'add dates'}`;
+      if (markers[s.id].unbindTooltip) markers[s.id].unbindTooltip();
+      markers[s.id].bindTooltip(lab, { permanent: true, direction: 'right', offset: [12, -16], className: 'pinlabel' });
     });
   }
 
@@ -426,6 +463,8 @@
     $('#returned').addEventListener('change', e => { state.returned = e.target.value; updateReport(); });
     $('#notes').addEventListener('input', e => { state.notes = e.target.value; updateReport(); });
     $('#add-stop').addEventListener('click', () => addStop(null));
+    $$('.steps [data-step]').forEach(b => b.addEventListener('click', () => setStep(+b.dataset.step)));
+    $('#go-exp').addEventListener('click', () => { setStep(2); $('#tab-trip').scrollIntoView({ behavior: 'smooth' }); });
     $('#clear').addEventListener('click', () => {
       if (!state.stops.length && !state.onset) return;
       const b = $('#clear');
@@ -446,6 +485,13 @@
     });
     $('#data-country').addEventListener('change', renderDataTable);
     $('#export-expanded').addEventListener('click', exportExpanded);
+  }
+  function setStep(n) {
+    state.step = n;
+    $('#tab-trip').classList.toggle('step1', n === 1);
+    $('#tab-trip').classList.toggle('step2', n === 2);
+    $$('.steps [data-step]').forEach(b => { const on = +b.dataset.step === n; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
+    $('#go-exp').hidden = n !== 1; $('#go-report').hidden = n !== 2;
   }
   function refreshPreview(card, s) { renderPreview(card, s); }
   function showTab(name) {

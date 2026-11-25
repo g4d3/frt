@@ -12,7 +12,7 @@
 <header class="top">
   <div>
     <h1>Travel exposure history</h1>
-    <p>Place pin · Choose eposure · See report</p>
+    <p>Fever in the returning traveller · step 1: where, when, and what were they exposed to?</p>
   </div>
   <nav class="tabs" role="tablist">
     <button role="tab" data-tab="trip" aria-selected="true">Trip</button>
@@ -34,19 +34,23 @@
         <label><input type="radio" name="overlay" value="areas"> Mapped areas</label>
         <label><input type="radio" name="overlay" value="none"> None</label>
       </span>
-      <span class="hint">Click the map to drop a pin for each place stayed. Drag pins to adjust.</span>
+      <span class="hint">Click the map for each place stayed, enter the dates at the pin, then click the next place. Drag pins to adjust.</span>
     </div>
   </section>
 
   <section class="panel">
     <!-- TRIP -->
-    <div class="tab" id="tab-trip">
+    <div class="tab step1" id="tab-trip">
       <p class="privacy">Do not enter names, NHS numbers or other identifiers. Nothing is sent or stored: closing the tab clears it.</p>
       <div class="grid2">
         <label>Fever onset date <small>(optional, for incubation timing)</small><input type="date" id="onset"></label>
         <label>Date returned to UK<input type="date" id="returned"></label>
       </div>
       <label>General notes <small>(e.g. prophylaxis, vaccines, immune status)</small><textarea id="notes" rows="2"></textarea></label>
+      <div class="steps" role="tablist" aria-label="Steps">
+        <button type="button" role="tab" data-step="1" class="on">1 · Places &amp; dates</button>
+        <button type="button" role="tab" data-step="2">2 · Exposures</button>
+      </div>
       <div class="stops-head">
         <h2>Places stayed <span id="stop-count"></span></h2>
         <div class="btns">
@@ -56,9 +60,9 @@
       </div>
       <div id="stops"></div>
       <div id="empty" class="empty">
-        <p><strong>Click the map where the traveller stayed.</strong> Each pin becomes a stop with its own dates and exposures. Add a separate pin for a notable day trip (a lake, a cave, a game park).</p>
+        <p><strong>Click the map where the traveller stayed.</strong> A box opens at the pin: enter the dates, press <em>Done</em>, then click the next place. When the route is complete, go to <em>2 · Exposures</em>. Add a separate pin for a notable day trip (a lake, a cave, a game park).</p>
       </div>
-      <div class="sticky-go"><button id="go-report">View report →</button></div>
+      <div class="sticky-go"><button id="go-exp">Next: exposures →</button><button id="go-report" hidden>View report →</button></div>
     </div>
 
     <!-- REPORT -->
@@ -89,7 +93,7 @@
       <ul>
         <li>Geography is country-level, except where a <em>mapped risk area</em> has been drawn (choose <em>Mapped areas</em> above the map: e.g. valley fever in the south-west USA, malaria in Kruger or the Thai border provinces). In those countries a pin outside the area does not pick up that risk, and the report lists it under "Not at this pin". The outlines are rough: always check the area visited on NaTHNaC or the CDC maps.</li>
         <li>Outbreaks change weekly. The alerts list is maintained by hand from NaTHNaC and UKHSA <em>Outbreaks under monitoring</em>; alerts past their review date are flagged as stale.</li>
-        <li>It is not a substitute for the ACDP VHF risk assessment, local guidance or specialist advice. </li>
+        <li>It is not a substitute for the ACDP VHF risk assessment, local guidance or specialist advice. Imported Fever Service: <strong>0844 778 8990</strong> (24/7).</li>
       </ul>
       <h2>Sources</h2>
       <ul class="refs">
@@ -122,7 +126,7 @@
       <summary>Exposures <small class="exp-hint"></small></summary>
       <div class="exp-groups"></div>
     </details>
-    <label>Other exposures or details<textarea data-f="other" rows="2"></textarea></label>
+    <label class="other-l">Other exposures or details<textarea data-f="other" rows="2"></textarea></label>
     <div class="preview"></div>
     <div class="links"></div>
   </article>
